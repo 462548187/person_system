@@ -24,7 +24,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * 系统用户
+ * 系统员工
  *
  * @author Mark sunlightcs@gmail.com
  */
@@ -34,17 +34,21 @@ public class SysUserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	/**
-	 * 用户ID
+	 * 员工ID
 	 */
 	@TableId
 	private Long userId;
 
 	/**
-	 * 用户名
+	 * 员工名
 	 */
-	@NotBlank(message="用户名不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	@NotBlank(message="员工登录名不能为空", groups = {AddGroup.class, UpdateGroup.class})
 	private String username;
-
+	/**
+	 * 员工名
+	 */
+	@NotBlank(message="员工姓名不能为空", groups = {AddGroup.class, UpdateGroup.class})
+	private String name;
 	/**
 	 * 密码
 	 */
