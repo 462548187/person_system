@@ -60,7 +60,7 @@ var vm = new Vue({
     el:'#rrapp',
     data:{
         q:{
-            planname: null
+            name: null
         },
         showList: true,
         title:null,
@@ -80,49 +80,32 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.roleList = {};
-            vm.plan = {deptName:null, deptId:null, status:1, roleIdList:[]};
+            vm.plan = { status:0};
 
-            //获取角色信息
-            this.getRoleList();
 
-            vm.getDept();
-        },
-        getDept: function(){
-            //加载部门树
-            $.get(baseURL + "person/dept/list", function(r){
-                ztree = $.fn.zTree.init($("#deptTree"), setting, r);
-                var node = ztree.getNodeByParam("deptId", vm.plan.deptId);
-                if(node != null){
-                    ztree.selectNode(node);
-
-                    vm.plan.deptName = node.name;
-                }
-            })
         },
         update: function () {
-            var planId = getSelectedRow();
-            if(planId == null){
+            var id = getSelectedRow();
+            if(id == null){
                 return ;
             }
 
             vm.showList = false;
             vm.title = "修改";
 
-            vm.getUser(planId);
-            //获取角色信息
-            this.getRoleList();
+            vm.getRecord(id);
         },
         permissions: function () {
-            var planId = getSelectedRow();
-            if(planId == null){
+            var id = getSelectedRow();
+            if(id == null){
                 return ;
             }
 
-            window.location.href=baseURL+"person/permissions/index/"+planId;
+            window.location.href=baseURL+"person/permissions/index/"+id;
         },
         del: function () {
-            var planIds = getSelectedRows();
-            if(planIds == null){
+            var ids = getSelectedRows();
+            if(ids == null){
                 return ;
             }
 
@@ -131,7 +114,7 @@ var vm = new Vue({
                     type: "POST",
                     url: baseURL + "person/plan/delete",
                     contentType: "application/json",
-                    data: JSON.stringify(planIds),
+                    data: JSON.stringify(ids),
                     success: function(r){
                         if(r.code == 0){
                             alert('操作成功', function(){
@@ -145,7 +128,7 @@ var vm = new Vue({
             });
         },
         saveOrUpdate: function () {
-            var url = vm.plan.planId == null ? "person/plan/save" : "person/plan/update";
+            var url = vm.plan.id == null ? "person/plan/save" : "person/plan/update";
             $.ajax({
                 type: "POST",
                 url: baseURL + url,
@@ -162,45 +145,17 @@ var vm = new Vue({
                 }
             });
         },
-        getUser: function(planId){
-            $.get(baseURL + "person/plan/info/"+planId, function(r){
+        getRecord: function(id){
+            $.get(baseURL + "person/plan/info/"+id, function(r){
                 vm.plan = r.plan;
-                vm.plan.password = null;
 
-                vm.getDept();
-            });
-        },
-        getRoleList: function(){
-            $.get(baseURL + "person/role/select", function(r){
-                vm.roleList = r.list;
-            });
-        },
-        deptTree: function(){
-            layer.open({
-                type: 1,
-                offset: '50px',
-                skin: 'layui-layer-molv',
-                title: "选择部门",
-                area: ['300px', '450px'],
-                shade: 0,
-                shadeClose: false,
-                content: jQuery("#deptLayer"),
-                btn: ['确定', '取消'],
-                btn1: function (index) {
-                    var node = ztree.getSelectedNodes();
-                    //选择上级部门
-                    vm.plan.deptId = node[0].deptId;
-                    vm.plan.deptName = node[0].name;
-
-                    layer.close(index);
-                }
             });
         },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'planname': vm.q.planname},
+                postData:{'id': vm.q.id},
                 page:page
             }).trigger("reloadGrid");
         }
