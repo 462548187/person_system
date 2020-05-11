@@ -23,8 +23,6 @@ import java.util.Map;
 
 /**
  * 个人计划
- *
- * @author 
  */
 @RestController
 @RequestMapping("/person/plan")
