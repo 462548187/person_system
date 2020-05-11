@@ -1,121 +1,97 @@
 /**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
  *
- * https://www.renren.io
  *
- * 版权所有，侵权必究！
+ *
+ *
+ *
  */
 
-package com.person.modules.sys.controller;
+package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
-import com.person.modules.sys.entity.SysRoleEntity;
-import com.person.modules.sys.service.SysRoleDeptService;
-import com.person.modules.sys.service.SysRoleMenuService;
-import com.person.modules.sys.service.SysRoleService;
+import com.person.modules.person.entity.WorkRecordEntity;
+import com.person.modules.person.service.WorkRecordService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Map;
 
 /**
- * 角色管理
+ * 考勤管理
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 
  */
 @RestController
-@RequestMapping("/sys/role")
+@RequestMapping("/person/work")
 public class WorkRecordController extends AbstractController {
 	@Autowired
-	private SysRoleService sysRoleService;
-	@Autowired
-	private SysRoleMenuService sysRoleMenuService;
-	@Autowired
-	private SysRoleDeptService sysRoleDeptService;
-	
+	private WorkRecordService workRecordService;
+
 	/**
-	 * 角色列表
+	 * 所有考勤列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("sys:role:list")
+	@RequiresPermissions("person:work:list")
 	public R list(@RequestParam Map<String, Object> params){
-		PageUtils page = sysRoleService.queryPage(params);
+		PageUtils page = workRecordService.queryPage(params);
 
 		return R.ok().put("page", page);
 	}
-	
-	/**
-	 * 角色列表
-	 */
-	@RequestMapping("/select")
-	@RequiresPermissions("sys:role:select")
-	public R select(){
-		List<SysRoleEntity> list = sysRoleService.list();
-		
-		return R.ok().put("list", list);
-	}
-	
-	/**
-	 * 角色信息
-	 */
-	@RequestMapping("/info/{roleId}")
-	@RequiresPermissions("sys:role:info")
-	public R info(@PathVariable("roleId") Long roleId){
-		SysRoleEntity role = sysRoleService.getById(roleId);
-		
-		//查询角色对应的菜单
-		List<Long> menuIdList = sysRoleMenuService.queryMenuIdList(roleId);
-		role.setMenuIdList(menuIdList);
 
-		//查询角色对应的部门
-		List<Long> deptIdList = sysRoleDeptService.queryDeptIdList(new Long[]{roleId});
-		role.setDeptIdList(deptIdList);
-		
-		return R.ok().put("role", role);
-	}
-	
+
 	/**
-	 * 保存角色
+	 * 考勤信息
 	 */
-	@SysLog("保存角色")
+	@RequestMapping("/info/{id}")
+	@RequiresPermissions("person:work:info")
+	@ResponseBody
+	public R info(@PathVariable("id") Long id){
+		WorkRecordEntity work = workRecordService.getById(id);
+
+		return R.ok().put("work", work);
+	}
+
+	/**
+	 * 保存考勤
+	 */
+	@SysLog("保存考勤")
 	@RequestMapping("/save")
-	@RequiresPermissions("sys:role:save")
-	public R save(@RequestBody SysRoleEntity role){
-		ValidatorUtils.validateEntity(role);
-		
-		sysRoleService.saveRole(role);
-		
+	@RequiresPermissions("person:work:save")
+	public R save(@RequestBody WorkRecordEntity work){
+		ValidatorUtils.validateEntity(work);
+
+		workRecordService.save(work);
+
 		return R.ok();
 	}
-	
+
 	/**
-	 * 修改角色
+	 * 修改考勤
 	 */
-	@SysLog("修改角色")
+	@SysLog("修改考勤")
 	@RequestMapping("/update")
-	@RequiresPermissions("sys:role:update")
-	public R update(@RequestBody SysRoleEntity role){
-		ValidatorUtils.validateEntity(role);
-		
-		sysRoleService.update(role);
-		
+	@RequiresPermissions("person:work:update")
+	public R update(@RequestBody WorkRecordEntity work){
+		ValidatorUtils.validateEntity(work);
+		workRecordService.update(work);
+
 		return R.ok();
 	}
-	
+
 	/**
-	 * 删除角色
+	 * 删除考勤
 	 */
-	@SysLog("删除角色")
+	@SysLog("删除考勤")
 	@RequestMapping("/delete")
-	@RequiresPermissions("sys:role:delete")
-	public R delete(@RequestBody Long[] roleIds){
-		sysRoleService.deleteBatch(roleIds);
-		
+	@RequiresPermissions("person:work:delete")
+	public R delete(@RequestBody Long[] ids){
+		workRecordService.deleteBatch(ids);
 		return R.ok();
 	}
+
 }

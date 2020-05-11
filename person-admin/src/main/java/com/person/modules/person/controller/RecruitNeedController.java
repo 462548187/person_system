@@ -1,95 +1,95 @@
 /**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
+ * 
  *
- * https://www.renren.io
+ * 
  *
- * 版权所有，侵权必究！
+ * 
  */
 
-package com.person.modules.sys.controller;
+package com.person.modules.person.controller;
 
+import com.person.common.annotation.SysLog;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
-import com.person.modules.sys.entity.SysDictEntity;
-import com.person.modules.sys.service.SysDictService;
+import com.person.modules.person.entity.RecruitNeedEntity;
+import com.person.modules.person.service.RecruitNeedService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.Map;
 
 /**
- * 数据字典
+ * 招聘要求
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 
  */
 @RestController
-@RequestMapping("sys/dict")
+@RequestMapping("person/need")
 public class RecruitNeedController {
     @Autowired
-    private SysDictService sysDictService;
+    private RecruitNeedService recruitNeedService;
 
     /**
-     * 列表
+     * 所有招聘要求列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:dict:list")
+    @RequiresPermissions("person:need:list")
     public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = sysDictService.queryPage(params);
+        PageUtils page = recruitNeedService.queryPage(params);
 
         return R.ok().put("page", page);
     }
 
 
     /**
-     * 信息
+     * 招聘要求信息
      */
     @RequestMapping("/info/{id}")
-    @RequiresPermissions("sys:dict:info")
+    @RequiresPermissions("person:need:info")
+    @ResponseBody
     public R info(@PathVariable("id") Long id){
-        SysDictEntity dict = sysDictService.getById(id);
+        RecruitNeedEntity need = recruitNeedService.getById(id);
 
-        return R.ok().put("dict", dict);
+        return R.ok().put("need", need);
     }
 
     /**
-     * 保存
+     * 保存招聘要求
      */
+    @SysLog("保存招聘要求")
     @RequestMapping("/save")
-    @RequiresPermissions("sys:dict:save")
-    public R save(@RequestBody SysDictEntity dict){
-        //校验类型
-        ValidatorUtils.validateEntity(dict);
+    @RequiresPermissions("person:need:save")
+    public R save(@RequestBody RecruitNeedEntity need){
+        ValidatorUtils.validateEntity(need);
 
-        sysDictService.save(dict);
+        recruitNeedService.save(need);
 
         return R.ok();
     }
 
     /**
-     * 修改
+     * 修改招聘要求
      */
+    @SysLog("修改招聘要求")
     @RequestMapping("/update")
-    @RequiresPermissions("sys:dict:update")
-    public R update(@RequestBody SysDictEntity dict){
-        //校验类型
-        ValidatorUtils.validateEntity(dict);
-
-        sysDictService.updateById(dict);
+    @RequiresPermissions("person:need:update")
+    public R update(@RequestBody RecruitNeedEntity need){
+        ValidatorUtils.validateEntity(need);
+        recruitNeedService.update(need);
 
         return R.ok();
     }
 
     /**
-     * 删除
+     * 删除招聘要求
      */
+    @SysLog("删除招聘要求")
     @RequestMapping("/delete")
-    @RequiresPermissions("sys:dict:delete")
+    @RequiresPermissions("person:need:delete")
     public R delete(@RequestBody Long[] ids){
-        sysDictService.removeByIds(Arrays.asList(ids));
-
+        recruitNeedService.deleteBatch(ids);
         return R.ok();
     }
 

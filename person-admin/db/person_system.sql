@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 10/05/2020 22:48:06
+ Date: 11/05/2020 22:13:26
 */
 
 SET NAMES utf8mb4;
@@ -273,7 +273,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 19 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -296,6 +296,14 @@ INSERT INTO `sys_log` VALUES (15, 'admin', '修改菜单', 'com.person.modules.s
 INSERT INTO `sys_log` VALUES (16, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":41,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"工资管理\",\"type\":0,\"icon\":\"fa fa-jpy\",\"orderNum\":3}', 7, '0:0:0:0:0:0:0:1', '2020-05-10 21:54:34');
 INSERT INTO `sys_log` VALUES (17, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":42,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"考勤管理\",\"type\":0,\"icon\":\"fa fa-calendar-check-o\",\"orderNum\":4}', 6, '0:0:0:0:0:0:0:1', '2020-05-10 21:54:41');
 INSERT INTO `sys_log` VALUES (18, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":43,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"个人中心\",\"type\":0,\"orderNum\":5}', 6, '0:0:0:0:0:0:0:1', '2020-05-10 21:54:50');
+INSERT INTO `sys_log` VALUES (19, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":46,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"个人计划\",\"url\":\"/person/plan/list\",\"perms\":\"person:plan:list\",\"type\":1,\"orderNum\":0}', 23, '0:0:0:0:0:0:0:1', '2020-05-11 22:05:40');
+INSERT INTO `sys_log` VALUES (20, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":46,\"parentId\":43,\"parentName\":\"个人中心\",\"name\":\"个人计划\",\"url\":\"/person/plan/list\",\"perms\":\"person:plan:list\",\"type\":1,\"orderNum\":0}', 17, '0:0:0:0:0:0:0:1', '2020-05-11 22:06:23');
+INSERT INTO `sys_log` VALUES (21, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":46,\"parentId\":43,\"parentName\":\"个人中心\",\"name\":\"个人计划\",\"url\":\"/person/plan.html\",\"perms\":\"person:plan:list\",\"type\":1,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-11 22:07:12');
+INSERT INTO `sys_log` VALUES (22, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":46,\"parentId\":43,\"parentName\":\"个人中心\",\"name\":\"个人计划\",\"url\":\"modules/person/plan.html\",\"perms\":\"\",\"type\":1,\"orderNum\":0}', 10, '0:0:0:0:0:0:0:1', '2020-05-11 22:07:47');
+INSERT INTO `sys_log` VALUES (23, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":47,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"查看\",\"perms\":\"person:plan:list,person:plan:info\",\"type\":2,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-11 22:09:06');
+INSERT INTO `sys_log` VALUES (24, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":48,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"新增\",\"perms\":\"person:plan:save\",\"type\":2,\"orderNum\":0}', 7, '0:0:0:0:0:0:0:1', '2020-05-11 22:09:45');
+INSERT INTO `sys_log` VALUES (25, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":49,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"修改\",\"perms\":\"person:plan:update\",\"type\":2,\"orderNum\":0}', 5, '0:0:0:0:0:0:0:1', '2020-05-11 22:10:25');
+INSERT INTO `sys_log` VALUES (26, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":50,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"删除\",\"perms\":\"person:plan:delete\",\"type\":2,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-11 22:10:57');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -311,7 +319,7 @@ CREATE TABLE `sys_menu`  (
   `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 46 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -347,6 +355,11 @@ INSERT INTO `sys_menu` VALUES (42, 0, '考勤管理', NULL, NULL, 0, 'fa fa-cale
 INSERT INTO `sys_menu` VALUES (43, 0, '个人中心', NULL, NULL, 0, NULL, 5);
 INSERT INTO `sys_menu` VALUES (44, 0, '招聘管理', NULL, NULL, 0, NULL, 1);
 INSERT INTO `sys_menu` VALUES (45, 0, '档案管理', NULL, NULL, 0, '', 2);
+INSERT INTO `sys_menu` VALUES (46, 43, '个人计划', 'modules/person/plan.html', '', 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (47, 46, '查看', NULL, 'person:plan:list,person:plan:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (48, 46, '新增', NULL, 'person:plan:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (49, 46, '修改', NULL, 'person:plan:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (50, 46, '删除', NULL, 'person:plan:delete', 2, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_oss

@@ -1,20 +1,21 @@
 /**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
  *
- * https://www.renren.io
  *
- * 版权所有，侵权必究！
+ *
+ *
+ *
  */
 
-package com.person.modules.sys.controller;
+package com.person.modules.person.controller;
 
 
 import com.person.common.annotation.SysLog;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
-import com.person.modules.sys.entity.SysConfigEntity;
-import com.person.modules.sys.service.SysConfigService;
+import com.person.modules.person.entity.ConvertApplyEntity;
+import com.person.modules.person.service.ConvertApplyService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -22,77 +23,75 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 /**
- * 系统配置信息
+ * 系统申请信息
  *
- * @author Mark sunlightcs@gmail.com
+ * @author
  */
 @RestController
-@RequestMapping("/sys/config")
+@RequestMapping("/person/apply")
 public class ConvertApplyController extends AbstractController {
 	@Autowired
-	private SysConfigService sysConfigService;
+	private ConvertApplyService convertApplyService;
 	
 	/**
-	 * 所有配置列表
+	 * 所有申请列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("sys:config:list")
+	@RequiresPermissions("person:apply:list")
 	public R list(@RequestParam Map<String, Object> params){
-		PageUtils page = sysConfigService.queryPage(params);
+		PageUtils page = convertApplyService.queryPage(params);
 
 		return R.ok().put("page", page);
 	}
 	
 	
 	/**
-	 * 配置信息
+	 * 申请信息
 	 */
 	@RequestMapping("/info/{id}")
-	@RequiresPermissions("sys:config:info")
+	@RequiresPermissions("person:apply:info")
 	@ResponseBody
 	public R info(@PathVariable("id") Long id){
-		SysConfigEntity config = sysConfigService.getById(id);
+		ConvertApplyEntity apply = convertApplyService.getById(id);
 		
-		return R.ok().put("config", config);
+		return R.ok().put("apply", apply);
 	}
 	
 	/**
-	 * 保存配置
+	 * 保存申请
 	 */
-	@SysLog("保存配置")
+	@SysLog("保存申请")
 	@RequestMapping("/save")
-	@RequiresPermissions("sys:config:save")
-	public R save(@RequestBody SysConfigEntity config){
-		ValidatorUtils.validateEntity(config);
+	@RequiresPermissions("person:apply:save")
+	public R save(@RequestBody ConvertApplyEntity apply){
+		ValidatorUtils.validateEntity(apply);
 
-		sysConfigService.saveConfig(config);
+		convertApplyService.save(apply);
 		
 		return R.ok();
 	}
 	
 	/**
-	 * 修改配置
+	 * 修改申请
 	 */
-	@SysLog("修改配置")
+	@SysLog("修改申请")
 	@RequestMapping("/update")
-	@RequiresPermissions("sys:config:update")
-	public R update(@RequestBody SysConfigEntity config){
-		ValidatorUtils.validateEntity(config);
-		
-		sysConfigService.update(config);
+	@RequiresPermissions("person:apply:update")
+	public R update(@RequestBody ConvertApplyEntity apply){
+		ValidatorUtils.validateEntity(apply);
+		convertApplyService.update(apply);
 		
 		return R.ok();
 	}
 	
 	/**
-	 * 删除配置
+	 * 删除申请
 	 */
-	@SysLog("删除配置")
+	@SysLog("删除申请")
 	@RequestMapping("/delete")
-	@RequiresPermissions("sys:config:delete")
+	@RequiresPermissions("person:apply:delete")
 	public R delete(@RequestBody Long[] ids){
-		sysConfigService.deleteBatch(ids);
-		
+		convertApplyService.deleteBatch(ids);
 		return R.ok();
 	}
 

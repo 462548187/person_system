@@ -1,145 +1,97 @@
 /**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
+ * 
  *
- * https://www.renren.io
+ * 
  *
- * 版权所有，侵权必究！
+ * 
  */
 
-package com.person.modules.sys.controller;
+package com.person.modules.person.controller;
 
-import com.person.common.utils.Constant;
+import com.person.common.annotation.SysLog;
+import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
-import com.person.modules.sys.entity.SysDeptEntity;
-import com.person.modules.sys.service.SysDeptService;
+import com.person.common.validator.ValidatorUtils;
+import com.person.modules.person.entity.InterviewPlanEntity;
+import com.person.modules.person.service.InterviewPlanService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.List;
+import java.util.Map;
 
 
 /**
- * 部门管理
+ * 面试管理
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 
  */
 @RestController
-@RequestMapping("/sys/dept")
+@RequestMapping("/person/interview")
 public class InterviewPlanController extends AbstractController {
 	@Autowired
-	private SysDeptService sysDeptService;
-	
+	private InterviewPlanService interviewPlanService;
+
 	/**
-	 * 列表
+	 * 所有面试列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("sys:dept:list")
-	public List<SysDeptEntity> list(){
-		List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
+	@RequiresPermissions("person:apply:list")
+	public R list(@RequestParam Map<String, Object> params){
+		PageUtils page = interviewPlanService.queryPage(params);
 
-		return deptList;
+		return R.ok().put("page", page);
+	}
+
+
+	/**
+	 * 面试信息
+	 */
+	@RequestMapping("/info/{id}")
+	@RequiresPermissions("person:apply:info")
+	@ResponseBody
+	public R info(@PathVariable("id") Long id){
+		InterviewPlanEntity apply = interviewPlanService.getById(id);
+
+		return R.ok().put("apply", apply);
 	}
 
 	/**
-	 * 选择部门(添加、修改菜单)
+	 * 保存面试
 	 */
-	@RequestMapping("/select")
-	@RequiresPermissions("sys:dept:select")
-	public R select(){
-		List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
-
-		//添加一级部门
-		if(getUserId() == Constant.SUPER_ADMIN){
-			SysDeptEntity root = new SysDeptEntity();
-			root.setDeptId(0L);
-			root.setName("一级部门");
-			root.setParentId(-1L);
-			root.setOpen(true);
-			deptList.add(root);
-		}
-
-		return R.ok().put("deptList", deptList);
-	}
-
-	/**
-	 * 上级部门Id(管理员则为0)
-	 */
-	@RequestMapping("/info")
-	@RequiresPermissions("sys:dept:list")
-	public R info(){
-		long deptId = 0;
-		if(getUserId() != Constant.SUPER_ADMIN){
-			List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
-			Long parentId = null;
-			for(SysDeptEntity sysDeptEntity : deptList){
-				if(parentId == null){
-					parentId = sysDeptEntity.getParentId();
-					continue;
-				}
-
-				if(parentId > sysDeptEntity.getParentId().longValue()){
-					parentId = sysDeptEntity.getParentId();
-				}
-			}
-			deptId = parentId;
-		}
-
-		return R.ok().put("deptId", deptId);
-	}
-	
-	/**
-	 * 信息
-	 */
-	@RequestMapping("/info/{deptId}")
-	@RequiresPermissions("sys:dept:info")
-	public R info(@PathVariable("deptId") Long deptId){
-		SysDeptEntity dept = sysDeptService.getById(deptId);
-		
-		return R.ok().put("dept", dept);
-	}
-	
-	/**
-	 * 保存
-	 */
+	@SysLog("保存面试")
 	@RequestMapping("/save")
-	@RequiresPermissions("sys:dept:save")
-	public R save(@RequestBody SysDeptEntity dept){
-		sysDeptService.save(dept);
-		
-		return R.ok();
-	}
-	
-	/**
-	 * 修改
-	 */
-	@RequestMapping("/update")
-	@RequiresPermissions("sys:dept:update")
-	public R update(@RequestBody SysDeptEntity dept){
-		sysDeptService.updateById(dept);
-		
-		return R.ok();
-	}
-	
-	/**
-	 * 删除
-	 */
-	@RequestMapping("/delete")
-	@RequiresPermissions("sys:dept:delete")
-	public R delete(long deptId){
-		//判断是否有子部门
-		List<Long> deptList = sysDeptService.queryDetpIdList(deptId);
-		if(deptList.size() > 0){
-			return R.error("请先删除子部门");
-		}
+	@RequiresPermissions("person:apply:save")
+	public R save(@RequestBody InterviewPlanEntity apply){
+		ValidatorUtils.validateEntity(apply);
 
-		sysDeptService.removeById(deptId);
-		
+		interviewPlanService.save(apply);
+
 		return R.ok();
 	}
-	
+
+	/**
+	 * 修改面试
+	 */
+	@SysLog("修改面试")
+	@RequestMapping("/update")
+	@RequiresPermissions("person:apply:update")
+	public R update(@RequestBody InterviewPlanEntity apply){
+		ValidatorUtils.validateEntity(apply);
+		interviewPlanService.update(apply);
+
+		return R.ok();
+	}
+
+	/**
+	 * 删除面试
+	 */
+	@SysLog("删除面试")
+	@RequestMapping("/delete")
+	@RequiresPermissions("person:apply:delete")
+	public R delete(@RequestBody Long[] ids){
+		interviewPlanService.deleteBatch(ids);
+		return R.ok();
+	}
 }

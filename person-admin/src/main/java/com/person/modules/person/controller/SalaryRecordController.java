@@ -1,47 +1,98 @@
 /**
- * Copyright (c) 2016-2019 人人开源 All rights reserved.
+ * 
  *
- * https://www.renren.io
+ * 
  *
- * 版权所有，侵权必究！
+ * 
  */
 
-package com.person.modules.sys.controller;
+package com.person.modules.person.controller;
 
+import com.person.common.annotation.SysLog;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
-import com.person.modules.sys.service.SysLogService;
+import com.person.common.validator.ValidatorUtils;
+import com.person.modules.person.entity.SalaryRecordEntity;
+import com.person.modules.person.service.SalaryRecordService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
 
 /**
- * 系统日志
+ * 工资
  *
- * @author Mark sunlightcs@gmail.com
+ * @author 
  */
 @Controller
-@RequestMapping("/sys/log")
+@RequestMapping("/person/salary")
 public class SalaryRecordController {
 	@Autowired
-	private SysLogService sysLogService;
-	
+	private SalaryRecordService salaryRecordService;
+
 	/**
-	 * 列表
+	 * 所有工资列表
 	 */
-	@ResponseBody
 	@RequestMapping("/list")
-	@RequiresPermissions("sys:log:list")
+	@RequiresPermissions("person:salary:list")
 	public R list(@RequestParam Map<String, Object> params){
-		PageUtils page = sysLogService.queryPage(params);
+		PageUtils page = salaryRecordService.queryPage(params);
 
 		return R.ok().put("page", page);
 	}
-	
+
+
+	/**
+	 * 工资信息
+	 */
+	@RequestMapping("/info/{id}")
+	@RequiresPermissions("person:salary:info")
+	@ResponseBody
+	public R info(@PathVariable("id") Long id){
+		SalaryRecordEntity salary = salaryRecordService.getById(id);
+
+		return R.ok().put("salary", salary);
+	}
+
+	/**
+	 * 保存工资
+	 */
+	@SysLog("保存工资")
+	@RequestMapping("/save")
+	@RequiresPermissions("person:salary:save")
+	public R save(@RequestBody SalaryRecordEntity salary){
+		ValidatorUtils.validateEntity(salary);
+
+		salaryRecordService.save(salary);
+
+		return R.ok();
+	}
+
+	/**
+	 * 修改工资
+	 */
+	@SysLog("修改工资")
+	@RequestMapping("/update")
+	@RequiresPermissions("person:salary:update")
+	public R update(@RequestBody SalaryRecordEntity salary){
+		ValidatorUtils.validateEntity(salary);
+		salaryRecordService.update(salary);
+
+		return R.ok();
+	}
+
+	/**
+	 * 删除工资
+	 */
+	@SysLog("删除工资")
+	@RequestMapping("/delete")
+	@RequiresPermissions("person:salary:delete")
+	public R delete(@RequestBody Long[] ids){
+		salaryRecordService.deleteBatch(ids);
+		return R.ok();
+	}
+
 }
