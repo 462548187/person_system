@@ -48,6 +48,15 @@
 				</div>
 			</div>
 			<div class="form-group">
+				<div class="col-sm-2 control-label">状态</div>
+				<label class="radio-inline">
+					<input type="radio" name="status" value="0" v-model="plan.status"/> 进行中
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="status" value="1" v-model="plan.status"/> 完成
+				</label>
+			</div>
+			<div class="form-group">
 				<div class="col-sm-2 control-label"></div>
 				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
 				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>

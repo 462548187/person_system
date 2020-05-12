@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 11/05/2020 22:13:26
+ Date: 13/05/2020 07:43:28
 */
 
 SET NAMES utf8mb4;
@@ -149,11 +149,13 @@ CREATE TABLE `b_user_plan`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人计划' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人计划' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_user_plan
 -- ----------------------------
+INSERT INTO `b_user_plan` VALUES (2, NULL, '萨达', '2012-09-12', '2012-09-13', 1, NULL, NULL);
+INSERT INTO `b_user_plan` VALUES (3, 1, '阿斯顿发光会', '2012-09-12', '2012-09-12', 1, '2020-05-12 22:54:11', NULL);
 
 -- ----------------------------
 -- Table structure for b_work_daily
@@ -273,7 +275,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 27 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -304,6 +306,22 @@ INSERT INTO `sys_log` VALUES (23, 'admin', '保存菜单', 'com.person.modules.s
 INSERT INTO `sys_log` VALUES (24, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":48,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"新增\",\"perms\":\"person:plan:save\",\"type\":2,\"orderNum\":0}', 7, '0:0:0:0:0:0:0:1', '2020-05-11 22:09:45');
 INSERT INTO `sys_log` VALUES (25, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":49,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"修改\",\"perms\":\"person:plan:update\",\"type\":2,\"orderNum\":0}', 5, '0:0:0:0:0:0:0:1', '2020-05-11 22:10:25');
 INSERT INTO `sys_log` VALUES (26, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":50,\"parentId\":46,\"parentName\":\"个人计划\",\"name\":\"删除\",\"perms\":\"person:plan:delete\",\"type\":2,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-11 22:10:57');
+INSERT INTO `sys_log` VALUES (27, 'admin', '保存个人计划', 'com.person.modules.person.controller.UserPlanController.save()', '{\"id\":1,\"name\":\"测试\",\"startDate\":\"2020-05-13\",\"endDate\":\"2020-05-14\",\"status\":0}', 101, '0:0:0:0:0:0:0:1', '2020-05-12 22:43:55');
+INSERT INTO `sys_log` VALUES (28, 'admin', '删除个人计划', 'com.person.modules.person.controller.UserPlanController.delete()', '[1]', 15, '0:0:0:0:0:0:0:1', '2020-05-12 22:52:13');
+INSERT INTO `sys_log` VALUES (29, 'admin', '保存个人计划', 'com.person.modules.person.controller.UserPlanController.save()', '{\"id\":2,\"name\":\"萨达\",\"startDate\":\"2012-09-12\",\"endDate\":\"2012-09-13\",\"status\":0}', 7, '0:0:0:0:0:0:0:1', '2020-05-12 22:52:35');
+INSERT INTO `sys_log` VALUES (30, 'admin', '保存个人计划', 'com.person.modules.person.controller.UserPlanController.save()', '{\"id\":3,\"userId\":1,\"name\":\"阿斯顿发光会\",\"startDate\":\"2012-09-12\",\"endDate\":\"2012-09-12\",\"status\":0,\"createTime\":\"2020-05-12 22:54:11\"}', 101, '0:0:0:0:0:0:0:1', '2020-05-12 22:54:11');
+INSERT INTO `sys_log` VALUES (31, 'admin', '修改个人计划', 'com.person.modules.person.controller.UserPlanController.update()', '{\"id\":2,\"name\":\"萨达\",\"startDate\":\"2012-09-12\",\"endDate\":\"2012-09-13\",\"status\":1}', 97, '0:0:0:0:0:0:0:1', '2020-05-13 07:20:07');
+INSERT INTO `sys_log` VALUES (32, 'admin', '修改个人计划', 'com.person.modules.person.controller.UserPlanController.update()', '{\"id\":3,\"userId\":1,\"name\":\"阿斯顿发光会\",\"startDate\":\"2012-09-12\",\"endDate\":\"2012-09-12\",\"status\":1,\"createTime\":\"2020-05-12 22:54:11\"}', 8, '0:0:0:0:0:0:0:1', '2020-05-13 07:20:21');
+INSERT INTO `sys_log` VALUES (33, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":51,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"照片需求\",\"url\":\"/person/apply/apply.html\",\"perms\":\"person:apply:list,person:apply:info\",\"type\":1,\"orderNum\":0}', 11, '0:0:0:0:0:0:0:1', '2020-05-13 07:32:11');
+INSERT INTO `sys_log` VALUES (34, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":51,\"parentId\":44,\"parentName\":\"招聘管理\",\"name\":\"招聘需求\",\"url\":\"/person/apply/apply.html\",\"perms\":\"person:apply:list,person:apply:info\",\"type\":1,\"orderNum\":0}', 24, '0:0:0:0:0:0:0:1', '2020-05-13 07:32:41');
+INSERT INTO `sys_log` VALUES (35, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":52,\"parentId\":44,\"parentName\":\"招聘管理\",\"name\":\"面试计划\",\"url\":\"person/interview/interview.html\",\"perms\":\"\",\"type\":1,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-13 07:34:22');
+INSERT INTO `sys_log` VALUES (36, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":53,\"parentId\":44,\"parentName\":\"招聘管理\",\"name\":\"员工档案\",\"url\":\"person/doc/doc.html\",\"type\":1,\"orderNum\":0}', 10, '0:0:0:0:0:0:0:1', '2020-05-13 07:34:57');
+INSERT INTO `sys_log` VALUES (37, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":54,\"parentId\":42,\"parentName\":\"考勤管理\",\"name\":\"出勤记录\",\"url\":\"person/work/work.html\",\"type\":1,\"orderNum\":0}', 10, '0:0:0:0:0:0:0:1', '2020-05-13 07:36:07');
+INSERT INTO `sys_log` VALUES (38, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":55,\"parentId\":43,\"parentName\":\"个人中心\",\"name\":\"工作日报\",\"url\":\"person/daily/daily.html\",\"type\":1,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-05-13 07:38:09');
+INSERT INTO `sys_log` VALUES (39, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":53,\"parentId\":45,\"parentName\":\"档案管理\",\"name\":\"员工档案\",\"url\":\"person/doc/doc.html\",\"type\":1,\"orderNum\":0}', 12, '0:0:0:0:0:0:0:1', '2020-05-13 07:38:53');
+INSERT INTO `sys_log` VALUES (40, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":56,\"parentId\":41,\"parentName\":\"工资管理\",\"name\":\"工资查询\",\"url\":\"person/salary/salary.html\",\"type\":1,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-05-13 07:40:16');
+INSERT INTO `sys_log` VALUES (41, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":57,\"parentId\":43,\"parentName\":\"个人中心\",\"name\":\"转正申请\",\"url\":\"person/apply/apply.html\",\"type\":1,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-05-13 07:41:19');
+INSERT INTO `sys_log` VALUES (42, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":51,\"parentId\":44,\"parentName\":\"招聘管理\",\"name\":\"招聘需求\",\"url\":\"/person/need/need.html\",\"perms\":\"person:need:list,person:need:info\",\"type\":1,\"orderNum\":0}', 17, '0:0:0:0:0:0:0:1', '2020-05-13 07:42:21');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -319,7 +337,7 @@ CREATE TABLE `sys_menu`  (
   `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -360,6 +378,13 @@ INSERT INTO `sys_menu` VALUES (47, 46, '查看', NULL, 'person:plan:list,person:
 INSERT INTO `sys_menu` VALUES (48, 46, '新增', NULL, 'person:plan:save', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (49, 46, '修改', NULL, 'person:plan:update', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (50, 46, '删除', NULL, 'person:plan:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (51, 44, '招聘需求', '/person/need/need.html', 'person:need:list,person:need:info', 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (52, 44, '面试计划', 'person/interview/interview.html', '', 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (53, 45, '员工档案', 'person/doc/doc.html', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (54, 42, '出勤记录', 'person/work/work.html', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (55, 43, '工作日报', 'person/daily/daily.html', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (56, 41, '工资查询', 'person/salary/salary.html', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (57, 43, '转正申请', 'person/apply/apply.html', NULL, 1, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_oss
