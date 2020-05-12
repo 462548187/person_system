@@ -9,6 +9,7 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -62,7 +63,8 @@ public class UserPlanController extends AbstractController {
 	@RequiresPermissions("person:plan:save")
 	public R save(@RequestBody UserPlanEntity plan){
 		ValidatorUtils.validateEntity(plan);
-
+		plan.setUserId(getUserId());
+		plan.setCreateTime(DateUtils.currentTimeFormat() );
 		userPlanService.save(plan);
 
 		return R.ok();

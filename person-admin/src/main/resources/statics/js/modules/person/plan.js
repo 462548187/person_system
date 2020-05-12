@@ -4,7 +4,7 @@ $(function () {
         datatype: "json",
         colModel: [			
 			{ label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
-            { label: '用户ID', name: 'userId', width: 45},
+            { label: '用户ID', name: 'userId', width: 45,hidden:true},
             { label: '计划名称', name: 'name', width: 75 },
             { label: '开始日期', name: 'startDate', width: 75 },
             { label: '结束日期', name: 'endDate', width: 75 },
@@ -64,12 +64,8 @@ var vm = new Vue({
         },
         showList: true,
         title:null,
-        roleList:{},
         plan:{
-            status:1,
-            deptId:null,
-            deptName:null,
-            roleIdList:[]
+            status:1
         }
     },
     methods: {
@@ -79,7 +75,6 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.roleList = {};
             vm.plan = { status:0};
 
 
@@ -155,7 +150,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'id': vm.q.id},
+                postData:{'name': vm.q.name},
                 page:page
             }).trigger("reloadGrid");
         }

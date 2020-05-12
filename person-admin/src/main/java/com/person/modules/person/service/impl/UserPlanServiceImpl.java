@@ -11,6 +11,7 @@ package com.person.modules.person.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.person.common.utils.Constant;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.UserPlanDao;
@@ -28,11 +29,13 @@ public class UserPlanServiceImpl extends ServiceImpl<UserPlanDao, UserPlanEntity
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String key = (String)params.get("key");
+        String name = (String)params.get("name");
 
         IPage<UserPlanEntity> page = this.page(
-            new Query<UserPlanEntity>().getPage(params),
-            new QueryWrapper<UserPlanEntity>().like(StringUtils.isNotBlank(key),"username", key)
+                new Query<UserPlanEntity>().getPage(params),
+                new QueryWrapper<UserPlanEntity>()
+                        .like(StringUtils.isNotBlank(name),"name", name)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
         );
 
         return new PageUtils(page);
