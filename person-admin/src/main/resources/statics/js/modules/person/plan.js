@@ -1,4 +1,5 @@
 $(function () {
+
     $("#jqGrid").jqGrid({
         url: baseURL + 'person/plan/list',
         datatype: "json",
@@ -155,4 +156,17 @@ var vm = new Vue({
             }).trigger("reloadGrid");
         }
     }
+});
+layui.use('laydate', function(){
+    var laydate = layui.laydate;
+
+    //执行一个laydat
+    laydate.render({
+        elem: '#startDate' //指定元素
+        ,value: new Date()
+    });
+    laydate.render({
+        elem: '#endDate' //指定元素
+        ,value: new Date()
+    });
 });
