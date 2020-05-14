@@ -30,16 +30,22 @@ var vm = new Vue({
             //加载菜单树
             $.get(baseURL + "sys/menu/select", function(r){
                 ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
-                var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
+                var node = ztree.getNodeByParam("menuId", menuId);
+                // var node = ztree.getNodeByParam("menuId", vm.menu.parentId);
                 ztree.selectNode(node);
 
                 vm.menu.parentName = node.name;
             })
         },
         add: function(){
+            var menuId = getMenuId();
+            if(menuId == null){
+                menuId =0;
+            }
             vm.showList = false;
             vm.title = "新增";
-            vm.menu = {parentName:null,parentId:0,type:1,orderNum:0};
+            vm.menu = {parentName:null,parentId:menuId,type:1,orderNum:0};
+            // vm.menu = {parentName:null,parentId:0,type:1,orderNum:0};
             vm.getMenu();
         },
         update: function () {
@@ -53,7 +59,7 @@ var vm = new Vue({
                 vm.title = "修改";
                 vm.menu = r.menu;
 
-                vm.getMenu();
+                vm.getMenu(menuId);
             });
         },
         del: function () {

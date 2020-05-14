@@ -11,6 +11,7 @@ package com.person.modules.person.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.person.common.utils.Constant;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.WorkDailyDao;
@@ -28,11 +29,13 @@ public class WorkDailyServiceImpl extends ServiceImpl<WorkDailyDao, WorkDailyEnt
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String key = (String)params.get("key");
+        String workDate = (String)params.get("workDate");
 
         IPage<WorkDailyEntity> page = this.page(
-            new Query<WorkDailyEntity>().getPage(params),
-            new QueryWrapper<WorkDailyEntity>().like(StringUtils.isNotBlank(key),"username", key)
+                new Query<WorkDailyEntity>().getPage(params),
+                new QueryWrapper<WorkDailyEntity>()
+                        .eq(StringUtils.isNotBlank(workDate),"workDate", workDate)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
         );
 
         return new PageUtils(page);

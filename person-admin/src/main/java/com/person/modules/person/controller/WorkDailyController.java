@@ -21,6 +21,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+import static com.person.modules.sys.shiro.ShiroUtils.getUserId;
+
 /**
  * 日报
  *
@@ -54,7 +56,7 @@ public class WorkDailyController {
 	public R info(@PathVariable("id") Long id){
 		WorkDailyEntity daily = workDailyService.getById(id);
 
-		return R.ok().put("daily", daily);
+		return R.ok().put("record", daily);
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class WorkDailyController {
 	@RequiresPermissions("person:daily:save")
 	public R save(@RequestBody WorkDailyEntity daily){
 		ValidatorUtils.validateEntity(daily);
-
+		daily.setUserId(getUserId());
 		workDailyService.save(daily);
 
 		return R.ok();
