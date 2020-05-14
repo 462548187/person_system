@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>招聘需求</title>
+<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="计划名称">
+			</div>
+			<a class="btn btn-default" @click="query">查询</a>
+			<#if shiro.hasPermission("person:need:save")>
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+			</#if>
+			<#if shiro.hasPermission("person:need:update")>
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+			</#if>
+			<#if shiro.hasPermission("person:need:delete")>
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+			</#if>
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+
+	<div v-show="!showList" class="panel panel-default">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+				<div class="col-sm-2 control-label">需求部门</div>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" v-model="need.dept" placeholder="需求部门"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">需求人数</div>
+				<div class="col-sm-10">
+					<input v-model="need.needNum"  placeholder="需求人数" name="needNum"
+						   id="needNum" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">岗位类型</div>
+				<div class="col-sm-10">
+					<input v-model="need.post"  placeholder="岗位类型" name="post"
+						   id="post" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">学历要求</div>
+				<div class="col-sm-10">
+					<input v-model="need.education"  placeholder="学历要求" name="education"
+						   id="education" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">工作年限</div>
+				<div class="col-sm-10">
+					<input v-model="need.workTime"  placeholder="工作年限" name="workTime"
+						   id="workTime" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">招聘要求</div>
+				<div class="col-sm-10">
+					<input v-model="need.demand"  placeholder="招聘要求" name="demand"
+						   id="demand" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">招聘负责人</div>
+				<div class="col-sm-10">
+					<input v-model="need.recruitUserId"  placeholder="招聘负责人" name="recruitUserId"
+						   id="recruitUserId" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">需求负责人</div>
+				<div class="col-sm-10">
+					<input v-model="need.needUserId"  placeholder="需求负责人" name="needUserId"
+						   id="needUserId" class="layui-input" autocomplete="off">
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div>
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+
+<script src="${request.contextPath}/statics/js/modules/person/need.js?_${.now?long}"></script>
+</body>
+</html>
