@@ -9,6 +9,7 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -69,6 +70,7 @@ public class WorkDailyController  extends AbstractController {
 	public R save(@RequestBody WorkDailyEntity daily){
 		ValidatorUtils.validateEntity(daily);
 		daily.setUserId(getUserId());
+		daily.setCreateTime(DateUtils.currentTimeFormat() );
 		workDailyService.save(daily);
 
 		return R.ok();
@@ -82,6 +84,7 @@ public class WorkDailyController  extends AbstractController {
 	@RequiresPermissions("person:daily:update")
 	public R update(@RequestBody WorkDailyEntity daily){
 		ValidatorUtils.validateEntity(daily);
+		daily.setUpdateTime(DateUtils.currentTimeFormat() );
 		workDailyService.update(daily);
 
 		return R.ok();

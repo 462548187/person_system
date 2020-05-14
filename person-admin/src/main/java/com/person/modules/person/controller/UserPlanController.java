@@ -78,6 +78,8 @@ public class UserPlanController extends AbstractController {
 	@RequiresPermissions("person:plan:update")
 	public R update(@RequestBody UserPlanEntity plan){
 		ValidatorUtils.validateEntity(plan);
+		plan.setUpdateTime(DateUtils.currentTimeFormat() );
+
 		userPlanService.update(plan);
 
 		return R.ok();

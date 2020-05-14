@@ -1,5 +1,26 @@
 $(function () {
 
+    layui.use('laydate', function(){
+        var laydate = layui.laydate;
+
+        //执行一个laydat
+        laydate.render({
+            elem: '#startDate' //指定元素
+            ,value: new Date(),
+            done: function (value) { // value 是laydate选择的日期
+                var mountedSelf = this; // 当前的vue对象
+                mountedSelf.data(value); // vue对象的属性设置为当前的日期
+            },
+        });
+        laydate.render({
+            elem: '#endDate' //指定元素
+            ,value: new Date(),
+            done: function (value) { // value 是laydate选择的日期
+                var mountedSelf = this; // 当前的vue对象
+                mountedSelf.data = value; // vue对象的属性设置为当前的日期
+            },
+        });
+    });
     $("#jqGrid").jqGrid({
         url: baseURL + 'person/plan/list',
         datatype: "json",
@@ -156,17 +177,4 @@ var vm = new Vue({
             }).trigger("reloadGrid");
         }
     }
-});
-layui.use('laydate', function(){
-    var laydate = layui.laydate;
-
-    //执行一个laydat
-    laydate.render({
-        elem: '#startDate' //指定元素
-        ,value: new Date()
-    });
-    laydate.render({
-        elem: '#endDate' //指定元素
-        ,value: new Date()
-    });
 });
