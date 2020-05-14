@@ -3,13 +3,13 @@ $(function () {
     $("#jqGrid").jqGrid({
         url: baseURL + 'person/daily/list',
         datatype: "json",
-        colModel: [			
-			{ label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
+        colModel: [
+            { label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
             { label: '用户ID', name: 'userId', width: 45,hidden:true},
             { label: '开始日期', name: 'workDate', width: 75 },
             { label: '工作内容', name: 'workContent', width: 75 },
             { label: '完成进度', name: 'progress', width: 75 },
-			{ label: '创建时间', name: 'createTime', index: "create_time", width: 85}
+            { label: '创建时间', name: 'createTime', index: "create_time", width: 85}
         ],
 		viewrecords: true,
         height: 385,
@@ -37,31 +37,32 @@ $(function () {
         }
     });
 });
-// var setting = {
-//     data: {
-//         simpleData: {
-//             enable: true,
-//             idKey: "deptId",
-//             pIdKey: "parentId",
-//             rootPId: -1
-//         },
-//         key: {
-//             url:"nourl"
-//         }
-//     }
-// };
-// var ztree;
+var setting = {
+    data: {
+        simpleData: {
+            enable: true,
+            idKey: "deptId",
+            pIdKey: "parentId",
+            rootPId: -1
+        },
+        key: {
+            url:"nourl"
+        }
+    }
+};
+var ztree;
 
 var vm = new Vue({
     el:'#rrapp',
     data:{
         q:{
-            workDate: null
+            name: null
         },
         showList: true,
-        title:null
-        ,
-        daily:{}
+        title:null,
+        daily:{
+            status:1
+        }
     },
     methods: {
         query: function () {
@@ -70,7 +71,7 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.daily = {};
+            vm.daily = { status:0};
 
 
         },
@@ -138,13 +139,14 @@ var vm = new Vue({
         getRecord: function(id){
             $.get(baseURL + "person/daily/info/"+id, function(r){
                 vm.daily = r.daily;
+
             });
         },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'workDate': vm.q.workDate},
+                postData:{'name': vm.q.name},
                 page:page
             }).trigger("reloadGrid");
         }
