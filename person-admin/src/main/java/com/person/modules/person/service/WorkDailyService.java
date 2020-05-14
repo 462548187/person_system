@@ -23,6 +23,5 @@ public interface WorkDailyService extends IService<WorkDailyEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
     void deleteBatch(Long[] ids);
-
     void update(WorkDailyEntity record);
 }

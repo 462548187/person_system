@@ -14,6 +14,7 @@ import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
 import com.person.modules.person.entity.WorkDailyEntity;
 import com.person.modules.person.service.WorkDailyService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -31,7 +32,7 @@ import static com.person.modules.sys.shiro.ShiroUtils.getUserId;
 @Controller
 @RequestMapping("/person/daily")
 
-public class WorkDailyController {
+public class WorkDailyController  extends AbstractController {
 	@Autowired
 	private WorkDailyService workDailyService;
 
