@@ -166,18 +166,17 @@ layui.use('laydate', function () {
     // $(this).removeAttr("lay-key")
     laydate.render({
         elem: '#startDate',
-        // trigger: 'click',
+        trigger: 'click',
         done: function (value) {
-            vm.startDate = value;
+            vm.plan.startDate = value;
         },
     });
-    $(this).removeAttr("lay-key")
 
     laydate.render({
         elem: '#endDate',
-        // trigger: 'click',
+        trigger: 'click',
         done: function (value) {
-            vm.endDate = value;
+            vm.plan.endDate = value;
         },
     });
 });
