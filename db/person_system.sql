@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50548
 File Encoding         : 65001
 
-Date: 2020-05-15 14:14:10
+Date: 2020-05-15 14:38:52
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -58,8 +58,6 @@ CREATE TABLE `b_interview_plan` (
 -- ----------------------------
 -- Records of b_interview_plan
 -- ----------------------------
-INSERT INTO `b_interview_plan` VALUES ('1', '2', null, '3', '4', '0', '2020-05-15 13:49:31', null);
-INSERT INTO `b_interview_plan` VALUES ('2', null, '22', '33', '44', '0', '2020-05-15 13:50:47', null);
 INSERT INTO `b_interview_plan` VALUES ('3', '111', '222', '333', '444', '0', '2020-05-15 13:51:38', null);
 
 -- ----------------------------
@@ -80,11 +78,12 @@ CREATE TABLE `b_recruit_need` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='招聘需求';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='招聘需求';
 
 -- ----------------------------
 -- Records of b_recruit_need
 -- ----------------------------
+INSERT INTO `b_recruit_need` VALUES ('1', '1', '2', '3', '4', '5', '6', '0', '7', '8', '2020-05-15 14:33:35', null);
 
 -- ----------------------------
 -- Table structure for b_salary_record
@@ -112,12 +111,12 @@ CREATE TABLE `b_salary_record` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='工资记录';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='工资记录';
 
 -- ----------------------------
 -- Records of b_salary_record
 -- ----------------------------
-INSERT INTO `b_salary_record` VALUES ('1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2020-05-15 13:53:22', null);
+INSERT INTO `b_salary_record` VALUES ('2', null, '22', '22', '33', null, null, null, null, null, null, null, null, null, null, null, null, null, '2020-05-15 14:18:37', null);
 
 -- ----------------------------
 -- Table structure for b_user_doc
@@ -133,12 +132,13 @@ CREATE TABLE `b_user_doc` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='员工档案';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='员工档案';
 
 -- ----------------------------
 -- Records of b_user_doc
 -- ----------------------------
 INSERT INTO `b_user_doc` VALUES ('1', '1', '2', '3', '4', null, '2020-05-15 13:51:50', null);
+INSERT INTO `b_user_doc` VALUES ('2', '1', '2', '3', '4', null, '2020-05-15 14:18:52', null);
 
 -- ----------------------------
 -- Table structure for b_user_plan
@@ -174,12 +174,13 @@ CREATE TABLE `b_work_daily` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='工作日报';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT COMMENT='工作日报';
 
 -- ----------------------------
 -- Records of b_work_daily
 -- ----------------------------
 INSERT INTO `b_work_daily` VALUES ('26', '1', '2020-05-01', '防守打法', '1', '2020-05-15 13:07:35', null);
+INSERT INTO `b_work_daily` VALUES ('27', '1', '2020-05-15', '的点点滴滴', '12', '2020-05-15 14:18:21', null);
 
 -- ----------------------------
 -- Table structure for b_work_record
@@ -282,7 +283,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=166 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=COMPACT COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -452,6 +453,13 @@ INSERT INTO `sys_log` VALUES ('162', 'admin', '保存面试', 'com.person.module
 INSERT INTO `sys_log` VALUES ('163', 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":1,\"userId\":1,\"education\":\"2\",\"birth\":\"3\",\"entryDate\":\"4\",\"createTime\":\"2020-05-15 13:51:50\"}', '89', '0:0:0:0:0:0:0:1', '2020-05-15 13:51:50');
 INSERT INTO `sys_log` VALUES ('164', 'admin', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":1,\"createTime\":\"2020-05-15 13:53:22\"}', '58', '0:0:0:0:0:0:0:1', '2020-05-15 13:53:22');
 INSERT INTO `sys_log` VALUES ('165', 'admin', '保存申请', 'com.person.modules.person.controller.ConvertApplyController.save()', '{\"id\":1,\"applyDate\":\"1\",\"status\":0,\"createTime\":\"2020-05-15 13:53:45\"}', '70', '0:0:0:0:0:0:0:1', '2020-05-15 13:53:45');
+INSERT INTO `sys_log` VALUES ('166', 'admin', '保存日报', 'com.person.modules.person.controller.WorkDailyController.save()', '{\"id\":27,\"userId\":1,\"workDate\":\"2020-05-15\",\"workContent\":\"的点点滴滴\",\"progress\":12,\"createTime\":\"2020-05-15 14:18:21\"}', '205', '0:0:0:0:0:0:0:1', '2020-05-15 14:18:22');
+INSERT INTO `sys_log` VALUES ('167', 'admin', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":2,\"salaryMonth\":\"22\",\"mustSalary\":22.0,\"realitySalary\":33.0,\"createTime\":\"2020-05-15 14:18:37\"}', '132', '0:0:0:0:0:0:0:1', '2020-05-15 14:18:37');
+INSERT INTO `sys_log` VALUES ('168', 'admin', '删除工资', 'com.person.modules.person.controller.SalaryRecordController.delete()', '[1]', '47', '0:0:0:0:0:0:0:1', '2020-05-15 14:18:42');
+INSERT INTO `sys_log` VALUES ('169', 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":2,\"userId\":1,\"education\":\"2\",\"birth\":\"3\",\"entryDate\":\"4\",\"createTime\":\"2020-05-15 14:18:52\"}', '119', '0:0:0:0:0:0:0:1', '2020-05-15 14:18:52');
+INSERT INTO `sys_log` VALUES ('170', 'admin', '删除面试', 'com.person.modules.person.controller.InterviewPlanController.delete()', '[1,2]', '109', '0:0:0:0:0:0:0:1', '2020-05-15 14:21:28');
+INSERT INTO `sys_log` VALUES ('171', 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":51,\"parentId\":44,\"parentName\":\"招聘管理\",\"name\":\"招聘需求\",\"url\":\"modules//person/need.html\",\"perms\":\"\",\"type\":1,\"icon\":\"fa fa-bullhorn\",\"orderNum\":0}', '115', '0:0:0:0:0:0:0:1', '2020-05-15 14:22:52');
+INSERT INTO `sys_log` VALUES ('172', 'admin', '保存招聘要求', 'com.person.modules.person.controller.RecruitNeedController.save()', '{\"id\":1,\"dept\":\"1\",\"needNum\":2,\"post\":\"3\",\"education\":\"4\",\"workTime\":5,\"demand\":\"6\",\"status\":0,\"recruitUserId\":7,\"needUserId\":8,\"createTime\":\"2020-05-15 14:33:35\"}', '189', '0:0:0:0:0:0:0:1', '2020-05-15 14:33:35');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -508,7 +516,7 @@ INSERT INTO `sys_menu` VALUES ('47', '46', '查看', null, 'person:plan:list,per
 INSERT INTO `sys_menu` VALUES ('48', '46', '新增', null, 'person:plan:save', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('49', '46', '修改', null, 'person:plan:update', '2', null, '0');
 INSERT INTO `sys_menu` VALUES ('50', '46', '删除', null, 'person:plan:delete', '2', null, '0');
-INSERT INTO `sys_menu` VALUES ('51', '44', '招聘需求', 'modules//person/need.html', 'person:need:list,person:need:info', '1', 'fa fa-bullhorn', '0');
+INSERT INTO `sys_menu` VALUES ('51', '44', '招聘需求', 'modules/person/need.html', '', '1', 'fa fa-bullhorn', '0');
 INSERT INTO `sys_menu` VALUES ('52', '44', '面试计划', 'modules/person/interview.html', '', '1', 'fa fa-users', '0');
 INSERT INTO `sys_menu` VALUES ('53', '45', '员工档案', 'modules/person/doc.html', null, '1', 'fa fa-address-card-o', '0');
 INSERT INTO `sys_menu` VALUES ('54', '42', '出勤记录', 'modules/person/work.html', null, '1', 'fa fa-check-square', '0');
