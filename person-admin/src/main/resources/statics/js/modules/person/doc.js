@@ -6,10 +6,10 @@ $(function () {
         colModel: [			
 			{ label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
             { label: '用户ID', name: 'userId', width: 45,hidden:true},
-            { label: '计划名称', name: 'name', width: 75 },
-            { label: '开始日期', name: 'startDate', width: 75 },
-            { label: '结束日期', name: 'endDate', width: 75 },
-			{ label: '状态', name: 'status', width: 60, formatter: function(value, options, row){
+            { label: '学历', name: 'education', width: 75 },
+            { label: '生日', name: 'birth', width: 75 },
+            { label: '入职日期', name: 'entryDate', width: 75 },
+			{ label: '员工类型', name: 'userType', width: 60, formatter: function(value, options, row){
 				return value === 0 ? 
 					'<span class="label label-danger">进行中</span>' :
 					'<span class="label label-success">完成</span>';

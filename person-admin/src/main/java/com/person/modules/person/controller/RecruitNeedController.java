@@ -28,7 +28,7 @@ import java.util.Map;
  * @author 
  */
 @RestController
-@RequestMapping("person/need")
+@RequestMapping("/person/need")
 public class RecruitNeedController  extends AbstractController {
     @Autowired
     private RecruitNeedService recruitNeedService;
