@@ -1,69 +1,69 @@
 $(function () {
 
     $("#jqGrid").jqGrid({
-        url: baseURL + 'person/plan/list',
+        url: baseURL + 'person/daily/list',
         datatype: "json",
         colModel: [
-            { label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
-            { label: '用户ID', name: 'userId', width: 45},
-            { label: '开始日期', name: 'workDate', width: 75 },
-            { label: '工作内容', name: 'workContent', width: 75 },
-            { label: '完成进度', name: 'progress', width: 75 },
-            { label: '创建时间', name: 'createTime', width: 85}
+            {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
+            {label: '用户ID', name: 'userId', width: 45},
+            {label: '开始日期', name: 'workDate', width: 75},
+            {label: '工作内容', name: 'workContent', width: 75},
+            {label: '完成进度', name: 'progress', width: 75},
+            {label: '创建时间', name: 'createTime', width: 85}
         ],
-		viewrecords: true,
+        viewrecords: true,
         height: 385,
         rowNum: 10,
-		rowList : [10,30,50],
-        rownumbers: true, 
-        rownumWidth: 25, 
-        autowidth:true,
+        rowList: [10, 30, 50],
+        rownumbers: true,
+        rownumWidth: 25,
+        autowidth: true,
         multiselect: true,
         pager: "#jqGridPager",
-        jsonReader : {
+        jsonReader: {
             root: "page.list",
             page: "page.currPage",
             total: "page.totalPage",
             records: "page.totalCount"
         },
-        prmNames : {
-            page:"page", 
-            rows:"limit", 
+        prmNames: {
+            page: "page",
+            rows: "limit",
             order: "order"
         },
-        gridComplete:function(){
-        	//隐藏grid底部滚动条
-        	$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" }); 
+        gridComplete: function () {
+            //隐藏grid底部滚动条
+            $("#jqGrid").closest(".ui-jqgrid-bdiv").css({"overflow-x": "hidden"});
         }
     });
 });
 
 
 var vm = new Vue({
-    el:'#rrapp',
-    data:{
-        q:{
+    el: '#rrapp',
+    data: {
+        q: {
             name: null
         },
         showList: true,
-        title:null,
-        daily:{}
+        title: null,
+        daily: {}
     },
     methods: {
         query: function () {
             vm.reload();
         },
-        add: function(){
+        add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.daily = { };
+            vm.daily = {};
 
 
         },
         update: function () {
             var id = getSelectedRow();
-            if(id == null){
-                return ;
+            if (id == null) {
+                return;
             }
 
             vm.showList = false;
@@ -73,30 +73,30 @@ var vm = new Vue({
         },
         permissions: function () {
             var id = getSelectedRow();
-            if(id == null){
-                return ;
+            if (id == null) {
+                return;
             }
 
-            window.location.href=baseURL+"person/permissions/index/"+id;
+            window.location.href = baseURL + "person/permissions/index/" + id;
         },
         del: function () {
             var ids = getSelectedRows();
-            if(ids == null){
-                return ;
+            if (ids == null) {
+                return;
             }
 
-            confirm('确定要删除选中的记录？', function(){
+            confirm('确定要删除选中的记录？', function () {
                 $.ajax({
                     type: "POST",
                     url: baseURL + "person/daily/delete",
                     contentType: "application/json",
                     data: JSON.stringify(ids),
-                    success: function(r){
-                        if(r.code == 0){
-                            alert('操作成功', function(){
+                    success: function (r) {
+                        if (r.code == 0) {
+                            alert('操作成功', function () {
                                 vm.reload();
                             });
-                        }else{
+                        } else {
                             alert(r.msg);
                         }
                     }
@@ -110,45 +110,53 @@ var vm = new Vue({
                 url: baseURL + url,
                 contentType: "application/json",
                 data: JSON.stringify(vm.daily),
-                success: function(r){
-                    if(r.code === 0){
-                        alert('操作成功', function(){
+                success: function (r) {
+                    if (r.code === 0) {
+                        alert('操作成功', function () {
                             vm.reload();
                         });
-                    }else{
+                    } else {
                         alert(r.msg);
                     }
                 }
             });
         },
-        getRecord: function(id){
-            $.get(baseURL + "person/daily/info/"+id, function(r){
+        getRecord: function (id) {
+            $.get(baseURL + "person/daily/info/" + id, function (r) {
                 vm.daily = r.daily;
 
             });
         },
         reload: function () {
             vm.showList = true;
-            var page = $("#jqGrid").jqGrid('getGridParam','page');
-            $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'name': vm.q.name},
-                page:page
+            var page = $("#jqGrid").jqGrid('getGridParam', 'page');
+            $("#jqGrid").jqGrid('setGridParam', {
+                postData: {'name': vm.q.name},
+                page: page
             }).trigger("reloadGrid");
         }
     }
 });
-// layui.use('laydate', function(){
-//     var laydate = layui.laydate;
-//
-//     //执行一个laydat
-//     laydate.render({
-//         elem: '#workDate' //指定元素
-//         ,value: new Date()
-//     });
-//     //执行一个laydat
-//     laydate.render({
-//         elem: '#work_date_query' //指定元素
-//         ,value: new Date()
-//     });
-//
-// });
+layui.use('laydate', function () {
+    var laydate = layui.laydate;
+
+    //执行一个laydat
+    laydate.render({
+        elem: '#workDate' //指定元素
+        , value: new Date()
+        , trigger: 'click'
+        , done: function (value) {
+            vm.daily.workDate = value;
+        }
+    });
+    //执行一个laydat
+    laydate.render({
+        elem: '#work_date_query' //指定元素
+        , value: new Date()
+        , trigger: 'click'
+        , done: function (value) {
+            vm.q.workDate = value;
+        }
+    });
+
+});

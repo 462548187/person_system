@@ -163,13 +163,12 @@ var vm = new Vue({
 });
 layui.use('laydate', function () {
     var laydate = layui.laydate;
-    // $(this).removeAttr("lay-key")
     laydate.render({
         elem: '#startDate',
         trigger: 'click',
         done: function (value) {
             vm.plan.startDate = value;
-        },
+        }
     });
 
     laydate.render({
@@ -177,6 +176,6 @@ layui.use('laydate', function () {
         trigger: 'click',
         done: function (value) {
             vm.plan.endDate = value;
-        },
+        }
     });
 });

@@ -10,6 +10,7 @@ package com.person.modules.person.controller;
 
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -28,7 +29,7 @@ import java.util.Map;
  *
  * @author 
  */
-@Controller
+@RestController
 @RequestMapping("/person/doc")
 public class UserDocController  extends AbstractController {
 	@Autowired
@@ -66,6 +67,7 @@ public class UserDocController  extends AbstractController {
 	@RequiresPermissions("person:doc:save")
 	public R save(@RequestBody UserDocEntity doc){
 		ValidatorUtils.validateEntity(doc);
+		doc.setCreateTime(DateUtils.currentTimeFormat() );
 
 		userDocService.save(doc);
 

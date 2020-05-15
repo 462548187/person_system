@@ -30,7 +30,7 @@ import static com.person.modules.sys.shiro.ShiroUtils.getUserId;
  *
  * @author 
  */
-@Controller
+@RestController
 @RequestMapping("/person/daily")
 
 public class WorkDailyController  extends AbstractController {

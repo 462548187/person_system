@@ -9,6 +9,7 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -64,6 +65,7 @@ public class RecruitNeedController  extends AbstractController {
     @RequiresPermissions("person:need:save")
     public R save(@RequestBody RecruitNeedEntity need){
         ValidatorUtils.validateEntity(need);
+        need.setCreateTime(DateUtils.currentTimeFormat() );
 
         recruitNeedService.save(need);
 

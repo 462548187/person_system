@@ -9,6 +9,7 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -65,6 +66,7 @@ public class WorkRecordController extends AbstractController {
 	public R save(@RequestBody WorkRecordEntity work){
 		ValidatorUtils.validateEntity(work);
 		work.setUserId(getUserId());
+		work.setCreateTime(DateUtils.currentTimeFormat() );
 		workRecordService.save(work);
 		return R.ok();
 	}
@@ -77,6 +79,7 @@ public class WorkRecordController extends AbstractController {
 	@RequiresPermissions("person:work:update")
 	public R update(@RequestBody WorkRecordEntity work){
 		ValidatorUtils.validateEntity(work);
+		work.setUpdateTime(DateUtils.currentTimeFormat() );
 		workRecordService.update(work);
 
 		return R.ok();

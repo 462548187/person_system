@@ -3,6 +3,7 @@ package com.person.modules.person.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
 @Data
 @TableName("b_convert_apply")
 public class ConvertApplyEntity {
@@ -12,6 +13,7 @@ public class ConvertApplyEntity {
     private Long applyUserId;
 
     private String applyDate;
+    private String applyContent;
 
     private Integer status;
 

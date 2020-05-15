@@ -10,6 +10,7 @@ package com.person.modules.person.controller;
 
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -65,7 +66,7 @@ public class ConvertApplyController extends AbstractController {
 	@RequiresPermissions("person:apply:save")
 	public R save(@RequestBody ConvertApplyEntity apply){
 		ValidatorUtils.validateEntity(apply);
-
+		apply.setCreateTime(DateUtils.currentTimeFormat() );
 		convertApplyService.save(apply);
 		
 		return R.ok();

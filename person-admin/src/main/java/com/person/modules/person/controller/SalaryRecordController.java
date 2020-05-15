@@ -9,6 +9,7 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
@@ -28,7 +29,7 @@ import java.util.Map;
  *
  * @author 
  */
-@Controller
+@RestController
 @RequestMapping("/person/salary")
 public class SalaryRecordController  extends AbstractController {
 	@Autowired
@@ -66,6 +67,7 @@ public class SalaryRecordController  extends AbstractController {
 	@RequiresPermissions("person:salary:save")
 	public R save(@RequestBody SalaryRecordEntity salary){
 		ValidatorUtils.validateEntity(salary);
+		salary.setCreateTime(DateUtils.currentTimeFormat() );
 
 		salaryRecordService.save(salary);
 
