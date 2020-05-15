@@ -11,9 +11,15 @@ $(function () {
             {label: '下班时间', name: 'downTime', width: 75},
             {
                 label: '状态', name: 'status', width: 60, formatter: function (value, options, row) {
-                    return value === 0 ?
-                        '<span class="label label-danger">正常</span>' :
-                        '<span class="label label-success">迟到</span>';
+                    if (value === 0) {
+                        return '<span class="label label-success">正常</span>'
+                    } else if (value === 1) {
+                        return '<span class="label label-danger">迟到</span>'
+                    } else if (value === 2) {
+                        return '<span class="label label-warning">早退</span>'
+                    } else if (value === 3) {
+                        return '<span class="label label-info">加班</span>'
+                    }
                 }
             },
             {label: '创建时间', name: 'createTime', index: "create_time", width: 85}
@@ -44,32 +50,18 @@ $(function () {
         }
     });
 });
-var setting = {
-    data: {
-        simpleData: {
-            enable: true,
-            idKey: "deptId",
-            pIdKey: "parentId",
-            rootPId: -1
-        },
-        key: {
-            url: "nourl"
-        }
-    }
-};
-var ztree;
 
 var vm = new Vue({
     el: '#rrapp',
     data: {
         q: {
-            name: null
+            workDate: null
         },
         showList: true,
         title: null,
-        work: {
-            status: 1
-        }
+        work: {},
+        upFlag: true,
+        downFlag: false
     },
     methods: {
         query: function () {
@@ -78,16 +70,17 @@ var vm = new Vue({
         add: function () {
             vm.showList = false;
             vm.title = "新增";
-            vm.work = {status: 0};
-
-
+            vm.work = {};
+            vm.upFlag = true;
+            vm.downFlag = false;
         },
         update: function () {
             var id = getSelectedRow();
             if (id == null) {
                 return;
             }
-
+            vm.upFlag = false;
+            vm.downFlag = true;
             vm.showList = false;
             vm.title = "修改";
 
@@ -153,7 +146,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {'workDate': vm.q.workDate},
                 page: page
             }).trigger("reloadGrid");
         }
@@ -161,6 +154,7 @@ var vm = new Vue({
 });
 
 layui.use('laydate', function () {
+
     var laydate = layui.laydate;
     laydate.render({
         elem: '#workDate',
@@ -187,6 +181,13 @@ layui.use('laydate', function () {
         trigger: 'click',
         done: function (value) {
             vm.work.downTime = value;
+        }
+    });
+    laydate.render({
+        elem: '#workDateQuery',
+        trigger: 'click',
+        done: function (value) {
+            vm.q.workDate = value;
         }
     });
 });

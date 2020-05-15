@@ -4,7 +4,7 @@ server:
     uri-encoding: UTF-8
     max-threads: 1000
     min-spare-threads: 30
-  port: 80
+  port: 8888
   servlet:
     context-path: /person_system
 
@@ -63,3 +63,8 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
+
+#上下班时间
+work-up-time: 9
+work-down-time: 18
+work-over-time: 20

@@ -7,9 +7,11 @@ package com.person.modules.person.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.person.common.utils.Constant;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.WorkRecordDao;
+import com.person.modules.person.entity.UserPlanEntity;
 import com.person.modules.person.entity.WorkRecordEntity;
 import com.person.modules.person.service.WorkRecordService;
 import org.apache.commons.lang.StringUtils;
@@ -24,11 +26,13 @@ public class WorkRecordServiceImpl extends ServiceImpl<WorkRecordDao, WorkRecord
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String key = (String) params.get("key");
+        String workDate = (String)params.get("workDate");
 
         IPage<WorkRecordEntity> page = this.page(
                 new Query<WorkRecordEntity>().getPage(params),
-                new QueryWrapper<WorkRecordEntity>().like(StringUtils.isNotBlank(key), "username", key)
+                new QueryWrapper<WorkRecordEntity>()
+                        .eq(StringUtils.isNotBlank(workDate),"work_date", workDate)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
         );
 
         return new PageUtils(page);
