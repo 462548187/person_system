@@ -26,7 +26,7 @@ var vm = new Vue({
         }
     },
     methods: {
-        getMenu: function(menuId){
+        getMenu: function(){
             //加载菜单树
             $.get(baseURL + "sys/menu/select", function(r){
                 ztree = $.fn.zTree.init($("#menuTree"), setting, r.menuList);
@@ -37,8 +37,13 @@ var vm = new Vue({
             })
         },
         add: function(){
+            // var menuId = getMenuId();
+            // if(menuId == null){
+            //     menuId =0;
+            // }
             vm.showList = false;
             vm.title = "新增";
+            // vm.menu = {parentName:null,parentId:menuId,type:1,orderNum:0};
             vm.menu = {parentName:null,parentId:0,type:1,orderNum:0};
             vm.getMenu();
         },
@@ -53,7 +58,7 @@ var vm = new Vue({
                 vm.title = "修改";
                 vm.menu = r.menu;
 
-                vm.getMenu();
+                vm.getMenu(menuId);
             });
         },
         del: function () {
@@ -154,13 +159,13 @@ var Menu = {
 Menu.initColumn = function () {
     var columns = [
         {field: 'selectItem', radio: true},
-        {title: '菜单ID', field: 'menuId', visible: false, align: 'center', valign: 'middle', width: '80px'},
-        {title: '菜单名称', field: 'name', align: 'center', valign: 'middle', sortable: true, width: '180px'},
+        {title: '菜单ID', field: 'menuId',  width: '70px',hidden:true},
+        {title: '菜单名称', field: 'name', align: 'center', valign: 'middle', sortable: true, width: '140px'},
         {title: '上级菜单', field: 'parentName', align: 'center', valign: 'middle', sortable: true, width: '100px'},
-        {title: '图标', field: 'icon', align: 'center', valign: 'middle', sortable: true, width: '80px', formatter: function(item, index){
+        {title: '图标', field: 'icon', align: 'center', valign: 'middle', sortable: true, width: '60px', formatter: function(item, index){
             return item.icon == null ? '' : '<i class="'+item.icon+' fa-lg"></i>';
         }},
-        {title: '类型', field: 'type', align: 'center', valign: 'middle', sortable: true, width: '100px', formatter: function(item, index){
+        {title: '类型', field: 'type', align: 'center', valign: 'middle', sortable: true, width: '80px', formatter: function(item, index){
             if(item.type === 0){
                 return '<span class="label label-primary">目录</span>';
             }
@@ -171,9 +176,9 @@ Menu.initColumn = function () {
                 return '<span class="label label-warning">按钮</span>';
             }
         }},
-        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true, width: '100px'},
-        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', sortable: true, width: '160px'},
-        {title: '授权标识', field: 'perms', align: 'center', valign: 'middle', sortable: true}]
+        {title: '排序号', field: 'orderNum', align: 'center', valign: 'middle', sortable: true},
+        {title: '菜单URL', field: 'url', align: 'center', valign: 'middle', sortable: true, width: '200px'},
+        {title: '授权标识', field: 'perms', align: 'center', valign: 'middle', sortable: true, width: '200px'}]
     return columns;
 };
 

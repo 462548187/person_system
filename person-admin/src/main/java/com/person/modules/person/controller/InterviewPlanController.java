@@ -52,9 +52,9 @@ public class InterviewPlanController extends AbstractController {
 	@RequiresPermissions("person:apply:info")
 	@ResponseBody
 	public R info(@PathVariable("id") Long id){
-		InterviewPlanEntity apply = interviewPlanService.getById(id);
+		InterviewPlanEntity interview = interviewPlanService.getById(id);
 
-		return R.ok().put("apply", apply);
+		return R.ok().put("interview", interview);
 	}
 
 	/**

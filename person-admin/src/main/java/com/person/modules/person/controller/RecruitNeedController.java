@@ -14,6 +14,7 @@ import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
 import com.person.modules.person.entity.RecruitNeedEntity;
 import com.person.modules.person.service.RecruitNeedService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -27,7 +28,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("person/need")
-public class RecruitNeedController {
+public class RecruitNeedController  extends AbstractController {
     @Autowired
     private RecruitNeedService recruitNeedService;
 

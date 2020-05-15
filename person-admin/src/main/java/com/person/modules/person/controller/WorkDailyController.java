@@ -9,17 +9,21 @@
 package com.person.modules.person.controller;
 
 import com.person.common.annotation.SysLog;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
 import com.person.modules.person.entity.WorkDailyEntity;
 import com.person.modules.person.service.WorkDailyService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
+
+import static com.person.modules.sys.shiro.ShiroUtils.getUserId;
 
 /**
  * 日报
@@ -29,7 +33,7 @@ import java.util.Map;
 @Controller
 @RequestMapping("/person/daily")
 
-public class WorkDailyController {
+public class WorkDailyController  extends AbstractController {
 	@Autowired
 	private WorkDailyService workDailyService;
 
@@ -54,7 +58,7 @@ public class WorkDailyController {
 	public R info(@PathVariable("id") Long id){
 		WorkDailyEntity daily = workDailyService.getById(id);
 
-		return R.ok().put("daily", daily);
+		return R.ok().put("record", daily);
 	}
 
 	/**
@@ -65,7 +69,8 @@ public class WorkDailyController {
 	@RequiresPermissions("person:daily:save")
 	public R save(@RequestBody WorkDailyEntity daily){
 		ValidatorUtils.validateEntity(daily);
-
+		daily.setUserId(getUserId());
+		daily.setCreateTime(DateUtils.currentTimeFormat() );
 		workDailyService.save(daily);
 
 		return R.ok();
@@ -79,6 +84,7 @@ public class WorkDailyController {
 	@RequiresPermissions("person:daily:update")
 	public R update(@RequestBody WorkDailyEntity daily){
 		ValidatorUtils.validateEntity(daily);
+		daily.setUpdateTime(DateUtils.currentTimeFormat() );
 		workDailyService.update(daily);
 
 		return R.ok();

@@ -15,6 +15,7 @@ import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
 import com.person.modules.person.entity.UserDocEntity;
 import com.person.modules.person.service.UserDocService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/person/doc")
-public class UserDocController {
+public class UserDocController  extends AbstractController {
 	@Autowired
 	private UserDocService userDocService;
 

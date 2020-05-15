@@ -64,9 +64,8 @@ public class WorkRecordController extends AbstractController {
 	@RequiresPermissions("person:work:save")
 	public R save(@RequestBody WorkRecordEntity work){
 		ValidatorUtils.validateEntity(work);
-
+		work.setUserId(getUserId());
 		workRecordService.save(work);
-
 		return R.ok();
 	}
 

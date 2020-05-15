@@ -14,6 +14,7 @@ import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
 import com.person.modules.person.entity.SalaryRecordEntity;
 import com.person.modules.person.service.SalaryRecordService;
+import com.person.modules.sys.controller.AbstractController;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -29,7 +30,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("/person/salary")
-public class SalaryRecordController {
+public class SalaryRecordController  extends AbstractController {
 	@Autowired
 	private SalaryRecordService salaryRecordService;
 
