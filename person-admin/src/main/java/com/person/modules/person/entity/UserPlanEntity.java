@@ -3,6 +3,7 @@ package com.person.modules.person.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
 @Data
 @TableName("b_user_plan")
 public class UserPlanEntity {
@@ -12,6 +13,7 @@ public class UserPlanEntity {
     private Long userId;
 
     private String name;
+    private String content;
 
     private String startDate;
 

@@ -41,6 +41,7 @@ public class WorkDailyController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:daily:list")
     public R list(@RequestParam Map<String, Object> params) {
+        params.put("userId",getUserId());
         PageUtils page = workDailyService.queryPage(params);
 
         return R.ok().put("page", page);

@@ -31,12 +31,14 @@ public class WorkDailyServiceImpl extends ServiceImpl<WorkDailyDao, WorkDailyEnt
     public PageUtils queryPage(Map<String, Object> params) {
         String workDate = (String)params.get("workDate");
         String workMonth = (String)params.get("workMonth");
+        Long userId = (Long) params.get("userId");
 
         IPage<WorkDailyEntity> page = this.page(
                 new Query<WorkDailyEntity>().getPage(params),
                 new QueryWrapper<WorkDailyEntity>()
                         .eq(StringUtils.isNotBlank(workDate),"work_date", workDate)
                         .eq(StringUtils.isNotBlank(workMonth),"work_month", workMonth)
+                        .eq(userId != null, "user_id", userId)
                         .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
         );
 

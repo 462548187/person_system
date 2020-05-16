@@ -6,7 +6,8 @@ $(function () {
         colModel: [
             {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
             {label: '用户ID', name: 'userId', width: 45, hidden: true},
-            {label: '计划名称', name: 'name', width: 75},
+            {label: '计划主题', name: 'name', width: 75},
+            {label: '计划内容', name: 'content', width: 75},
             {label: '开始日期', name: 'startDate', width: 75},
             {label: '结束日期', name: 'endDate', width: 75},
             {
