@@ -30,11 +30,11 @@ public class ConvertApplyServiceImpl extends ServiceImpl<ConvertApplyDao, Conver
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String key = (String) params.get("key");
+        Long userId = (Long) params.get("userId");
 
         IPage<ConvertApplyEntity> page = this.page(
                 new Query<ConvertApplyEntity>().getPage(params),
-                new QueryWrapper<ConvertApplyEntity>().like(StringUtils.isNotBlank(key), "username", key)
+                new QueryWrapper<ConvertApplyEntity>().eq(userId != null, "user_id", userId)
         );
         List<ConvertApplyEntity> records = page.getRecords();
         List<ConvertApplyEntity> list = new ArrayList<ConvertApplyEntity>();

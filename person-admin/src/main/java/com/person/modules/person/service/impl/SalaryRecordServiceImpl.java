@@ -33,14 +33,14 @@ public class SalaryRecordServiceImpl extends ServiceImpl<SalaryRecordDao, Salary
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String salaryMonth = (String) params.get("salaryMonth");
-        Long userId = Long.valueOf(params.get("userId").toString());
+        Long userId = (Long) params.get("userId");
 
         IPage<SalaryRecordEntity> page = this.page(
                 new Query<SalaryRecordEntity>().getPage(params),
                 new QueryWrapper<SalaryRecordEntity>()
                         .eq(StringUtils.isNotBlank(salaryMonth), "salary_month", salaryMonth)
                         .eq("user_id", userId)
-                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
         List<SalaryRecordEntity> records = page.getRecords();
 

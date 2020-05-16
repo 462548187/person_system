@@ -71,7 +71,8 @@ var vm = new Vue({
         q: {},
         showList: true,
         title: null,
-        apply: {}
+        apply: {},
+        isReadOnly:false
     },
     methods: {
         query: function () {
@@ -89,6 +90,7 @@ var vm = new Vue({
             }
             vm.getRecord(id);
             vm.showList = false;
+            vm.isReadOnly=true;
             vm.title = "修改";
         },
         permissions: function () {

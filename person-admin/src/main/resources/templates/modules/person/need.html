@@ -32,7 +32,7 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">需求部门</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="need.dept" placeholder="需求部门"/>
+					<input type="text" class="form-control" style="cursor:pointer;" v-model="need.dept" @click="deptTree" readonly="readonly" placeholder="需求部门"/>
 				</div>
 			</div>
 			<div class="form-group">
@@ -66,22 +66,29 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">招聘要求</div>
 				<div class="col-sm-10">
-					<input v-model="need.demand"  placeholder="招聘要求" name="demand"
+					<textarea v-model="need.demand"  placeholder="招聘要求" name="demand"
 						   id="demand" class="layui-input" autocomplete="off">
+					</textarea>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">招聘负责人</div>
 				<div class="col-sm-10">
-					<input v-model="need.recruitUserId"  placeholder="招聘负责人" name="recruitUserId"
-						   id="recruitUserId" class="layui-input" autocomplete="off">
+					<select id="recruitUserId" v-model="need.recruitUserId" class="form-control" >
+						<option v-for="user in users" :value="user.userId">
+							{{ user.name }}
+						</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">需求负责人</div>
 				<div class="col-sm-10">
-					<input v-model="need.needUserId"  placeholder="需求负责人" name="needUserId"
-						   id="needUserId" class="layui-input" autocomplete="off">
+					<select id="needUserId" v-model="need.needUserId" class="form-control" >
+						<option v-for="user in users" :value="user.userId">
+							{{ user.name }}
+						</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -93,7 +100,10 @@
 	</div>
 </div>
 
-
+<!-- 选择部门 -->
+<div id="deptLayer" style="display: none;padding:10px;">
+	<ul id="deptTree" class="ztree"></ul>
+</div>
 <script src="${request.contextPath}/statics/js/modules/person/need.js?_${.now?long}"></script>
 </body>
 </html>

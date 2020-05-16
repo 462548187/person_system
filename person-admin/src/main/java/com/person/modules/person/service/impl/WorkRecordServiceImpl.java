@@ -26,19 +26,19 @@ public class WorkRecordServiceImpl extends ServiceImpl<WorkRecordDao, WorkRecord
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String workMonth = (String)params.get("workMonth");
-        String workDate = (String)params.get("workDate");
-        String status = (String)params.get("status");
-        Long userId = Long.valueOf(params.get("userId").toString());
+        String workMonth = (String) params.get("workMonth");
+        String workDate = (String) params.get("workDate");
+        String status = (String) params.get("status");
+        Long userId = (Long) params.get("userId");
 
         IPage<WorkRecordEntity> page = this.page(
                 new Query<WorkRecordEntity>().getPage(params),
                 new QueryWrapper<WorkRecordEntity>()
-                        .eq(StringUtils.isNotBlank(workDate),"work_date", workDate)
-                        .eq(StringUtils.isNotBlank(workMonth),"work_month", workMonth)
-                        .eq(StringUtils.isNotBlank(status),"status", status)
-                        .eq("user_id", userId)
-                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+                        .eq(StringUtils.isNotBlank(workDate), "work_date", workDate)
+                        .eq(StringUtils.isNotBlank(workMonth), "work_month", workMonth)
+                        .eq(StringUtils.isNotBlank(status), "status", status)
+                        .eq(userId != null, "user_id", userId)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
 
         return new PageUtils(page);

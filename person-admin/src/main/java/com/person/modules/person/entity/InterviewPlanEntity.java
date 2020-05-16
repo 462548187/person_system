@@ -1,8 +1,10 @@
 package com.person.modules.person.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
 @Data
 @TableName("b_interview_plan")
 public class InterviewPlanEntity {
@@ -16,6 +18,8 @@ public class InterviewPlanEntity {
     private String meetTime;
 
     private Long meetUserId;
+    @TableField(exist = false)
+    private String meetName;
 
     private Integer status;
 

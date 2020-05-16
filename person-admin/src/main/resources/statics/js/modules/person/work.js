@@ -64,7 +64,8 @@ var vm = new Vue({
         title: null,
         work: {},
         upFlag: true,
-        downFlag: false
+        downFlag: false,
+        readonly:false
     },
     methods: {
         query: function () {
@@ -72,7 +73,7 @@ var vm = new Vue({
         },
         add: function () {
             vm.showList = false;
-            vm.title = "新增";
+            vm.title = "上班打卡";
             vm.work = {};
             vm.upFlag = true;
             vm.downFlag = false;
@@ -85,8 +86,8 @@ var vm = new Vue({
             vm.upFlag = false;
             vm.downFlag = true;
             vm.showList = false;
-            vm.title = "修改";
-
+            vm.title = "下班打卡";
+            vm.readonly=true;
             vm.getRecord(id);
         },
         permissions: function () {

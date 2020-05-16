@@ -38,6 +38,10 @@ public class ConvertApplyController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:apply:list")
     public R list(@RequestParam Map<String, Object> params) {
+        if(getUserId() != 1){
+            //不是管理员只能查看自己工资记录
+            params.put("userId", getUserId());
+        }
         PageUtils page = convertApplyService.queryPage(params);
 
         return R.ok().put("page", page);

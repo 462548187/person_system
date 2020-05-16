@@ -32,7 +32,7 @@ public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> i
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Long userId = params.get("userId") == null ? null : Long.valueOf(String.valueOf(params.get("userId")));
+        Long userId = (Long) params.get("userId");
 
         IPage<UserDocEntity> page = this.page(
                 new Query<UserDocEntity>().getPage(params),

@@ -1,5 +1,6 @@
 package com.person.modules.person.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -24,8 +25,13 @@ public class RecruitNeedEntity {
     private Integer status;
 
     private Long recruitUserId;
+    @TableField(exist = false)
+    private String recruitName;
 
     private Long needUserId;
+
+    @TableField(exist = false)
+    private String needName;
 
     private String createTime;
 

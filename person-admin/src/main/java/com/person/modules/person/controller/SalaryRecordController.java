@@ -40,9 +40,10 @@ public class SalaryRecordController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:salary:list")
     public R list(@RequestParam Map<String, Object> params) {
-        Long queryUserId = Long.valueOf(params.get("userId").toString());
-        Long userId = queryUserId == 1 ? getUserId() : queryUserId;
-        params.put("userId", userId);
+        if(getUserId() != 1){
+            //不是管理员只能查看自己工资记录
+            params.put("userId", getUserId());
+        }
         PageUtils page = salaryRecordService.queryPage(params);
 
         return R.ok().put("page", page);

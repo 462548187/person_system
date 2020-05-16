@@ -1,9 +1,5 @@
 /**
- * 
  *
- * 
- *
- * 
  */
 
 package com.person.modules.person.service.impl;
@@ -29,15 +25,15 @@ public class UserPlanServiceImpl extends ServiceImpl<UserPlanDao, UserPlanEntity
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String name = (String)params.get("name");
-        Long userId = Long.valueOf(params.get("userId").toString());
+        String name = (String) params.get("name");
+        Long userId = (Long) params.get("userId");
 
         IPage<UserPlanEntity> page = this.page(
                 new Query<UserPlanEntity>().getPage(params),
                 new QueryWrapper<UserPlanEntity>()
-                        .like(StringUtils.isNotBlank(name),"name", name)
-                        .eq("user_id", userId)
-                        .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+                        .like(StringUtils.isNotBlank(name), "name", name)
+                        .eq(userId != null,"user_id", userId)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
 
         return new PageUtils(page);
