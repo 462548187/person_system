@@ -6,6 +6,7 @@ $(function () {
         colModel: [			
 			{ label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
             { label: '用户ID', name: 'userId', width: 45,hidden:true},
+            { label: '员工姓名', name: 'userName', width: 75 },
             { label: '学历', name: 'education', width: 75 },
             { label: '生日', name: 'birth', width: 75 },
             { label: '入职日期', name: 'entryDate', width: 75 },
@@ -61,34 +62,32 @@ var vm = new Vue({
     el:'#rrapp',
     data:{
         q:{
-            name: null
+            userId: null
         },
         showList: true,
         title:null,
-        doc:{
-            status:1
-        }
+        doc:{},
+        users: [],
+        user: {}
     },
     methods: {
         query: function () {
             vm.reload();
+            vm.getUsers();
         },
         add: function(){
             vm.showList = false;
             vm.title = "新增";
             vm.doc = { status:0};
-
-
+            vm.getUsers();
         },
         update: function () {
             var id = getSelectedRow();
             if(id == null){
                 return ;
             }
-
             vm.showList = false;
             vm.title = "修改";
-
             vm.getRecord(id);
         },
         permissions: function () {
@@ -147,26 +146,37 @@ var vm = new Vue({
 
             });
         },
+        getUsers: function () {
+            $.get(baseURL + "sys/user/users" , function (r) {
+                vm.users = r.users;
+            });
+        },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'name': vm.q.name},
+                postData:{'userId': vm.q.userId},
                 page:page
-            }).trigger("reloadGrid");
+            }).trigger("reloadGrid")
+            vm.getUsers();
         }
     }
 });
-layui.use('laydate', function(){
+layui.use('laydate', function () {
     var laydate = layui.laydate;
-
-    //执行一个laydat
     laydate.render({
-        elem: '#startDate' //指定元素
-        ,value: new Date()
+        elem: '#birth',
+        trigger: 'click',
+        done: function (value) {
+            vm.doc.birth = value;
+        }
     });
+
     laydate.render({
-        elem: '#endDate' //指定元素
-        ,value: new Date()
+        elem: '#entryDate',
+        trigger: 'click',
+        done: function (value) {
+            vm.doc.entryDate = value;
+        }
     });
 });

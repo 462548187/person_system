@@ -9,11 +9,13 @@
 package com.person.modules.person.controller;
 
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.person.common.annotation.SysLog;
 import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.R;
 import com.person.common.validator.ValidatorUtils;
+import com.person.modules.person.entity.SalaryRecordEntity;
 import com.person.modules.person.entity.UserDocEntity;
 import com.person.modules.person.service.UserDocService;
 import com.person.modules.sys.controller.AbstractController;
@@ -68,9 +70,16 @@ public class UserDocController  extends AbstractController {
 	public R save(@RequestBody UserDocEntity doc){
 		ValidatorUtils.validateEntity(doc);
 		doc.setCreateTime(DateUtils.currentTimeFormat() );
-
+		//查询当日记录是否已存在
+		UserDocEntity d = new UserDocEntity();
+		d.setUserId(doc.getUserId());
+		QueryWrapper q = new QueryWrapper();
+		q.setEntity(d);
+		UserDocEntity one = userDocService.getOne(q);
+		if (null != one) {
+			return R.error( "该员工已有档案，请勿重复添加");
+		}
 		userDocService.save(doc);
-
 		return R.ok();
 	}
 

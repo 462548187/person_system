@@ -9,7 +9,13 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="计划名称">
+<!--				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="员工姓名">-->
+				<select id="userIdQuery" v-model="q.userId" @keyup.enter="query" class="form-control" placeholder="员工姓名">
+					<option selected="selected" value="">全部</option>
+					<option v-for="user in users" :value="user.userId">
+						{{ user.name }}
+					</option>
+				</select>
 			</div>
 			<a class="btn btn-default" @click="query">查询</a>
 			<#if shiro.hasPermission("person:doc:save")>
@@ -32,7 +38,11 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">员工姓名</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="doc.userId" placeholder="员工姓名"/>
+					<select id="userId" v-model="doc.userId" class="form-control" >
+						<option v-for="user in users" :value="user.userId">
+							{{ user.name }}
+						</option>
+					</select>
 				</div>
 			</div>
 			<div class="form-group">
@@ -44,14 +54,14 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">生日</div>
 				<div class="col-sm-10">
-					<input v-model="doc.birth"  placeholder="生日" name="birth"
+					<input v-model="doc.birth"  placeholder="生日"
 						   id="birth" class="layui-input" autocomplete="off">
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label">入职日期</div>
 				<div class="col-sm-10">
-					<input v-model="doc.entryDate"  placeholder="入职日期" name="entryDate"
+					<input v-model="doc.entryDate"  placeholder="入职日期"
 						   id="entryDate" class="layui-input" autocomplete="off">
 				</div>
 			</div>

@@ -6,6 +6,7 @@ $(function () {
         colModel: [
             {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
             {label: '用户ID', name: 'userId', width: 45, hidden: true},
+            {label: '员工姓名', name: 'userName', width: 75},
             {label: '工资月份', name: 'salaryMonth', width: 75},
             {label: '应发工资', name: 'mustSalary', width: 75},
             {label: '实发工资', name: 'realitySalary', width: 75},
@@ -73,7 +74,9 @@ var vm = new Vue({
         },
         showList: true,
         title: null,
-        salary: {}
+        salary: {},
+        users: [],
+        user: {}
     },
     methods: {
         query: function () {
@@ -83,7 +86,7 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.salary = {};
-
+            vm.getUsers();
 
         },
         update: function () {
@@ -153,13 +156,38 @@ var vm = new Vue({
 
             });
         },
+        getUsers: function () {
+            $.get(baseURL + "sys/user/users" , function (r) {
+                vm.users = r.users;
+            });
+        },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {'salaryMonth': vm.q.salaryMonth},
                 page: page
             }).trigger("reloadGrid");
         }
     }
+});
+layui.use('laydate', function () {
+    var laydate = layui.laydate;
+    laydate.render({
+        elem: '#salaryMonth',
+        trigger: 'click',
+        type:'month',
+        done: function (value) {
+            vm.salary.salaryMonth = value;
+        }
+    });
+
+    laydate.render({
+        elem: '#salaryMonthQuery',
+        trigger: 'click',
+        type:'month',
+        done: function (value) {
+            vm.salary.salaryMonth = value;
+        }
+    });
 });
