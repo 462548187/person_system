@@ -11,6 +11,7 @@ public class WorkDailyEntity {
 
     private Long userId;
 
+    private String workMonth;
     private String workDate;
 
     private String workContent;

@@ -3,6 +3,7 @@ package com.person.modules.person.entity;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
+
 @Data
 @TableName("b_work_record")
 public class WorkRecordEntity {
@@ -11,6 +12,7 @@ public class WorkRecordEntity {
 
     private Long userId;
 
+    private String workMonth;
     private String workDate;
 
     private String upTime;

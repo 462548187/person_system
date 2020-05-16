@@ -5,10 +5,16 @@ $(function () {
         datatype: "json",
         colModel: [
             {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
-            {label: '用户ID', name: 'userId', width: 45},
-            {label: '开始日期', name: 'workDate', width: 75},
+            {label: '用户ID', name: 'userId', width: 45, hidden: true},
+            {label: '工作月份', name: 'workMonth', width: 75},
+            {label: '工作日期', name: 'workDate', width: 75},
             {label: '工作内容', name: 'workContent', width: 75},
-            {label: '完成进度', name: 'progress', width: 75},
+            {
+                label: '完成进度', name: 'progress', width: 75,
+                formatter: function (value, options, row) {
+                    return value + '%';
+                }
+            },
             {label: '创建时间', name: 'createTime', width: 85}
         ],
         viewrecords: true,
@@ -43,7 +49,8 @@ var vm = new Vue({
     el: '#rrapp',
     data: {
         q: {
-            name: null
+            workDate: null,
+            workMonth: null
         },
         showList: true,
         title: null,
@@ -124,14 +131,16 @@ var vm = new Vue({
         getRecord: function (id) {
             $.get(baseURL + "person/daily/info/" + id, function (r) {
                 vm.daily = r.daily;
-
             });
         },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {
+                    'workMonth': vm.q.workMonth,
+                    'workDate': vm.q.workDate,
+                },
                 page: page
             }).trigger("reloadGrid");
         }
@@ -151,12 +160,18 @@ layui.use('laydate', function () {
     });
     //执行一个laydat
     laydate.render({
-        elem: '#work_date_query' //指定元素
-        , value: new Date()
+        elem: '#workDateQuery' //指定元素
         , trigger: 'click'
         , done: function (value) {
             vm.q.workDate = value;
         }
     });
-
+    laydate.render({
+        elem: '#workMonthQuery',
+        type: 'month',
+        trigger: 'click',
+        done: function (value) {
+            vm.q.workMonth = value;
+        }
+    });
 });

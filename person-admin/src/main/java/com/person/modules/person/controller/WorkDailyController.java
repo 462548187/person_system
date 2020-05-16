@@ -56,7 +56,7 @@ public class WorkDailyController extends AbstractController {
     public R info(@PathVariable("id") Long id) {
         WorkDailyEntity daily = workDailyService.getById(id);
 
-        return R.ok().put("record", daily);
+        return R.ok().put("daily", daily);
     }
 
     /**
@@ -68,8 +68,7 @@ public class WorkDailyController extends AbstractController {
     public R save(@RequestBody WorkDailyEntity daily) {
         ValidatorUtils.validateEntity(daily);
         Long userId = getUserId();
-        daily.setUserId(userId);
-        daily.setCreateTime(DateUtils.currentTimeFormat());
+
         //查询当日记录是否已存在
         WorkDailyEntity d = new WorkDailyEntity();
         d.setUserId(userId);
@@ -81,6 +80,9 @@ public class WorkDailyController extends AbstractController {
         if (null != one) {
             return R.error(workDate + "日已上报日报");
         }
+        daily.setUserId(userId);
+        daily.setCreateTime(DateUtils.currentTimeFormat());
+        daily.setWorkMonth(workDate.substring(0,7));
         workDailyService.save(daily);
 
         return R.ok();

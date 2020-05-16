@@ -46,6 +46,7 @@ public class WorkRecordController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:work:list")
     public R list(@RequestParam Map<String, Object> params) {
+        params.put("userId",getUserId());
         PageUtils page = workRecordService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -73,8 +74,7 @@ public class WorkRecordController extends AbstractController {
     public R save(@RequestBody WorkRecordEntity work) {
         ValidatorUtils.validateEntity(work);
         Long userId = getUserId();
-        work.setUserId(userId);
-        work.setCreateTime(DateUtils.currentTimeFormat());
+
         //查询当日记录是否已存在
         WorkRecordEntity d = new WorkRecordEntity();
         String workDate = work.getWorkDate();
@@ -91,11 +91,12 @@ public class WorkRecordController extends AbstractController {
         if (up > upTime || (up == upTime && (Integer.valueOf(work.getUpTime().substring(3, 5))) > 0)) {
             work.setStatus(WorkStatusEnum.LATE.getCode());
         }
-
+        work.setUserId(userId);
+        work.setCreateTime(DateUtils.currentTimeFormat());
+        work.setWorkMonth(workDate.substring(0,7));
         workRecordService.save(work);
         return R.ok();
     }
-
 
     /**
      * 修改考勤

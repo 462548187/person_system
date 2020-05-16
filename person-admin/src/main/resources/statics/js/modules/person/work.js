@@ -6,6 +6,7 @@ $(function () {
         colModel: [
             {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
             {label: '用户ID', name: 'userId', width: 45, hidden: true},
+            {label: '工作月份', name: 'workMonth', width: 75},
             {label: '工作日期', name: 'workDate', width: 75},
             {label: '上班时间', name: 'upTime', width: 75},
             {label: '下班时间', name: 'downTime', width: 75},
@@ -55,7 +56,9 @@ var vm = new Vue({
     el: '#rrapp',
     data: {
         q: {
-            workDate: null
+            workDate: null,
+            status: null,
+            workMonth: null
         },
         showList: true,
         title: null,
@@ -139,14 +142,17 @@ var vm = new Vue({
         getRecord: function (id) {
             $.get(baseURL + "person/work/info/" + id, function (r) {
                 vm.work = r.work;
-
             });
         },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'workDate': vm.q.workDate},
+                postData: {
+                    'workDate': vm.q.workDate,
+                    'workMonth': vm.q.workMonth,
+                    'status': vm.q.status
+                },
                 page: page
             }).trigger("reloadGrid");
         }
@@ -188,6 +194,14 @@ layui.use('laydate', function () {
         trigger: 'click',
         done: function (value) {
             vm.q.workDate = value;
+        }
+    });
+    laydate.render({
+        elem: '#workMonthQuery',
+        type: 'month',
+        trigger: 'click',
+        done: function (value) {
+            vm.q.workMonth = value;
         }
     });
 });

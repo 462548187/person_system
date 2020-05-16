@@ -1,5 +1,7 @@
 package com.person.modules.person.entity;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -11,6 +13,8 @@ public class ConvertApplyEntity {
     private Long id;
 
     private Long applyUserId;
+    @TableField(exist = false)
+    private String applyName;
 
     private String applyDate;
     private String applyContent;
@@ -19,7 +23,10 @@ public class ConvertApplyEntity {
 
     private String approvalDate;
 
-    private String approvalUserId;
+    private Long approvalUserId;
+
+    @TableField(exist = false)
+    private String approvalName;
 
     private Integer approvalResult;
 

@@ -37,6 +37,7 @@ public class UserPlanController extends AbstractController {
 	@RequestMapping("/list")
 	@RequiresPermissions("person:plan:list")
 	public R list(@RequestParam Map<String, Object> params){
+		params.put("userId",getUserId());
 		PageUtils page = userPlanService.queryPage(params);
 
 		return R.ok().put("page", page);

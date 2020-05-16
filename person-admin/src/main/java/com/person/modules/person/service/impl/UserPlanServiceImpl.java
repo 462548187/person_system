@@ -30,11 +30,13 @@ public class UserPlanServiceImpl extends ServiceImpl<UserPlanDao, UserPlanEntity
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String name = (String)params.get("name");
+        Long userId = Long.valueOf(params.get("userId").toString());
 
         IPage<UserPlanEntity> page = this.page(
                 new Query<UserPlanEntity>().getPage(params),
                 new QueryWrapper<UserPlanEntity>()
                         .like(StringUtils.isNotBlank(name),"name", name)
+                        .eq("user_id", userId)
                         .apply(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
         );
 
