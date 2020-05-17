@@ -11,9 +11,14 @@ $(function () {
             {label: '面试官', name: 'meetName', width: 75},
             {
                 label: '面试结果', name: 'status', width: 60, formatter: function (value, options, row) {
-                    return value === 0 ?
-                        '<span class="label label-danger">通过</span>' :
-                        '<span class="label label-success">未通过</span>';
+                    if(value == 0){
+                        return '<span class="label label-info">面试中</span>';
+                    }else if(value == 1){
+                        return '<span class="label label-success">通过</span>';
+                    }else if(value == 2){
+                       return '<span class="label label-danger">未通过</span>';
+
+                    }
                 }
             },
             {label: '创建时间', name: 'createTime', index: "create_time", width: 85}

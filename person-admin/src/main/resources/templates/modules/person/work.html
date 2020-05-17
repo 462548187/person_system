@@ -12,10 +12,10 @@
                     <input class="form-control" id="workMonthQuery" v-model="q.workMonth" @keyup.enter="query"
                            placeholder="工作月份">
                 </div>
-                <div class="form-group col-sm-2">
-                    <input class="form-control" id="workDateQuery" v-model="q.workDate" @keyup.enter="query"
-                           placeholder="工作日期">
-                </div>
+<!--                <div class="form-group col-sm-2">-->
+<!--                    <input class="form-control" id="workDateQuery" v-model="q.workDate" @keyup.enter="query"-->
+<!--                           placeholder="工作日期">-->
+<!--                </div>-->
                 <div class="form-group col-sm-2">
                     <select v-model="q.status" @keyup.enter="query" class="form-control" placeholder="状态">
                         <option selected="selected" value="">全部</option>
@@ -25,6 +25,7 @@
                         <option value="3">加班</option>
                     </select>
                 </div>
+<!--            <div class="form-group col-sm-6">-->
                 <a class="btn btn-default" @click="query">查询</a>
                 <#if shiro.hasPermission("person:work:save")>
                     <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;上班打卡</a>
@@ -35,6 +36,7 @@
                 <#if shiro.hasPermission("person:work:delete")>
                     <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
                 </#if>
+<!--            </div>-->
         </div>
 <table id="jqGrid"></table>
 <div id="jqGridPager"></div>

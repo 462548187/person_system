@@ -72,9 +72,10 @@ var vm = new Vue({
         showList: true,
         title: null,
         apply: {},
-        isReadOnly:false,
+        isReadOnly: false,
         users: [],
         user: {},
+        approvalFlag:true
     },
     methods: {
         query: function () {
@@ -86,8 +87,8 @@ var vm = new Vue({
             vm.showList = false;
             vm.title = "新增";
             vm.apply = {};
-            vm.isReadOnly=false;
-
+            vm.isReadOnly = false;
+            vm.approvalFlag=false;
         },
         update: function () {
             var id = getSelectedRow();
@@ -96,7 +97,7 @@ var vm = new Vue({
             }
             vm.getRecord(id);
             vm.showList = false;
-            vm.isReadOnly=true;
+            vm.isReadOnly = true;
             vm.title = "修改";
         },
         permissions: function () {
@@ -149,7 +150,7 @@ var vm = new Vue({
             });
         },
         getUsers: function () {
-            $.get(baseURL + "sys/user/users" , function (r) {
+            $.get(baseURL + "sys/user/users", function (r) {
                 vm.users = r.users;
             });
         },
@@ -169,7 +170,7 @@ var vm = new Vue({
     }
 });
 layui.use('laydate', function () {
-    $.get(baseURL + "sys/user/users" , function (r) {
+    $.get(baseURL + "sys/user/users", function (r) {
         vm.users = r.users;
     });
     var laydate = layui.laydate;
