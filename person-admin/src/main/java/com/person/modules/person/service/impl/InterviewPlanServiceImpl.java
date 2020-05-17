@@ -66,6 +66,5 @@ public class InterviewPlanServiceImpl extends ServiceImpl<InterviewPlanDao, Inte
     @Override
     public void update(InterviewPlanEntity record) {
         this.updateById(record);
-
     }
 }

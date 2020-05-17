@@ -92,7 +92,6 @@ public class UserDocController  extends AbstractController {
 	public R update(@RequestBody UserDocEntity doc){
 		ValidatorUtils.validateEntity(doc);
 		userDocService.update(doc);
-
 		return R.ok();
 	}
 

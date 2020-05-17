@@ -40,7 +40,7 @@ public class ConvertApplyController extends AbstractController {
     public R list(@RequestParam Map<String, Object> params) {
         if(getUserId() != 1){
             //不是管理员只能查看自己工资记录
-            params.put("userId", getUserId());
+            params.put("applyUserId", getUserId());
         }
         PageUtils page = convertApplyService.queryPage(params);
 

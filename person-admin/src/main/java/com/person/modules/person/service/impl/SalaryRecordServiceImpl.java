@@ -39,7 +39,7 @@ public class SalaryRecordServiceImpl extends ServiceImpl<SalaryRecordDao, Salary
                 new Query<SalaryRecordEntity>().getPage(params),
                 new QueryWrapper<SalaryRecordEntity>()
                         .eq(StringUtils.isNotBlank(salaryMonth), "salary_month", salaryMonth)
-                        .eq("user_id", userId)
+                        .eq(userId != null, "user_id", userId)
                         .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
         List<SalaryRecordEntity> records = page.getRecords();
@@ -61,6 +61,6 @@ public class SalaryRecordServiceImpl extends ServiceImpl<SalaryRecordDao, Salary
 
     @Override
     public void update(SalaryRecordEntity record) {
-
+        this.updateById(record);
     }
 }

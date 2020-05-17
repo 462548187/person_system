@@ -11,9 +11,9 @@ $(function () {
             { label: '生日', name: 'birth', width: 75 },
             { label: '入职日期', name: 'entryDate', width: 75 },
 			{ label: '员工类型', name: 'userType', width: 60, formatter: function(value, options, row){
-				return value === 0 ? 
-					'<span class="label label-danger">进行中</span>' :
-					'<span class="label label-success">完成</span>';
+				return value == 0 ?
+					'<span class="label label-danger">普通员工</span>' :
+					'<span class="label label-success">经理</span>';
 			}},
 			{ label: '创建时间', name: 'createTime', index: "create_time", width: 85}
         ],
@@ -163,6 +163,9 @@ var vm = new Vue({
     }
 });
 layui.use('laydate', function () {
+    $.get(baseURL + "sys/user/users" , function (r) {
+        vm.users = r.users;
+    });
     var laydate = layui.laydate;
     laydate.render({
         elem: '#birth',

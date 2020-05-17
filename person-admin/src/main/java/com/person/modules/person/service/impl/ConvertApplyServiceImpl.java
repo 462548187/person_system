@@ -7,6 +7,7 @@ package com.person.modules.person.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.person.common.utils.Constant;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.ConvertApplyDao;
@@ -30,19 +31,21 @@ public class ConvertApplyServiceImpl extends ServiceImpl<ConvertApplyDao, Conver
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Long userId = (Long) params.get("userId");
+        Long applyUserId = (Long) params.get("applyUserId");
 
         IPage<ConvertApplyEntity> page = this.page(
                 new Query<ConvertApplyEntity>().getPage(params),
-                new QueryWrapper<ConvertApplyEntity>().eq(userId != null, "user_id", userId)
+                new QueryWrapper<ConvertApplyEntity>().
+                        eq(applyUserId != null, "apply_user_id", applyUserId)
+                        .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
         List<ConvertApplyEntity> records = page.getRecords();
         List<ConvertApplyEntity> list = new ArrayList<ConvertApplyEntity>();
         for (ConvertApplyEntity r : records) {
-            Long applyUserId = r.getApplyUserId();
+            Long userId = r.getApplyUserId();
             Long approvalUserId = r.getApprovalUserId();
-            if (null != applyUserId) {
-                r.setApplyName(userService.getById(applyUserId).getName());
+            if (null != userId) {
+                r.setApplyName(userService.getById(userId).getName());
             }
             if (null != approvalUserId) {
                 r.setApprovalName(userService.getById(approvalUserId).getName());

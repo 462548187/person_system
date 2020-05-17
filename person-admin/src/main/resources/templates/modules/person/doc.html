@@ -9,8 +9,7 @@
 	<div v-show="showList">
 		<div class="grid-btn">
 			<div class="form-group col-sm-2">
-<!--				<input type="text" class="form-control" v-model="q.userId" @keyup.enter="query" placeholder="员工姓名">-->
-				<select id="userIdQuery" v-model="q.userId" @keyup.enter="query" class="form-control" placeholder="员工姓名">
+				<select id="userIdQuery" v-model="q.userId" @keyup.enter="query" class="form-control" >
 					<option selected="selected" value="">全部</option>
 					<option v-for="user in users" :value="user.userId">
 						{{ user.name }}
@@ -68,10 +67,10 @@
 			<div class="form-group">
 				<div class="col-sm-2 control-label">员工类型</div>
 				<label class="radio-inline">
-					<input type="radio" name="usrType" value="0" v-model="doc.status"/> 普工员工
+					<input type="radio" name="userType" value="0" v-model="doc.userType"/> 普工员工
 				</label>
 				<label class="radio-inline">
-					<input type="radio" name="usrType" value="1" v-model="doc.status"/> 经理
+					<input type="radio" name="userType" value="1" v-model="doc.userType"/> 经理
 				</label>
 			</div>
 			<div class="form-group">

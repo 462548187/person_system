@@ -34,11 +34,11 @@ public class RecruitNeedServiceImpl extends ServiceImpl<RecruitNeedDao, RecruitN
     SysUserService userService;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        String key = (String)params.get("key");
+        String status = (String)params.get("status");
 
         IPage<RecruitNeedEntity> page = this.page(
             new Query<RecruitNeedEntity>().getPage(params),
-            new QueryWrapper<RecruitNeedEntity>().like(StringUtils.isNotBlank(key),"username", key)
+            new QueryWrapper<RecruitNeedEntity>().eq(StringUtils.isNotBlank(status),"status", status)
         );
         List<RecruitNeedEntity> records = page.getRecords();
 
@@ -67,6 +67,5 @@ public class RecruitNeedServiceImpl extends ServiceImpl<RecruitNeedDao, RecruitN
     @Override
     public void update(RecruitNeedEntity record) {
         this.updateById(record);
-
     }
 }

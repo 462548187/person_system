@@ -46,7 +46,10 @@ public class WorkRecordController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:work:list")
     public R list(@RequestParam Map<String, Object> params) {
-        params.put("userId",getUserId());
+        if(getUserId() != 1){
+            //不是管理员只能查看自己工资记录
+            params.put("userId", getUserId());
+        }
         PageUtils page = workRecordService.queryPage(params);
 
         return R.ok().put("page", page);

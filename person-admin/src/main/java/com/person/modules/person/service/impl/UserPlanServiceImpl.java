@@ -12,17 +12,23 @@ import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.UserPlanDao;
 import com.person.modules.person.entity.UserPlanEntity;
+import com.person.modules.person.entity.WorkDailyEntity;
 import com.person.modules.person.service.UserPlanService;
+import com.person.modules.sys.service.SysUserService;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 
 @Service("userPlanService")
 public class UserPlanServiceImpl extends ServiceImpl<UserPlanDao, UserPlanEntity> implements UserPlanService {
-
+    @Autowired
+    SysUserService userService;
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
         String name = (String) params.get("name");
@@ -35,7 +41,14 @@ public class UserPlanServiceImpl extends ServiceImpl<UserPlanDao, UserPlanEntity
                         .eq(userId != null,"user_id", userId)
                         .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
         );
+        List<UserPlanEntity> records = page.getRecords();
 
+        List<UserPlanEntity> list = new ArrayList<UserPlanEntity>();
+        for (UserPlanEntity r : records) {
+            r.setUserName(userService.getById(r.getUserId()).getName());
+            list.add(r);
+        }
+        page.setRecords(list);
         return new PageUtils(page);
     }
 

@@ -18,6 +18,7 @@ import com.person.modules.sys.service.SysUserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.ObjectUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,12 @@ public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> i
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
-        Long userId = (Long) params.get("userId");
+        Object id = params.get("userId");
+        Long userId = null;
+        if (!ObjectUtils.isEmpty(id)) {
+            userId = (Long) id;
+        }
+
 
         IPage<UserDocEntity> page = this.page(
                 new Query<UserDocEntity>().getPage(params),
@@ -61,6 +67,5 @@ public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> i
     @Override
     public void update(UserDocEntity record) {
         this.updateById(record);
-
     }
 }

@@ -9,7 +9,7 @@ $(function () {
             {label: '需求人数', name: 'needNum', width: 75},
             {label: '岗位类型', name: 'post', width: 75},
             {label: '学历要求', name: 'education', width: 75},
-            {label: '工作年限要求', name: 'workTime', width: 75},
+            {label: '工作年限', name: 'workTime', width: 75},
             {label: '招聘要求', name: 'demand', width: 75},
             {label: '招聘负责人', name: 'recruitName', width: 75},
             {label: '需求负责人', name: 'needName', width: 75},
@@ -194,7 +194,7 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {'status': vm.q.status},
                 page: page
             }).trigger("reloadGrid");
         }

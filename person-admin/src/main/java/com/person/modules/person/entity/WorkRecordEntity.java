@@ -1,5 +1,6 @@
 package com.person.modules.person.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Data;
@@ -11,7 +12,8 @@ public class WorkRecordEntity {
     private Long id;
 
     private Long userId;
-
+    @TableField(exist = false)
+    private String userName;
     private String workMonth;
     private String workDate;
 

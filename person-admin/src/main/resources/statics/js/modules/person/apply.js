@@ -72,16 +72,22 @@ var vm = new Vue({
         showList: true,
         title: null,
         apply: {},
-        isReadOnly:false
+        isReadOnly:false,
+        users: [],
+        user: {},
     },
     methods: {
         query: function () {
             vm.reload();
+            vm.getUsers();
+
         },
         add: function () {
             vm.showList = false;
             vm.title = "新增";
             vm.apply = {};
+            vm.isReadOnly=false;
+
         },
         update: function () {
             var id = getSelectedRow();
@@ -142,6 +148,11 @@ var vm = new Vue({
                 }
             });
         },
+        getUsers: function () {
+            $.get(baseURL + "sys/user/users" , function (r) {
+                vm.users = r.users;
+            });
+        },
         getRecord: function (id) {
             $.get(baseURL + "person/apply/info/" + id, function (r) {
                 vm.apply = r.apply;
@@ -151,14 +162,16 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'name': vm.q.name},
+                postData: {'applyUserId': vm.q.applyUserId},
                 page: page
             }).trigger("reloadGrid");
         }
     }
 });
 layui.use('laydate', function () {
-
+    $.get(baseURL + "sys/user/users" , function (r) {
+        vm.users = r.users;
+    });
     var laydate = layui.laydate;
     laydate.render({
         elem: '#applyDate',

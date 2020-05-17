@@ -41,7 +41,10 @@ public class WorkDailyController extends AbstractController {
     @RequestMapping("/list")
     @RequiresPermissions("person:daily:list")
     public R list(@RequestParam Map<String, Object> params) {
-        params.put("userId",getUserId());
+        if (getUserId() != 1) {
+            //不是管理员只能查看自己工资记录
+            params.put("userId", getUserId());
+        }
         PageUtils page = workDailyService.queryPage(params);
 
         return R.ok().put("page", page);
@@ -83,7 +86,7 @@ public class WorkDailyController extends AbstractController {
         }
         daily.setUserId(userId);
         daily.setCreateTime(DateUtils.currentTimeFormat());
-        daily.setWorkMonth(workDate.substring(0,7));
+        daily.setWorkMonth(workDate.substring(0, 7));
         workDailyService.save(daily);
 
         return R.ok();

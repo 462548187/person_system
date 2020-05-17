@@ -76,7 +76,8 @@ var vm = new Vue({
         title: null,
         salary: {},
         users: [],
-        user: {}
+        user: {},
+        nameFlag:true
     },
     methods: {
         query: function () {
@@ -97,7 +98,7 @@ var vm = new Vue({
 
             vm.showList = false;
             vm.title = "修改";
-
+            vm.nameFlag=false;
             vm.getRecord(id);
         },
         permissions: function () {
@@ -187,7 +188,7 @@ layui.use('laydate', function () {
         trigger: 'click',
         type:'month',
         done: function (value) {
-            vm.salary.salaryMonth = value;
+            vm.q.salaryMonth = value;
         }
     });
 });
