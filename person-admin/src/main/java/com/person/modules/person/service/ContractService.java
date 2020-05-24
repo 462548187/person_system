@@ -20,10 +20,10 @@ import java.util.Map;
  *
  * @author 
  */
-public interface UserDocService  extends IService<UserDocEntity> {
+public interface ContractService extends IService<ContractEntity> {
 
     PageUtils queryPage(Map<String, Object> params);
     void deleteBatch(Long[] ids);
 
-    void update(UserDocEntity record);
+    void update(ContractEntity record);
 }

@@ -8,28 +8,30 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.person.common.utils.Constant;
+import com.person.common.utils.DateUtils;
 import com.person.common.utils.PageUtils;
 import com.person.common.utils.Query;
 import com.person.modules.person.dao.UserDocDao;
 import com.person.modules.person.entity.SalaryRecordEntity;
 import com.person.modules.person.entity.UserDocEntity;
 import com.person.modules.person.service.UserDocService;
+import com.person.modules.sys.entity.SysDeptEntity;
+import com.person.modules.sys.service.SysDeptService;
 import com.person.modules.sys.service.SysUserService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 
 @Service("userDocService")
 public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> implements UserDocService {
     @Autowired
     SysUserService userService;
+    @Autowired
+    SysDeptService sysDeptService;
 
     @Override
     public PageUtils queryPage(Map<String, Object> params) {
@@ -51,7 +53,13 @@ public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> i
 
         List<UserDocEntity> list = new ArrayList<UserDocEntity>();
         for (UserDocEntity r : records) {
+            String birthYear = r.getBirth().substring(0, 4);
+            String year = DateUtils.format(new Date(), "YYYY");
+            int age = Integer.valueOf(year) - Integer.valueOf(birthYear);
+            r.setAge(age);
             r.setUserName(userService.getById(r.getUserId()).getName());
+            SysDeptEntity sysDeptEntity = sysDeptService.getById(r.getDeptId());
+            r.setDeptName(sysDeptEntity.getName());
             list.add(r);
         }
         page.setRecords(list);

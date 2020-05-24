@@ -6,9 +6,13 @@ $(function () {
         colModel: [			
 			{ label: '主键', name: 'id', index: "id", width: 45, key: true,hidden:true},
             { label: '用户ID', name: 'userId', width: 45,hidden:true},
+            { label: '员工工号', name: 'userNo', width: 75 },
             { label: '员工姓名', name: 'userName', width: 75 },
+            { label: '员工手机', name: 'mobile', width: 75 },
+            { label: '所属部门', name: 'deptName', sortable: false, width: 75 },
             { label: '学历', name: 'education', width: 75 },
-            { label: '生日', name: 'birth', width: 75 },
+//            { label: '生日', name: 'birth', width: 75 },
+            { label: '年龄', name: 'age', width: 75 },
             { label: '入职日期', name: 'entryDate', width: 75 },
 			{ label: '员工类型', name: 'userType', width: 60, formatter: function(value, options, row){
 				return value == 0 ?
@@ -67,6 +71,8 @@ var vm = new Vue({
         showList: true,
         title:null,
         doc:{},
+        deptId:null,
+        deptName:null,
         users: [],
         user: {}
     },
@@ -78,9 +84,21 @@ var vm = new Vue({
         add: function(){
             vm.showList = false;
             vm.title = "新增";
-            vm.doc = { status:0};
+            vm.doc = { deptName:null, deptId:null, status:0};
             vm.getUsers();
+            vm.getDept();
         },
+        getDept: function(){
+            //加载部门树
+            $.get(baseURL + "sys/dept/list", function(r){
+                ztree = $.fn.zTree.init($("#deptTree"), setting, r);
+                var node = ztree.getNodeByParam("deptId", vm.doc.deptId);
+                if(node != null){
+                    ztree.selectNode(node);
+                    vm.doc.deptName = node.name;
+                }
+            })
+         },
         update: function () {
             var id = getSelectedRow();
             if(id == null){
@@ -149,6 +167,27 @@ var vm = new Vue({
         getUsers: function () {
             $.get(baseURL + "sys/user/users" , function (r) {
                 vm.users = r.users;
+            });
+        },
+        deptTree: function(){
+            layer.open({
+                type: 1,
+                offset: '50px',
+                skin: 'layui-layer-molv',
+                title: "选择部门",
+                area: ['300px', '300px'],
+                shade: 0,
+                shadeClose: false,
+                content: jQuery("#deptLayer"),
+                btn: ['确定', '取消'],
+                btn1: function (index) {
+                    var node = ztree.getSelectedNodes();
+                    //选择上级部门
+                    vm.doc.deptId = node[0].deptId;
+                    vm.doc.deptName = node[0].name;
+
+                    layer.close(index);
+                }
             });
         },
         reload: function () {

@@ -1,10 +1,8 @@
 package com.person.modules.person.entity;
 
-import com.alibaba.fastjson.annotation.JSONField;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.Data;
 
 @TableName("b_convert_apply")
 public class ConvertApplyEntity {

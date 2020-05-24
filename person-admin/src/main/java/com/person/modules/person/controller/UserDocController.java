@@ -19,6 +19,7 @@ import com.person.modules.person.entity.SalaryRecordEntity;
 import com.person.modules.person.entity.UserDocEntity;
 import com.person.modules.person.service.UserDocService;
 import com.person.modules.sys.controller.AbstractController;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -70,7 +71,7 @@ public class UserDocController  extends AbstractController {
 	public R save(@RequestBody UserDocEntity doc){
 		ValidatorUtils.validateEntity(doc);
 		doc.setCreateTime(DateUtils.currentTimeFormat() );
-		//查询当日记录是否已存在
+		//查询是否已存在
 		UserDocEntity d = new UserDocEntity();
 		d.setUserId(doc.getUserId());
 		QueryWrapper q = new QueryWrapper();
@@ -79,6 +80,7 @@ public class UserDocController  extends AbstractController {
 		if (null != one) {
 			return R.error( "该员工已有档案，请勿重复添加");
 		}
+		doc.setUserNo(StringUtils.leftPad(doc.getUserId().toString(),4,"0"));
 		userDocService.save(doc);
 		return R.ok();
 	}
