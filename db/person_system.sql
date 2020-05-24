@@ -3,19 +3,43 @@
 
  Source Server         : localhost
  Source Server Type    : MySQL
- Source Server Version : 50548
+ Source Server Version : 50729
  Source Host           : localhost:3306
  Source Schema         : person_system
 
  Target Server Type    : MySQL
- Target Server Version : 50548
+ Target Server Version : 50729
  File Encoding         : 65001
 
- Date: 17/05/2020 09:15:28
+ Date: 24/05/2020 23:08:49
 */
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
+
+-- ----------------------------
+-- Table structure for b_contract
+-- ----------------------------
+DROP TABLE IF EXISTS `b_contract`;
+CREATE TABLE `b_contract`  (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '??',
+  `name` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '????',
+  `part_a` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '????',
+  `part_b` varchar(128) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '????',
+  `sign_date` varchar(12) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '??????',
+  `person_a` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '?????',
+  `person_b` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '?????',
+  `amount` float NULL DEFAULT NULL COMMENT '????',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '????',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '????',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '????' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of b_contract
+-- ----------------------------
+INSERT INTO `b_contract` VALUES (2, '测设通', '甲方', '乙方', '2020-05-14', NULL, NULL, 111111, NULL, NULL);
+INSERT INTO `b_contract` VALUES (3, '测试合同', '华为科技', '京东科技', '2020-05-20', NULL, NULL, 222222, NULL, NULL);
 
 -- ----------------------------
 -- Table structure for b_convert_apply
@@ -31,8 +55,8 @@ CREATE TABLE `b_convert_apply`  (
   `approval_user_id` varchar(24) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审批人',
   `approval_result` int(11) NULL DEFAULT NULL COMMENT '审批结果',
   `approval_opinion` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '审批意见',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '转正申请' ROW_FORMAT = COMPACT;
 
@@ -53,15 +77,15 @@ CREATE TABLE `b_interview_plan`  (
   `meet_time` varchar(24) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '面试时间',
   `meet_user_id` bigint(20) NULL DEFAULT NULL COMMENT '面试官',
   `status` int(11) NULL DEFAULT 0 COMMENT '面试结果',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '面试计划' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of b_interview_plan
 -- ----------------------------
-INSERT INTO `b_interview_plan` VALUES (6, '刘琦琦', '18723409981', '2020-05-20 08:58:55', 3, 0, '2020-05-17 08:59:28', NULL);
+INSERT INTO `b_interview_plan` VALUES (6, '刘琦琦', '18723409981', '2020-05-20 08:58:55', 3, 1, '2020-05-17 08:59:28', NULL);
 
 -- ----------------------------
 -- Table structure for b_recruit_need
@@ -78,8 +102,8 @@ CREATE TABLE `b_recruit_need`  (
   `status` int(11) NULL DEFAULT NULL COMMENT '需求状态',
   `recruit_user_id` bigint(20) NULL DEFAULT NULL COMMENT '招聘负责人',
   `need_user_id` bigint(20) NULL DEFAULT NULL COMMENT '需求负责人',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '招聘需求' ROW_FORMAT = COMPACT;
 
@@ -111,8 +135,8 @@ CREATE TABLE `b_salary_record`  (
   `work_amount` float NULL DEFAULT NULL COMMENT '工龄工资',
   `overtime_amount` float NULL DEFAULT NULL COMMENT '加班费',
   `merits_amount` float NULL DEFAULT NULL COMMENT '绩效奖金',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工资记录' ROW_FORMAT = COMPACT;
 
@@ -134,17 +158,21 @@ CREATE TABLE `b_user_doc`  (
   `birth` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '生日',
   `entry_date` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '入职日期',
   `user_type` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '员工类型',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
+  `user_no` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
+  `dept_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工档案' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工档案' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of b_user_doc
 -- ----------------------------
-INSERT INTO `b_user_doc` VALUES (6, 2, '本科', '1998-05-11', '2020-03-11', '0', '2020-05-17 09:05:48', NULL);
-INSERT INTO `b_user_doc` VALUES (7, 3, '研究生', '1983-02-17', '2018-04-17', '1', '2020-05-17 09:06:23', NULL);
-INSERT INTO `b_user_doc` VALUES (8, 4, '本科', '1986-05-15', '2016-05-17', '1', '2020-05-17 09:06:56', NULL);
+INSERT INTO `b_user_doc` VALUES (6, 2, '本科', '1998-05-11', '2020-03-11', '0', '2020-05-17 09:05:48', NULL, '0002', '13778123349', '1');
+INSERT INTO `b_user_doc` VALUES (7, 3, '研究生', '1983-02-17', '2018-04-17', '1', '2020-05-17 09:06:23', NULL, '0003', '13884930019', '3');
+INSERT INTO `b_user_doc` VALUES (8, 4, '本科', '1986-05-15', '2016-05-17', '1', '2020-05-17 09:06:56', NULL, '0004', '18623092285', '3');
+INSERT INTO `b_user_doc` VALUES (11, 5, '本科', '1986-05-30', '2020-05-04', NULL, '2020-05-24 21:42:56', NULL, '0005', '18677894453', '8');
 
 -- ----------------------------
 -- Table structure for b_user_plan
@@ -157,8 +185,8 @@ CREATE TABLE `b_user_plan`  (
   `start_date` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '开始日期',
   `end_date` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '结束日期',
   `status` int(11) NULL DEFAULT 0 COMMENT '计划状态',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '修改时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '修改时间',
   `content` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '个人计划' ROW_FORMAT = COMPACT;
@@ -181,10 +209,10 @@ CREATE TABLE `b_work_daily`  (
   `work_date` varchar(24) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工作日期',
   `work_content` varchar(1024) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT '工作内容',
   `progress` int(11) NULL DEFAULT NULL COMMENT '完成进度',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工作日报' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工作日报' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of b_work_daily
@@ -204,8 +232,8 @@ CREATE TABLE `b_work_record`  (
   `up_time` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '上班时间',
   `down_time` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '下班时间',
   `status` int(11) NULL DEFAULT 0 COMMENT '状态',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
+  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
   `work_month` varchar(8) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '出勤记录' ROW_FORMAT = COMPACT;
@@ -253,7 +281,7 @@ CREATE TABLE `sys_dept`  (
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   `del_flag` tinyint(4) NULL DEFAULT 0 COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`dept_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门管理' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '部门管理' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_dept
@@ -261,8 +289,11 @@ CREATE TABLE `sys_dept`  (
 INSERT INTO `sys_dept` VALUES (1, 0, '江苏富梓民轮胎厂', 0, 0);
 INSERT INTO `sys_dept` VALUES (2, 1, '长沙分公司', 1, -1);
 INSERT INTO `sys_dept` VALUES (3, 1, '上海分公司', 2, 0);
-INSERT INTO `sys_dept` VALUES (4, 3, '技术部', 0, 0);
+INSERT INTO `sys_dept` VALUES (4, 3, '生产部', 0, 0);
 INSERT INTO `sys_dept` VALUES (5, 3, '销售部', 1, 0);
+INSERT INTO `sys_dept` VALUES (6, 3, '财务部', 0, 0);
+INSERT INTO `sys_dept` VALUES (7, 3, '人事部', 0, 0);
+INSERT INTO `sys_dept` VALUES (8, 3, '管理部', 0, 0);
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -304,9 +335,9 @@ CREATE TABLE `sys_log`  (
   `params` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '请求参数',
   `time` bigint(20) NOT NULL COMMENT '执行时长(毫秒)',
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
-  `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 358 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 379 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统日志' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_log
@@ -668,6 +699,27 @@ INSERT INTO `sys_log` VALUES (354, 'cw', '保存考勤', 'com.person.modules.per
 INSERT INTO `sys_log` VALUES (355, 'cw', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":19,\"userId\":3,\"salaryMonth\":\"2020-05\",\"mustSalary\":4432.0,\"realitySalary\":4411.0,\"createTime\":\"2020-05-17 09:12:42\"}', 10, '0:0:0:0:0:0:0:1', '2020-05-17 09:12:42');
 INSERT INTO `sys_log` VALUES (356, 'cw', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":20,\"userId\":4,\"salaryMonth\":\"2020-05\",\"mustSalary\":5600.0,\"realitySalary\":4456.0,\"createTime\":\"2020-05-17 09:13:05\"}', 9, '0:0:0:0:0:0:0:1', '2020-05-17 09:13:05');
 INSERT INTO `sys_log` VALUES (357, 'admin', '审核', 'com.person.modules.person.controller.ConvertApplyController.approval()', '{\"id\":5,\"applyUserId\":2,\"applyDate\":\"2020-05-17\",\"applyContent\":\"经过3个月的工作，我已经完全胜任现在的工作岗位，现申请转正，望批准。\",\"status\":2,\"approvalDate\":\"2020-05-17\",\"approvalUserId\":1,\"approvalResult\":2,\"approvalOpinion\":\"通过\",\"createTime\":\"2020-05-17 08:56:50\",\"updateTime\":\"2020-05-17 09:13:46\"}', 12, '0:0:0:0:0:0:0:1', '2020-05-17 09:13:46');
+INSERT INTO `sys_log` VALUES (358, 'admin', '修改角色', 'com.person.modules.sys.controller.SysRoleController.update()', '{\"roleId\":2,\"roleName\":\"总经理\",\"remark\":\"总经理\",\"deptId\":3,\"deptName\":\"上海分公司\",\"menuIdList\":[1,2,15,16,17,18,41,56,81,82,83,84,42,54,62,63,64,86,43,46,47,48,49,50,55,58,59,60,61,57,65,66,67,68,85,44,51,73,74,75,76,52,77,78,79,80,45,53,69,70,71,72],\"deptIdList\":[1,3,4,5,6,7,8],\"createTime\":\"May 15, 2020 8:29:43 PM\"}', 369, '0:0:0:0:0:0:0:1', '2020-05-24 13:14:07');
+INSERT INTO `sys_log` VALUES (359, 'admin', '修改面试', 'com.person.modules.person.controller.InterviewPlanController.update()', '{\"id\":6,\"candidate\":\"刘琦琦\",\"candidateMobile\":\"18723409981\",\"meetTime\":\"2020-05-20 08:58:55\",\"meetUserId\":3,\"status\":1,\"createTime\":\"2020-05-17 08:59:28\"}', 22, '0:0:0:0:0:0:0:1', '2020-05-24 13:19:05');
+INSERT INTO `sys_log` VALUES (360, 'admin', '保存用户', 'com.person.modules.sys.controller.SysUserController.save()', '{\"userId\":5,\"username\":\"存储\",\"name\":\"cc\",\"password\":\"7fe22afcdeaab59c453fd55c0723f7cd77cb974a1066c40721cd2a3cf0f0fce7\",\"salt\":\"MVDlRa0lGADPLXgehAH2\",\"email\":\"cc@qq.com\",\"status\":1,\"roleIdList\":[2],\"createTime\":\"May 24, 2020 1:38:30 PM\",\"deptId\":4,\"deptName\":\"生产部\"}', 66, '0:0:0:0:0:0:0:1', '2020-05-24 13:38:31');
+INSERT INTO `sys_log` VALUES (361, 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":9,\"userId\":5,\"education\":\"大专\",\"userNo\":\"0005\",\"birth\":\"2020-05-24\",\"entryDate\":\"2020-05-19\",\"userType\":\"0\",\"createTime\":\"2020-05-24 13:38:49\"}', 50, '0:0:0:0:0:0:0:1', '2020-05-24 13:38:50');
+INSERT INTO `sys_log` VALUES (362, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":5,\"username\":\"存储\",\"name\":\"王婷婷\",\"salt\":\"MVDlRa0lGADPLXgehAH2\",\"email\":\"cc@qq.com\",\"status\":1,\"roleIdList\":[2],\"createTime\":\"May 24, 2020 1:38:31 PM\",\"deptId\":4,\"deptName\":\"生产部\"}', 25, '0:0:0:0:0:0:0:1', '2020-05-24 13:39:18');
+INSERT INTO `sys_log` VALUES (363, 'admin', '修改员工档案', 'com.person.modules.person.controller.UserDocController.update()', '{\"id\":9,\"userId\":5,\"age\":0,\"education\":\"大专\",\"userNo\":\"0005\",\"birth\":\"1996-05-24\",\"entryDate\":\"2020-05-19\",\"userType\":\"0\",\"createTime\":\"2020-05-24 13:38:49\"}', 106, '127.0.0.1', '2020-05-24 20:43:41');
+INSERT INTO `sys_log` VALUES (364, 'admin', '保存用户', 'com.person.modules.sys.controller.SysUserController.save()', '{\"userId\":6,\"username\":\"ceshi\",\"name\":\"测试手机\",\"password\":\"019c84a915b50ca574a65a157c2fef00ad33a6c6d613718808dd6409edef6a4a\",\"salt\":\"TfWjU5q1e5nAtoRKlHZR\",\"status\":1,\"roleIdList\":[],\"createTime\":\"May 24, 2020 9:18:24 PM\",\"deptId\":4,\"deptName\":\"生产部\"}', 186, '0:0:0:0:0:0:0:1', '2020-05-24 21:18:25');
+INSERT INTO `sys_log` VALUES (365, 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":10,\"userId\":6,\"age\":0,\"mobile\":\"18651834963\",\"education\":\"大专\",\"userNo\":\"0006\",\"birth\":\"1983-05-24\",\"entryDate\":\"2020-05-19\",\"createTime\":\"2020-05-24 21:38:06\"}', 165, '0:0:0:0:0:0:0:1', '2020-05-24 21:38:06');
+INSERT INTO `sys_log` VALUES (366, 'admin', '删除员工档案', 'com.person.modules.person.controller.UserDocController.delete()', '[9,10]', 16, '0:0:0:0:0:0:0:1', '2020-05-24 21:39:13');
+INSERT INTO `sys_log` VALUES (367, 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":11,\"userId\":5,\"age\":0,\"mobile\":\"18677894453\",\"deptName\":\"管理部\",\"deptId\":8,\"education\":\"本科\",\"userNo\":\"0005\",\"birth\":\"1986-05-30\",\"entryDate\":\"2020-05-04\",\"createTime\":\"2020-05-24 21:42:56\"}', 14, '0:0:0:0:0:0:0:1', '2020-05-24 21:42:57');
+INSERT INTO `sys_log` VALUES (368, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":87,\"parentId\":45,\"parentName\":\"档案管理\",\"name\":\"合同管理\",\"url\":\"#\",\"type\":1,\"icon\":\"fa fa-file-word-o\",\"orderNum\":0}', 16, '0:0:0:0:0:0:0:1', '2020-05-24 21:48:22');
+INSERT INTO `sys_log` VALUES (369, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":87,\"parentId\":45,\"parentName\":\"档案管理\",\"name\":\"合同管理\",\"url\":\"modules/person/contract.html\",\"type\":1,\"icon\":\"fa fa-file-text\",\"orderNum\":0}', 20, '0:0:0:0:0:0:0:1', '2020-05-24 21:49:43');
+INSERT INTO `sys_log` VALUES (370, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":88,\"parentId\":87,\"parentName\":\"合同管理\",\"name\":\"查看\",\"perms\":\"person:contract:list,person:contract:info\",\"type\":2,\"orderNum\":0}', 13, '0:0:0:0:0:0:0:1', '2020-05-24 21:50:37');
+INSERT INTO `sys_log` VALUES (371, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":89,\"parentId\":87,\"parentName\":\"合同管理\",\"name\":\"增加\",\"perms\":\"person:contract:save\",\"type\":2,\"orderNum\":0}', 11, '0:0:0:0:0:0:0:1', '2020-05-24 21:51:11');
+INSERT INTO `sys_log` VALUES (372, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":90,\"parentId\":87,\"parentName\":\"合同管理\",\"name\":\"编辑\",\"perms\":\"person:contract:update\",\"type\":2,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-05-24 21:51:45');
+INSERT INTO `sys_log` VALUES (373, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":91,\"parentId\":87,\"parentName\":\"合同管理\",\"name\":\"删除\",\"perms\":\"person:contract:delete\",\"type\":2,\"orderNum\":0}', 11, '0:0:0:0:0:0:0:1', '2020-05-24 21:52:11');
+INSERT INTO `sys_log` VALUES (374, 'admin', '保存合同档案', 'com.person.modules.person.controller.ContractController.save()', '{\"id\":1,\"name\":\"cd\",\"partA\":\"jiafang\",\"partB\":\"yifang\",\"signDate\":\"2021-03-02\",\"amount\":1111.0}', 97, '0:0:0:0:0:0:0:1', '2020-05-24 22:25:29');
+INSERT INTO `sys_log` VALUES (375, 'admin', '修改合同档案', 'com.person.modules.person.controller.ContractController.update()', '{\"id\":1,\"name\":\"测试修改合同\",\"partA\":\"jiafang甲方\",\"partB\":\"yifang乙方\",\"signDate\":\"2021-03-17\",\"amount\":111122.0}', 17, '0:0:0:0:0:0:0:1', '2020-05-24 22:26:06');
+INSERT INTO `sys_log` VALUES (376, 'admin', '删除合同档案', 'com.person.modules.person.controller.ContractController.delete()', '[1]', 13, '0:0:0:0:0:0:0:1', '2020-05-24 22:26:15');
+INSERT INTO `sys_log` VALUES (377, 'admin', '保存合同档案', 'com.person.modules.person.controller.ContractController.save()', '{\"id\":2,\"name\":\"测设通\",\"partA\":\"甲方\",\"partB\":\"乙方\",\"signDate\":\"2020-05-14\",\"amount\":111111.0}', 103, '127.0.0.1', '2020-05-24 22:30:12');
+INSERT INTO `sys_log` VALUES (378, 'admin', '保存合同档案', 'com.person.modules.person.controller.ContractController.save()', '{\"id\":3,\"name\":\"测试合同\",\"partA\":\"华为科技\",\"partB\":\"京东科技\",\"signDate\":\"2020-05-20\",\"amount\":222222.0}', 12, '127.0.0.1', '2020-05-24 22:30:42');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -683,7 +735,7 @@ CREATE TABLE `sys_menu`  (
   `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 87 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 92 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '菜单管理' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -760,6 +812,11 @@ INSERT INTO `sys_menu` VALUES (83, 56, '编辑', NULL, 'person:salary:update', 2
 INSERT INTO `sys_menu` VALUES (84, 56, '删除', NULL, 'person:salary:delete', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (85, 57, '审核', NULL, 'person:apply:approval', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (86, 54, '删除', NULL, 'person:work:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (87, 45, '合同管理', 'modules/person/contract.html', NULL, 1, 'fa fa-file-text', 0);
+INSERT INTO `sys_menu` VALUES (88, 87, '查看', NULL, 'person:contract:list,person:contract:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (89, 87, '增加', NULL, 'person:contract:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (90, 87, '编辑', NULL, 'person:contract:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (91, 87, '删除', NULL, 'person:contract:delete', 2, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_oss
@@ -768,7 +825,7 @@ DROP TABLE IF EXISTS `sys_oss`;
 CREATE TABLE `sys_oss`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
   `url` varchar(200) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT 'URL地址',
-  `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_date` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '文件上传' ROW_FORMAT = COMPACT;
 
@@ -785,7 +842,7 @@ CREATE TABLE `sys_role`  (
   `role_name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '角色名称',
   `remark` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '备注',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色' ROW_FORMAT = COMPACT;
 
@@ -793,7 +850,7 @@ CREATE TABLE `sys_role`  (
 -- Records of sys_role
 -- ----------------------------
 INSERT INTO `sys_role` VALUES (1, '管理员', '超级管理员', 1, '2020-05-14 22:28:37');
-INSERT INTO `sys_role` VALUES (2, '普通用户', '普通员工', 3, '2020-05-15 20:29:43');
+INSERT INTO `sys_role` VALUES (2, '总经理', '总经理', 3, '2020-05-15 20:29:43');
 INSERT INTO `sys_role` VALUES (3, '财务专员', '财务专员', 3, '2020-05-15 20:30:29');
 INSERT INTO `sys_role` VALUES (4, '人事专员', '人事专员', 3, '2020-05-15 20:31:13');
 
@@ -806,7 +863,7 @@ CREATE TABLE `sys_role_dept`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 43 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与部门对应关系' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 50 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与部门对应关系' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_role_dept
@@ -823,10 +880,13 @@ INSERT INTO `sys_role_dept` VALUES (35, 4, 1);
 INSERT INTO `sys_role_dept` VALUES (36, 4, 3);
 INSERT INTO `sys_role_dept` VALUES (37, 4, 4);
 INSERT INTO `sys_role_dept` VALUES (38, 4, 5);
-INSERT INTO `sys_role_dept` VALUES (39, 2, 1);
-INSERT INTO `sys_role_dept` VALUES (40, 2, 3);
-INSERT INTO `sys_role_dept` VALUES (41, 2, 4);
-INSERT INTO `sys_role_dept` VALUES (42, 2, 5);
+INSERT INTO `sys_role_dept` VALUES (43, 2, 1);
+INSERT INTO `sys_role_dept` VALUES (44, 2, 3);
+INSERT INTO `sys_role_dept` VALUES (45, 2, 4);
+INSERT INTO `sys_role_dept` VALUES (46, 2, 5);
+INSERT INTO `sys_role_dept` VALUES (47, 2, 6);
+INSERT INTO `sys_role_dept` VALUES (48, 2, 7);
+INSERT INTO `sys_role_dept` VALUES (49, 2, 8);
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -837,7 +897,7 @@ CREATE TABLE `sys_role_menu`  (
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) NULL DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 451 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 503 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '角色与菜单对应关系' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -986,28 +1046,58 @@ INSERT INTO `sys_role_menu` VALUES (425, 4, 69);
 INSERT INTO `sys_role_menu` VALUES (426, 4, 70);
 INSERT INTO `sys_role_menu` VALUES (427, 4, 71);
 INSERT INTO `sys_role_menu` VALUES (428, 4, 72);
-INSERT INTO `sys_role_menu` VALUES (429, 2, 41);
-INSERT INTO `sys_role_menu` VALUES (430, 2, 56);
-INSERT INTO `sys_role_menu` VALUES (431, 2, 81);
-INSERT INTO `sys_role_menu` VALUES (432, 2, 42);
-INSERT INTO `sys_role_menu` VALUES (433, 2, 54);
-INSERT INTO `sys_role_menu` VALUES (434, 2, 62);
-INSERT INTO `sys_role_menu` VALUES (435, 2, 63);
-INSERT INTO `sys_role_menu` VALUES (436, 2, 64);
-INSERT INTO `sys_role_menu` VALUES (437, 2, 43);
-INSERT INTO `sys_role_menu` VALUES (438, 2, 46);
-INSERT INTO `sys_role_menu` VALUES (439, 2, 47);
-INSERT INTO `sys_role_menu` VALUES (440, 2, 48);
-INSERT INTO `sys_role_menu` VALUES (441, 2, 49);
-INSERT INTO `sys_role_menu` VALUES (442, 2, 50);
-INSERT INTO `sys_role_menu` VALUES (443, 2, 55);
-INSERT INTO `sys_role_menu` VALUES (444, 2, 58);
-INSERT INTO `sys_role_menu` VALUES (445, 2, 59);
-INSERT INTO `sys_role_menu` VALUES (446, 2, 60);
-INSERT INTO `sys_role_menu` VALUES (447, 2, 61);
-INSERT INTO `sys_role_menu` VALUES (448, 2, 57);
-INSERT INTO `sys_role_menu` VALUES (449, 2, 65);
-INSERT INTO `sys_role_menu` VALUES (450, 2, 66);
+INSERT INTO `sys_role_menu` VALUES (451, 2, 1);
+INSERT INTO `sys_role_menu` VALUES (452, 2, 2);
+INSERT INTO `sys_role_menu` VALUES (453, 2, 15);
+INSERT INTO `sys_role_menu` VALUES (454, 2, 16);
+INSERT INTO `sys_role_menu` VALUES (455, 2, 17);
+INSERT INTO `sys_role_menu` VALUES (456, 2, 18);
+INSERT INTO `sys_role_menu` VALUES (457, 2, 41);
+INSERT INTO `sys_role_menu` VALUES (458, 2, 56);
+INSERT INTO `sys_role_menu` VALUES (459, 2, 81);
+INSERT INTO `sys_role_menu` VALUES (460, 2, 82);
+INSERT INTO `sys_role_menu` VALUES (461, 2, 83);
+INSERT INTO `sys_role_menu` VALUES (462, 2, 84);
+INSERT INTO `sys_role_menu` VALUES (463, 2, 42);
+INSERT INTO `sys_role_menu` VALUES (464, 2, 54);
+INSERT INTO `sys_role_menu` VALUES (465, 2, 62);
+INSERT INTO `sys_role_menu` VALUES (466, 2, 63);
+INSERT INTO `sys_role_menu` VALUES (467, 2, 64);
+INSERT INTO `sys_role_menu` VALUES (468, 2, 86);
+INSERT INTO `sys_role_menu` VALUES (469, 2, 43);
+INSERT INTO `sys_role_menu` VALUES (470, 2, 46);
+INSERT INTO `sys_role_menu` VALUES (471, 2, 47);
+INSERT INTO `sys_role_menu` VALUES (472, 2, 48);
+INSERT INTO `sys_role_menu` VALUES (473, 2, 49);
+INSERT INTO `sys_role_menu` VALUES (474, 2, 50);
+INSERT INTO `sys_role_menu` VALUES (475, 2, 55);
+INSERT INTO `sys_role_menu` VALUES (476, 2, 58);
+INSERT INTO `sys_role_menu` VALUES (477, 2, 59);
+INSERT INTO `sys_role_menu` VALUES (478, 2, 60);
+INSERT INTO `sys_role_menu` VALUES (479, 2, 61);
+INSERT INTO `sys_role_menu` VALUES (480, 2, 57);
+INSERT INTO `sys_role_menu` VALUES (481, 2, 65);
+INSERT INTO `sys_role_menu` VALUES (482, 2, 66);
+INSERT INTO `sys_role_menu` VALUES (483, 2, 67);
+INSERT INTO `sys_role_menu` VALUES (484, 2, 68);
+INSERT INTO `sys_role_menu` VALUES (485, 2, 85);
+INSERT INTO `sys_role_menu` VALUES (486, 2, 44);
+INSERT INTO `sys_role_menu` VALUES (487, 2, 51);
+INSERT INTO `sys_role_menu` VALUES (488, 2, 73);
+INSERT INTO `sys_role_menu` VALUES (489, 2, 74);
+INSERT INTO `sys_role_menu` VALUES (490, 2, 75);
+INSERT INTO `sys_role_menu` VALUES (491, 2, 76);
+INSERT INTO `sys_role_menu` VALUES (492, 2, 52);
+INSERT INTO `sys_role_menu` VALUES (493, 2, 77);
+INSERT INTO `sys_role_menu` VALUES (494, 2, 78);
+INSERT INTO `sys_role_menu` VALUES (495, 2, 79);
+INSERT INTO `sys_role_menu` VALUES (496, 2, 80);
+INSERT INTO `sys_role_menu` VALUES (497, 2, 45);
+INSERT INTO `sys_role_menu` VALUES (498, 2, 53);
+INSERT INTO `sys_role_menu` VALUES (499, 2, 69);
+INSERT INTO `sys_role_menu` VALUES (500, 2, 70);
+INSERT INTO `sys_role_menu` VALUES (501, 2, 71);
+INSERT INTO `sys_role_menu` VALUES (502, 2, 72);
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -1022,19 +1112,22 @@ CREATE TABLE `sys_user`  (
   `mobile` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '手机号',
   `status` tinyint(4) NULL DEFAULT NULL COMMENT '状态  0：禁用   1：正常',
   `dept_id` bigint(20) NULL DEFAULT NULL COMMENT '部门ID',
-  `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
+  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
   `name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `user_no` varchar(8) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`user_id`) USING BTREE,
   UNIQUE INDEX `username`(`username`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统用户' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', 1, 1, '2016-11-11 11:11:11', '管理员');
-INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 3, '2020-05-15 22:29:02', '王大锤');
-INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 3, '2020-05-16 15:11:08', '财务小王');
-INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 3, '2020-05-16 15:11:43', '人事小李');
+INSERT INTO `sys_user` VALUES (1, 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', 1, 1, '2016-11-11 11:11:11', '管理员', '0001');
+INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 3, '2020-05-15 22:29:02', '王大锤', '0002');
+INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 3, '2020-05-16 15:11:08', '财务小王', '0003');
+INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 3, '2020-05-16 15:11:43', '人事小李', '0004');
+INSERT INTO `sys_user` VALUES (5, '存储', '7fe22afcdeaab59c453fd55c0723f7cd77cb974a1066c40721cd2a3cf0f0fce7', 'MVDlRa0lGADPLXgehAH2', 'cc@qq.com', NULL, 1, 4, '2020-05-24 13:38:31', '王婷婷', NULL);
+INSERT INTO `sys_user` VALUES (6, 'ceshi', '019c84a915b50ca574a65a157c2fef00ad33a6c6d613718808dd6409edef6a4a', 'TfWjU5q1e5nAtoRKlHZR', NULL, NULL, 1, 4, '2020-05-24 21:18:25', '测试手机', NULL);
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -1045,7 +1138,7 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = COMPACT;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = COMPACT;
 
 -- ----------------------------
 -- Records of sys_user_role
@@ -1054,5 +1147,6 @@ INSERT INTO `sys_user_role` VALUES (1, 1, 1);
 INSERT INTO `sys_user_role` VALUES (2, 2, 2);
 INSERT INTO `sys_user_role` VALUES (5, 3, 3);
 INSERT INTO `sys_user_role` VALUES (6, 4, 4);
+INSERT INTO `sys_user_role` VALUES (8, 5, 2);
 
 SET FOREIGN_KEY_CHECKS = 1;
