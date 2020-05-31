@@ -15,11 +15,13 @@ import com.person.modules.person.entity.WorkRecordEntity;
 import com.person.modules.person.service.SalaryRecordService;
 import com.person.modules.sys.controller.AbstractController;
 import com.person.modules.sys.entity.SysUserEntity;
+import com.person.modules.sys.service.SysUserService;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 
@@ -33,7 +35,8 @@ import java.util.Map;
 public class SalaryRecordController extends AbstractController {
     @Autowired
     private SalaryRecordService salaryRecordService;
-
+    @Autowired
+    SysUserService userService;
     /**
      * 所有工资列表
      */
@@ -44,6 +47,7 @@ public class SalaryRecordController extends AbstractController {
             //不是管理员只能查看自己工资记录
             params.put("userId", getUserId());
         }
+
         PageUtils page = salaryRecordService.queryPage(params);
 
         return R.ok().put("page", page);

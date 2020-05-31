@@ -7,6 +7,7 @@ $(function () {
             {label: '主键', name: 'id', index: "id", width: 45, key: true, hidden: true},
             {label: '用户ID', name: 'userId', width: 45, hidden: true},
             {label: '员工姓名', name: 'userName', width: 75},
+            {label: '所属部门', name: 'deptName', width: 75},
             {label: '工资月份', name: 'salaryMonth', width: 75},
             {label: '应发工资', name: 'mustSalary', width: 75},
             {label: '实发工资', name: 'realitySalary', width: 75},
@@ -70,18 +71,23 @@ var vm = new Vue({
     el: '#rrapp',
     data: {
         q: {
-            name: null
+            name: null,
+            deptId:null,
+            deptName:null,
         },
         showList: true,
         title: null,
         salary: {},
         users: [],
         user: {},
+        deptId:null,
+        deptName:null,
         nameFlag:true
     },
     methods: {
         query: function () {
             vm.reload();
+            vm.getDept();
         },
         add: function () {
             vm.showList = false;
@@ -89,6 +95,17 @@ var vm = new Vue({
             vm.salary = {};
             vm.getUsers();
 
+        },
+        getDept: function(){
+            //加载部门树
+            $.get(baseURL + "sys/dept/list", function(r){
+                ztree = $.fn.zTree.init($("#deptTree"), setting, r);
+                var node = ztree.getNodeByParam("deptId", vm.salary.deptId);
+                if(node != null){
+                    ztree.selectNode(node);
+                    vm.q.deptName = node.name;
+                }
+            })
         },
         update: function () {
             var id = getSelectedRow();
@@ -162,11 +179,34 @@ var vm = new Vue({
                 vm.users = r.users;
             });
         },
+        deptTree: function() {
+            layer.open({
+                type: 1,
+                offset: '50px',
+                skin: 'layui-layer-molv',
+                title: "选择部门",
+                area: ['300px', '300px'],
+                shade: 0,
+                shadeClose: false,
+                content: jQuery("#deptLayer"),
+                btn: ['确定', '取消'],
+                btn1: function (index) {
+                    var node = ztree.getSelectedNodes();
+                    //选择上级部门
+                    vm.q.deptId = node[0].deptId;
+                    vm.q.deptName = node[0].name;
+                    layer.close(index);
+                }
+            });
+        },
         reload: function () {
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam', 'page');
             $("#jqGrid").jqGrid('setGridParam', {
-                postData: {'salaryMonth': vm.q.salaryMonth},
+                postData: {
+                    'salaryMonth': vm.q.salaryMonth,
+                    'deptId': vm.q.deptId
+                },
                 page: page
             }).trigger("reloadGrid");
         }
@@ -191,4 +231,5 @@ layui.use('laydate', function () {
             vm.q.salaryMonth = value;
         }
     });
+    vm.getDept();
 });

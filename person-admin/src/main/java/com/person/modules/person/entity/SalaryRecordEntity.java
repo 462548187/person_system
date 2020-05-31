@@ -12,7 +12,10 @@ public class SalaryRecordEntity {
     private Long userId;
     @TableField(exist = false)
     private String userName;
-
+    @TableField(exist = false)
+    private String deptName;
+    @TableField(exist = false)
+    private String deptId;
     private String salaryMonth;
 
     private Float mustSalary;
@@ -48,6 +51,22 @@ public class SalaryRecordEntity {
     private String createTime;
 
     private String updateTime;
+
+    public String getDeptName() {
+        return deptName;
+    }
+
+    public void setDeptName(String deptName) {
+        this.deptName = deptName;
+    }
+
+    public String getDeptId() {
+        return deptId;
+    }
+
+    public void setDeptId(String deptId) {
+        this.deptId = deptId;
+    }
 
     public Long getId() {
         return id;
