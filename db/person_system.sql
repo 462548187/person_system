@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 31/05/2020 14:45:04
+ Date: 31/05/2020 23:02:53
 */
 
 SET NAMES utf8mb4;
@@ -85,7 +85,7 @@ CREATE TABLE `b_interview_plan`  (
 -- ----------------------------
 -- Records of b_interview_plan
 -- ----------------------------
-INSERT INTO `b_interview_plan` VALUES (6, '刘琦琦', '18723409981', '2020-05-20 08:58:55', 3, 1, '2020-05-17 08:59:28', NULL);
+INSERT INTO `b_interview_plan` VALUES (6, '刘琦琦', '18723409981', '2020-05-20 08:58:55', 3, 2, '2020-05-17 08:59:28', NULL);
 
 -- ----------------------------
 -- Table structure for b_recruit_need
@@ -120,33 +120,34 @@ CREATE TABLE `b_salary_record`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '主键',
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户id',
   `salary_month` varchar(16) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '工资月份',
-  `must_salary` float NULL DEFAULT NULL COMMENT '应发工资',
-  `reality_salary` float NULL DEFAULT NULL COMMENT '实发工资',
-  `fund_amount` float NULL DEFAULT NULL COMMENT '公积金扣款',
-  `tax_amount` float NULL DEFAULT NULL COMMENT '个税扣款',
-  `medical_amount` float NULL DEFAULT NULL COMMENT '医保扣款',
-  `pension_amount` float NULL DEFAULT NULL COMMENT '养老扣款',
-  `injured_amount` float NULL DEFAULT NULL COMMENT '工伤扣款',
-  `birth_amount` float NULL DEFAULT NULL COMMENT '生育扣款',
-  `unemployment_amount` float NULL DEFAULT NULL COMMENT '失业扣款',
-  `leave_amount` float NULL DEFAULT NULL COMMENT '请假扣款',
-  `late_amount` float NULL DEFAULT NULL COMMENT '迟到扣款',
-  `base_amount` float NULL DEFAULT NULL COMMENT '基本工资',
-  `work_amount` float NULL DEFAULT NULL COMMENT '工龄工资',
-  `overtime_amount` float NULL DEFAULT NULL COMMENT '加班费',
-  `merits_amount` float NULL DEFAULT NULL COMMENT '绩效奖金',
+  `must_salary` float NULL DEFAULT 0 COMMENT '应发工资',
+  `reality_salary` float NULL DEFAULT 0 COMMENT '实发工资',
+  `fund_amount` float NULL DEFAULT 0 COMMENT '公积金扣款',
+  `tax_amount` float NULL DEFAULT 0 COMMENT '个税扣款',
+  `medical_amount` float NULL DEFAULT 0 COMMENT '医保扣款',
+  `pension_amount` float NULL DEFAULT 0 COMMENT '养老扣款',
+  `injured_amount` float NULL DEFAULT 0 COMMENT '工伤扣款',
+  `birth_amount` float NULL DEFAULT 0 COMMENT '生育扣款',
+  `unemployment_amount` float NULL DEFAULT 0 COMMENT '失业扣款',
+  `leave_amount` float NULL DEFAULT 0 COMMENT '请假扣款',
+  `late_amount` float NULL DEFAULT 0 COMMENT '迟到扣款',
+  `base_amount` float NULL DEFAULT 0 COMMENT '基本工资',
+  `work_amount` float NULL DEFAULT 0 COMMENT '工龄工资',
+  `overtime_amount` float NULL DEFAULT 0 COMMENT '加班费',
+  `merits_amount` float NULL DEFAULT 0 COMMENT '绩效奖金',
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工资记录' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 23 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工资记录' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_salary_record
 -- ----------------------------
-INSERT INTO `b_salary_record` VALUES (18, 2, '2020-05', 6500, 5453, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:11:32', NULL);
-INSERT INTO `b_salary_record` VALUES (19, 3, '2020-05', 4432, 4411, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:12:42', NULL);
-INSERT INTO `b_salary_record` VALUES (20, 4, '2020-05', 5600, 4456, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:13:05', NULL);
-INSERT INTO `b_salary_record` VALUES (21, 3, '2020-04', 4500, 4300, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-31 14:42:48', NULL);
+INSERT INTO `b_salary_record` VALUES (18, 2, '2020-05', 6500, 5453, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-17 09:11:32', NULL);
+INSERT INTO `b_salary_record` VALUES (19, 3, '2020-05', 4432, 4411, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-17 09:12:42', NULL);
+INSERT INTO `b_salary_record` VALUES (20, 4, '2020-05', 5600, 4456, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-17 09:13:05', NULL);
+INSERT INTO `b_salary_record` VALUES (21, 3, '2020-04', 4500, 4300, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-31 14:42:48', NULL);
+INSERT INTO `b_salary_record` VALUES (22, 6, '2020-06', 3000, 500, 50, 30, 150, 210, 650, 0, 0, 0, 0, 0, 0, 0, 0, '2020-05-31 22:54:07', NULL);
 
 -- ----------------------------
 -- Table structure for b_user_doc
@@ -338,7 +339,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -347,6 +348,11 @@ INSERT INTO `sys_log` VALUES (1, 'admin', '修改用户', 'com.person.modules.sy
 INSERT INTO `sys_log` VALUES (2, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":3,\"username\":\"cw\",\"name\":\"财务小王\",\"salt\":\"2E5mvF1xjXFoY0narVz9\",\"email\":\"gy@qq.com\",\"mobile\":\"13455676543\",\"status\":1,\"roleIdList\":[3],\"createTime\":\"May 16, 2020 3:11:08 PM\",\"deptId\":6,\"deptName\":\"财务部\"}', 19, '0:0:0:0:0:0:0:1', '2020-05-31 12:26:29');
 INSERT INTO `sys_log` VALUES (3, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":4,\"username\":\"rs\",\"name\":\"人事小李\",\"salt\":\"NF4cYNKNmsMA997exGGN\",\"email\":\"zf@qq.com\",\"mobile\":\"19877678790\",\"status\":1,\"roleIdList\":[4],\"createTime\":\"May 16, 2020 3:11:43 PM\",\"deptId\":7,\"deptName\":\"人事部\"}', 17, '0:0:0:0:0:0:0:1', '2020-05-31 12:26:38');
 INSERT INTO `sys_log` VALUES (4, 'admin', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":21,\"userId\":3,\"salaryMonth\":\"2020-04\",\"mustSalary\":4500.0,\"realitySalary\":4300.0,\"createTime\":\"2020-05-31 14:42:48\"}', 58, '0:0:0:0:0:0:0:1', '2020-05-31 14:42:48');
+INSERT INTO `sys_log` VALUES (5, 'admin', '修改面试', 'com.person.modules.person.controller.InterviewPlanController.update()', '{\"id\":6,\"candidate\":\"刘琦琦\",\"candidateMobile\":\"18723409981\",\"meetTime\":\"2020-05-20 08:58:55\",\"meetUserId\":3,\"status\":1,\"createTime\":\"2020-05-17 08:59:28\"}', 84, '0:0:0:0:0:0:0:1', '2020-05-31 22:23:58');
+INSERT INTO `sys_log` VALUES (6, 'admin', '修改面试', 'com.person.modules.person.controller.InterviewPlanController.update()', '{\"id\":6,\"candidate\":\"刘琦琦\",\"candidateMobile\":\"18723409981\",\"meetTime\":\"2020-05-20 08:58:55\",\"meetUserId\":3,\"status\":1,\"createTime\":\"2020-05-17 08:59:28\"}', 7, '0:0:0:0:0:0:0:1', '2020-05-31 22:25:01');
+INSERT INTO `sys_log` VALUES (7, 'admin', '修改面试', 'com.person.modules.person.controller.InterviewPlanController.update()', '{\"id\":6,\"candidate\":\"刘琦琦\",\"candidateMobile\":\"18723409981\",\"meetTime\":\"2020-05-20 08:58:55\",\"meetUserId\":3,\"status\":1,\"createTime\":\"2020-05-17 08:59:28\"}', 93154, '0:0:0:0:0:0:0:1', '2020-05-31 22:28:18');
+INSERT INTO `sys_log` VALUES (8, 'admin', '修改面试', 'com.person.modules.person.controller.InterviewPlanController.update()', '{\"id\":6,\"candidate\":\"刘琦琦\",\"candidateMobile\":\"18723409981\",\"meetTime\":\"2020-05-20 08:58:55\",\"meetUserId\":3,\"status\":2,\"createTime\":\"2020-05-17 08:59:28\"}', 7, '0:0:0:0:0:0:0:1', '2020-05-31 22:28:29');
+INSERT INTO `sys_log` VALUES (9, 'admin', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":22,\"userId\":6,\"salaryMonth\":\"2020-06\",\"mustSalary\":3000.0,\"realitySalary\":500.0,\"fundAmount\":50.0,\"taxAmount\":30.0,\"medicalAmount\":150.0,\"pensionAmount\":210.0,\"injuredAmount\":650.0,\"createTime\":\"2020-05-31 22:54:07\"}', 62, '0:0:0:0:0:0:0:1', '2020-05-31 22:54:07');
 
 -- ----------------------------
 -- Table structure for sys_menu

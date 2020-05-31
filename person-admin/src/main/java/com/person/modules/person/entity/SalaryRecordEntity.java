@@ -17,19 +17,19 @@ public class SalaryRecordEntity {
     @TableField(exist = false)
     private String deptId;
     private String salaryMonth;
-
+    //基本工资
     private Float mustSalary;
-
+    //全勤工资
     private Float realitySalary;
-
+    //迟到扣款
     private Float fundAmount;
-
+    //请假扣款
     private Float taxAmount;
-
+    //绩效奖金
     private Float medicalAmount;
-
+    //个税
     private Float pensionAmount;
-
+    //五险一金
     private Float injuredAmount;
 
     private Float birthAmount;

@@ -62,7 +62,7 @@ public class SalaryRecordServiceImpl extends ServiceImpl<SalaryRecordDao, Salary
 
         //查询部门下的员工
         Object dId = params.get("deptId");
-        if (null != dId) {
+        if (null != dId&&StringUtils.isNotBlank(dId.toString())) {
             Long deptId = Long.parseLong(dId.toString());
             QueryWrapper query = new QueryWrapper();
             query.eq("dept_id", deptId);
