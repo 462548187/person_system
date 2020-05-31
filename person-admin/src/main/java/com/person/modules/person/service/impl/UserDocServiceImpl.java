@@ -40,12 +40,17 @@ public class UserDocServiceImpl extends ServiceImpl<UserDocDao, UserDocEntity> i
         if (!ObjectUtils.isEmpty(id)) {
             userId = (Long) id;
         }
-
+        Object dId = params.get("deptId");
+        Long deptId = null;
+        if (!ObjectUtils.isEmpty(dId)) {
+            deptId = Long.parseLong(dId.toString());
+        }
 
         IPage<UserDocEntity> page = this.page(
                 new Query<UserDocEntity>().getPage(params),
                 new QueryWrapper<UserDocEntity>()
                         .eq(null != userId, "user_id", userId)
+                        .eq(null != deptId, "dept_id", deptId)
                         .apply(params.get(Constant.SQL_FILTER) != null, (String) params.get(Constant.SQL_FILTER))
 
         );

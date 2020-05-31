@@ -8,14 +8,20 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			<div class="form-group col-sm-2">
-				<select id="userIdQuery" v-model="q.userId" @keyup.enter="query" class="form-control" >
-					<option selected="selected" value="">全部</option>
-					<option v-for="user in users" :value="user.userId">
-						{{ user.name }}
-					</option>
-				</select>
-			</div>
+<!--			<div class="form-group col-sm-2">-->
+<!--				<select id="userIdQuery" v-model="q.userId" @keyup.enter="query" class="form-control" >-->
+<!--					<option selected="selected" value="">全部</option>-->
+<!--					<option v-for="user in users" :value="user.userId">-->
+<!--						{{ user.name }}-->
+<!--					</option>-->
+<!--				</select>-->
+<!--			</div>-->
+<!--			<div class="form-group">-->
+<!--				<div class="form-group col-sm-2">所属部门</div>-->
+				<div class="form-group col-sm-2">
+					<input type="text" id="q_dept_id" v-model="q.deptName" class="form-control" style="cursor:pointer;"  @click="deptTree" readonly="readonly" placeholder="所属部门"/>
+				</div>
+<!--			</div>-->
 			<a class="btn btn-default" @click="query">查询</a>
 			<#if shiro.hasPermission("person:doc:save")>
 			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>

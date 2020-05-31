@@ -66,7 +66,9 @@ var vm = new Vue({
     el:'#rrapp',
     data:{
         q:{
-            userId: null
+            userId: null,
+            deptId: null,
+            deptName: null
         },
         showList: true,
         title:null,
@@ -80,6 +82,7 @@ var vm = new Vue({
         query: function () {
             vm.reload();
             vm.getUsers();
+            vm.getDept();
         },
         add: function(){
             vm.showList = false;
@@ -96,6 +99,7 @@ var vm = new Vue({
                 if(node != null){
                     ztree.selectNode(node);
                     vm.doc.deptName = node.name;
+                    vm.q.deptName = node.name;
                 }
             })
          },
@@ -185,7 +189,8 @@ var vm = new Vue({
                     //选择上级部门
                     vm.doc.deptId = node[0].deptId;
                     vm.doc.deptName = node[0].name;
-
+                    vm.q.deptId = node[0].deptId;
+                    vm.q.deptName = node[0].name;
                     layer.close(index);
                 }
             });
@@ -194,7 +199,10 @@ var vm = new Vue({
             vm.showList = true;
             var page = $("#jqGrid").jqGrid('getGridParam','page');
             $("#jqGrid").jqGrid('setGridParam',{
-                postData:{'userId': vm.q.userId},
+                postData:{
+                    'userId': vm.q.userId,
+                    'deptId': vm.q.deptId
+                },
                 page:page
             }).trigger("reloadGrid")
             vm.getUsers();
@@ -221,4 +229,6 @@ layui.use('laydate', function () {
             vm.doc.entryDate = value;
         }
     });
+    vm.getDept();
+
 });
