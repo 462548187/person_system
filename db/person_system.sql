@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 27/05/2020 21:47:41
+ Date: 31/05/2020 14:45:04
 */
 
 SET NAMES utf8mb4;
@@ -138,7 +138,7 @@ CREATE TABLE `b_salary_record`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工资记录' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 22 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '工资记录' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_salary_record
@@ -146,6 +146,7 @@ CREATE TABLE `b_salary_record`  (
 INSERT INTO `b_salary_record` VALUES (18, 2, '2020-05', 6500, 5453, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:11:32', NULL);
 INSERT INTO `b_salary_record` VALUES (19, 3, '2020-05', 4432, 4411, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:12:42', NULL);
 INSERT INTO `b_salary_record` VALUES (20, 4, '2020-05', 5600, 4456, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-17 09:13:05', NULL);
+INSERT INTO `b_salary_record` VALUES (21, 3, '2020-04', 4500, 4300, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2020-05-31 14:42:48', NULL);
 
 -- ----------------------------
 -- Table structure for b_user_doc
@@ -337,11 +338,15 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
 -- ----------------------------
+INSERT INTO `sys_log` VALUES (1, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":2,\"username\":\"wdc\",\"name\":\"王大锤\",\"salt\":\"1sbkoGf5x7Q5lqxvCs5I\",\"email\":\"1111@qq.com\",\"mobile\":\"18651234456\",\"status\":1,\"roleIdList\":[2],\"createTime\":\"May 15, 2020 10:29:02 PM\",\"deptId\":4,\"deptName\":\"生产部\"}', 179, '0:0:0:0:0:0:0:1', '2020-05-31 12:26:17');
+INSERT INTO `sys_log` VALUES (2, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":3,\"username\":\"cw\",\"name\":\"财务小王\",\"salt\":\"2E5mvF1xjXFoY0narVz9\",\"email\":\"gy@qq.com\",\"mobile\":\"13455676543\",\"status\":1,\"roleIdList\":[3],\"createTime\":\"May 16, 2020 3:11:08 PM\",\"deptId\":6,\"deptName\":\"财务部\"}', 19, '0:0:0:0:0:0:0:1', '2020-05-31 12:26:29');
+INSERT INTO `sys_log` VALUES (3, 'admin', '修改用户', 'com.person.modules.sys.controller.SysUserController.update()', '{\"userId\":4,\"username\":\"rs\",\"name\":\"人事小李\",\"salt\":\"NF4cYNKNmsMA997exGGN\",\"email\":\"zf@qq.com\",\"mobile\":\"19877678790\",\"status\":1,\"roleIdList\":[4],\"createTime\":\"May 16, 2020 3:11:43 PM\",\"deptId\":7,\"deptName\":\"人事部\"}', 17, '0:0:0:0:0:0:0:1', '2020-05-31 12:26:38');
+INSERT INTO `sys_log` VALUES (4, 'admin', '保存工资', 'com.person.modules.person.controller.SalaryRecordController.save()', '{\"id\":21,\"userId\":3,\"salaryMonth\":\"2020-04\",\"mustSalary\":4500.0,\"realitySalary\":4300.0,\"createTime\":\"2020-05-31 14:42:48\"}', 58, '0:0:0:0:0:0:0:1', '2020-05-31 14:42:48');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -745,9 +750,9 @@ CREATE TABLE `sys_user`  (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES (1, 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@renren.io', '13612345678', 1, 1, '2016-11-11 11:11:11', '管理员', '0001');
-INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 3, '2020-05-15 22:29:02', '王大锤', '0002');
-INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 3, '2020-05-16 15:11:08', '财务小王', '0003');
-INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 3, '2020-05-16 15:11:43', '人事小李', '0004');
+INSERT INTO `sys_user` VALUES (2, 'wdc', 'a977e04a469ee5b213c31dc60d03f75de2bfeda871f465c723c304313f748e7d', '1sbkoGf5x7Q5lqxvCs5I', '1111@qq.com', '18651234456', 1, 4, '2020-05-15 22:29:02', '王大锤', '0002');
+INSERT INTO `sys_user` VALUES (3, 'cw', '676bd505a6d523cb00f4f79bf6dc7a2954d761a3aee0d045c21f8d6e2172a179', '2E5mvF1xjXFoY0narVz9', 'gy@qq.com', '13455676543', 1, 6, '2020-05-16 15:11:08', '财务小王', '0003');
+INSERT INTO `sys_user` VALUES (4, 'rs', 'c4ade571b45f569230b7782b9d657bc6e724913d7d429bf742ad17dabf0753bc', 'NF4cYNKNmsMA997exGGN', 'zf@qq.com', '19877678790', 1, 7, '2020-05-16 15:11:43', '人事小李', '0004');
 INSERT INTO `sys_user` VALUES (5, '存储', '7fe22afcdeaab59c453fd55c0723f7cd77cb974a1066c40721cd2a3cf0f0fce7', 'MVDlRa0lGADPLXgehAH2', 'cc@qq.com', NULL, 1, 4, '2020-05-24 13:38:31', '王婷婷', NULL);
 INSERT INTO `sys_user` VALUES (6, 'ceshi', '019c84a915b50ca574a65a157c2fef00ad33a6c6d613718808dd6409edef6a4a', 'TfWjU5q1e5nAtoRKlHZR', NULL, NULL, 1, 4, '2020-05-24 21:18:25', '测试手机', NULL);
 
@@ -760,15 +765,15 @@ CREATE TABLE `sys_user_role`  (
   `user_id` bigint(20) NULL DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) NULL DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '用户与角色对应关系' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES (1, 1, 1);
-INSERT INTO `sys_user_role` VALUES (2, 2, 2);
-INSERT INTO `sys_user_role` VALUES (5, 3, 3);
-INSERT INTO `sys_user_role` VALUES (6, 4, 4);
 INSERT INTO `sys_user_role` VALUES (8, 5, 2);
+INSERT INTO `sys_user_role` VALUES (9, 2, 2);
+INSERT INTO `sys_user_role` VALUES (10, 3, 3);
+INSERT INTO `sys_user_role` VALUES (11, 4, 4);
 
 SET FOREIGN_KEY_CHECKS = 1;
