@@ -8,10 +8,10 @@
 <div id="rrapp" v-cloak>
 	<div v-show="showList">
 		<div class="grid-btn">
-			<div class="form-group col-sm-2">
-				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="计划主题">
-			</div>
-			<a class="btn btn-default" @click="query">查询</a>
+<!--			<div class="form-group col-sm-2">-->
+<!--				<input type="text" class="form-control" v-model="q.name" @keyup.enter="query" placeholder="计划主题">-->
+<!--			</div>-->
+<!--			<a class="btn btn-default" @click="query">查询</a>-->
 			<#if shiro.hasPermission("person:merit:save")>
 			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
 			</#if>
@@ -37,34 +37,17 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2 control-label">计划主题</div>
+				<div class="col-sm-2 control-label">月考核量</div>
 				<div class="col-sm-10">
-					<input type="text" class="form-control" v-model="merit.name" placeholder="计划主题"/>
+					<input type="number" class="form-control"  v-model="merit.monthQuota" placeholder="月考核量"/>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-sm-2 control-label">计划内容</div>
+				<div class="col-sm-2 control-label">周考核量</div>
 				<div class="col-sm-10">
-					<textarea  class="form-control" v-model="merit.content" placeholder="计划内容">
-					</textarea>
+					<input  type="number" class="form-control" v-model="merit.weekQuota" placeholder="周考核量">
+					</input>
 				</div>
-			</div>
-
-			<div class="form-group">
-				<div class="col-sm-2 control-label">结束日期</div>
-				<div class="col-sm-10">
-					<input v-model="merit.endDate"  placeholder="结束日期" name="endDate"
-						   id="endDate" class="layui-input" autocomplete="off">
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-sm-2 control-label">状态</div>
-				<label class="radio-inline">
-					<input type="radio" name="status" value="0" v-model="merit.status"/> 进行中
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="status" value="1" v-model="merit.status"/> 完成
-				</label>
 			</div>
 			<div class="form-group">
 				<div class="col-sm-2 control-label"></div>

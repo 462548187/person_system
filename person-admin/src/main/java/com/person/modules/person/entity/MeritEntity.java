@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 
-@TableName("b_merit")
+@TableName("b_merit_set")
 public class MeritEntity implements Serializable {
     private static final long serialVersionUID = 1L;
     @TableId

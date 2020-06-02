@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 01/06/2020 21:53:11
+ Date: 02/06/2020 21:17:29
 */
 
 SET NAMES utf8mb4;
@@ -99,11 +99,12 @@ CREATE TABLE `b_merit_set`  (
   `create_time` varchar(24) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` varchar(24) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '绩效设置' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '绩效设置' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_merit_set
 -- ----------------------------
+INSERT INTO `b_merit_set` VALUES (1, '2020-06-02', '113', '224', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for b_recruit_need
@@ -180,11 +181,13 @@ CREATE TABLE `b_train_plan`  (
   `create_time` datetime NULL DEFAULT NULL COMMENT '创建时间',
   `update_time` datetime NULL DEFAULT NULL COMMENT '更新时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '培训计划' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '培训计划' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_train_plan
 -- ----------------------------
+INSERT INTO `b_train_plan` VALUES (1, '新员工培训', '2020-01-01', '培训公司安全规范', '所有新员工', NULL, NULL);
+INSERT INTO `b_train_plan` VALUES (3, '侧1耳', '2020-06-17', '存储', '长度', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for b_user_doc
@@ -376,7 +379,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 20 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -400,6 +403,21 @@ INSERT INTO `sys_log` VALUES (16, 'admin', '保存菜单', 'com.person.modules.s
 INSERT INTO `sys_log` VALUES (17, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":96,\"parentId\":93,\"parentName\":\"考核设置\",\"name\":\"编辑\",\"type\":2,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-06-01 21:26:52');
 INSERT INTO `sys_log` VALUES (18, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":97,\"parentId\":93,\"parentName\":\"考核设置\",\"name\":\"删除\",\"type\":2,\"orderNum\":0}', 14, '0:0:0:0:0:0:0:1', '2020-06-01 21:27:03');
 INSERT INTO `sys_log` VALUES (19, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":98,\"parentId\":43,\"parentName\":\"培训管理\",\"name\":\"培训计划\",\"url\":\"#\",\"type\":1,\"orderNum\":0}', 11, '0:0:0:0:0:0:0:1', '2020-06-01 21:28:55');
+INSERT INTO `sys_log` VALUES (20, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":93,\"parentId\":92,\"parentName\":\"绩效考核\",\"name\":\"考核设置\",\"url\":\"/person/merit/list\",\"perms\":\"#\",\"type\":1,\"orderNum\":0}', 16, '0:0:0:0:0:0:0:1', '2020-06-02 20:49:58');
+INSERT INTO `sys_log` VALUES (21, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":93,\"parentId\":92,\"parentName\":\"绩效考核\",\"name\":\"考核设置\",\"url\":\"modules/person/merit.html\",\"perms\":\"#\",\"type\":1,\"orderNum\":0}', 11, '0:0:0:0:0:0:0:1', '2020-06-02 20:50:43');
+INSERT INTO `sys_log` VALUES (22, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":94,\"parentId\":93,\"parentName\":\"考核设置\",\"name\":\"查看\",\"perms\":\"person:merit:list,person:merit:info\",\"type\":2,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-06-02 20:51:53');
+INSERT INTO `sys_log` VALUES (23, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":99,\"parentId\":98,\"parentName\":\"培训计划\",\"name\":\"查看\",\"perms\":\"person:train:list,person:train:info\",\"type\":2,\"orderNum\":0}', 15, '0:0:0:0:0:0:0:1', '2020-06-02 20:54:35');
+INSERT INTO `sys_log` VALUES (24, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":100,\"parentId\":98,\"parentName\":\"培训计划\",\"name\":\"新增\",\"perms\":\"person:train:save\",\"type\":2,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-06-02 20:54:54');
+INSERT INTO `sys_log` VALUES (25, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":101,\"parentId\":98,\"parentName\":\"培训计划\",\"name\":\"编辑\",\"perms\":\"person:train:update\",\"type\":2,\"orderNum\":0}', 14, '0:0:0:0:0:0:0:1', '2020-06-02 20:55:13');
+INSERT INTO `sys_log` VALUES (26, 'admin', '保存菜单', 'com.person.modules.sys.controller.SysMenuController.save()', '{\"menuId\":102,\"parentId\":98,\"parentName\":\"培训计划\",\"name\":\"删除\",\"perms\":\"person:train:delete\",\"type\":2,\"orderNum\":0}', 8, '0:0:0:0:0:0:0:1', '2020-06-02 20:55:30');
+INSERT INTO `sys_log` VALUES (27, 'admin', '修改菜单', 'com.person.modules.sys.controller.SysMenuController.update()', '{\"menuId\":98,\"parentId\":43,\"parentName\":\"培训管理\",\"name\":\"培训计划\",\"url\":\"modules/person/train.html\",\"type\":1,\"orderNum\":0}', 9, '0:0:0:0:0:0:0:1', '2020-06-02 20:56:34');
+INSERT INTO `sys_log` VALUES (28, 'admin', '保存培训计划', 'com.person.modules.person.controller.TrainPlanController.save()', '{\"id\":1,\"title\":\"新员工培训\",\"trainDate\":\"2020-01-01\",\"content\":\"培训公司安全规范\",\"participant\":\"所有新员工\"}', 96, '0:0:0:0:0:0:0:1', '2020-06-02 21:04:01');
+INSERT INTO `sys_log` VALUES (29, 'admin', '保存培训计划', 'com.person.modules.person.controller.TrainPlanController.save()', '{\"id\":2,\"title\":\"测试\",\"trainDate\":\"2020-06-03\",\"content\":\"测试\",\"participant\":\"测试\"}', 7, '0:0:0:0:0:0:0:1', '2020-06-02 21:07:13');
+INSERT INTO `sys_log` VALUES (30, 'admin', '修改培训计划', 'com.person.modules.person.controller.TrainPlanController.update()', '{\"id\":2,\"title\":\"测试1\",\"trainDate\":\"2020-06-04\",\"content\":\"测试1\",\"participant\":\"测试1\"}', 9, '0:0:0:0:0:0:0:1', '2020-06-02 21:07:22');
+INSERT INTO `sys_log` VALUES (31, 'admin', '删除培训计划', 'com.person.modules.person.controller.TrainPlanController.delete()', '[2]', 11, '0:0:0:0:0:0:0:1', '2020-06-02 21:07:28');
+INSERT INTO `sys_log` VALUES (32, 'admin', '保存培训计划', 'com.person.modules.person.controller.TrainPlanController.save()', '{\"id\":3,\"title\":\"侧1耳\",\"trainDate\":\"2020-06-17\",\"content\":\"存储\",\"participant\":\"长度\"}', 6, '0:0:0:0:0:0:0:1', '2020-06-02 21:08:07');
+INSERT INTO `sys_log` VALUES (33, 'admin', '保存绩效设置', 'com.person.modules.person.controller.MeritController.save()', '{\"id\":1,\"setDate\":\"2020-06-02\",\"monthQuota\":\"11\",\"weekQuota\":\"22\"}', 85, '0:0:0:0:0:0:0:1', '2020-06-02 21:16:35');
+INSERT INTO `sys_log` VALUES (34, 'admin', '修改绩效设置', 'com.person.modules.person.controller.MeritController.update()', '{\"id\":1,\"setDate\":\"2020-06-02\",\"monthQuota\":\"113\",\"weekQuota\":\"224\"}', 13, '0:0:0:0:0:0:0:1', '2020-06-02 21:17:08');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -415,7 +433,7 @@ CREATE TABLE `sys_menu`  (
   `icon` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) NULL DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 99 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 103 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '菜单管理' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -498,12 +516,16 @@ INSERT INTO `sys_menu` VALUES (89, 87, '增加', NULL, 'person:contract:save', 2
 INSERT INTO `sys_menu` VALUES (90, 87, '编辑', NULL, 'person:contract:update', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (91, 87, '删除', NULL, 'person:contract:delete', 2, NULL, 0);
 INSERT INTO `sys_menu` VALUES (92, 0, '绩效考核', NULL, NULL, 0, 'fa fa-bar-chart', 0);
-INSERT INTO `sys_menu` VALUES (93, 92, '考核设置', '#', '#', 1, NULL, 0);
-INSERT INTO `sys_menu` VALUES (94, 93, '查看', NULL, NULL, 2, NULL, 0);
-INSERT INTO `sys_menu` VALUES (95, 93, '增加', NULL, NULL, 2, NULL, 0);
-INSERT INTO `sys_menu` VALUES (96, 93, '编辑', NULL, NULL, 2, NULL, 0);
-INSERT INTO `sys_menu` VALUES (97, 93, '删除', NULL, NULL, 2, NULL, 0);
-INSERT INTO `sys_menu` VALUES (98, 43, '培训计划', '#', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (93, 92, '考核设置', 'modules/person/merit.html', '#', 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (94, 93, '查看', NULL, 'person:merit:list,person:merit:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (95, 93, '增加', NULL, 'person:merit:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (96, 93, '编辑', NULL, 'person:merit:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (97, 93, '删除', NULL, 'person:merit:delete', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (98, 43, '培训计划', 'modules/person/train.html', NULL, 1, NULL, 0);
+INSERT INTO `sys_menu` VALUES (99, 98, '查看', NULL, 'person:train:list,person:train:info', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (100, 98, '新增', NULL, 'person:train:save', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (101, 98, '编辑', NULL, 'person:train:update', 2, NULL, 0);
+INSERT INTO `sys_menu` VALUES (102, 98, '删除', NULL, 'person:train:delete', 2, NULL, 0);
 
 -- ----------------------------
 -- Table structure for sys_oss
