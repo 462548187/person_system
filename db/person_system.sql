@@ -11,7 +11,7 @@
  Target Server Version : 50548
  File Encoding         : 65001
 
- Date: 02/06/2020 21:17:29
+ Date: 04/06/2020 22:28:58
 */
 
 SET NAMES utf8mb4;
@@ -104,7 +104,6 @@ CREATE TABLE `b_merit_set`  (
 -- ----------------------------
 -- Records of b_merit_set
 -- ----------------------------
-INSERT INTO `b_merit_set` VALUES (1, '2020-06-02', '113', '224', NULL, NULL);
 
 -- ----------------------------
 -- Table structure for b_recruit_need
@@ -206,7 +205,7 @@ CREATE TABLE `b_user_doc`  (
   `mobile` varchar(11) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `dept_id` varchar(10) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 12 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工档案' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 13 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '员工档案' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of b_user_doc
@@ -214,7 +213,8 @@ CREATE TABLE `b_user_doc`  (
 INSERT INTO `b_user_doc` VALUES (6, 2, '本科', '1998-05-11', '2020-03-11', '0', '2020-05-17 09:05:48', NULL, '0002', '13778123349', '1');
 INSERT INTO `b_user_doc` VALUES (7, 3, '研究生', '1983-02-17', '2018-04-17', '1', '2020-05-17 09:06:23', NULL, '0003', '13884930019', '3');
 INSERT INTO `b_user_doc` VALUES (8, 4, '本科', '1986-05-15', '2016-05-17', '1', '2020-05-17 09:06:56', NULL, '0004', '18623092285', '3');
-INSERT INTO `b_user_doc` VALUES (11, 5, '本科', '1986-05-30', '2020-05-04', NULL, '2020-05-24 21:42:56', NULL, '0005', '18677894453', '8');
+INSERT INTO `b_user_doc` VALUES (11, 5, '本科', '1986-05-30', '2020-05-04', '0', '2020-05-24 21:42:56', NULL, '0005', '18677894453', '8');
+INSERT INTO `b_user_doc` VALUES (12, 1, '博士', '1976-06-15', '2013-06-04', '1', '2020-06-04 22:27:49', NULL, '0001', NULL, '1');
 
 -- ----------------------------
 -- Table structure for b_user_plan
@@ -379,7 +379,7 @@ CREATE TABLE `sys_log`  (
   `ip` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime NULL DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 35 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '系统日志' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of sys_log
@@ -418,6 +418,8 @@ INSERT INTO `sys_log` VALUES (31, 'admin', '删除培训计划', 'com.person.mod
 INSERT INTO `sys_log` VALUES (32, 'admin', '保存培训计划', 'com.person.modules.person.controller.TrainPlanController.save()', '{\"id\":3,\"title\":\"侧1耳\",\"trainDate\":\"2020-06-17\",\"content\":\"存储\",\"participant\":\"长度\"}', 6, '0:0:0:0:0:0:0:1', '2020-06-02 21:08:07');
 INSERT INTO `sys_log` VALUES (33, 'admin', '保存绩效设置', 'com.person.modules.person.controller.MeritController.save()', '{\"id\":1,\"setDate\":\"2020-06-02\",\"monthQuota\":\"11\",\"weekQuota\":\"22\"}', 85, '0:0:0:0:0:0:0:1', '2020-06-02 21:16:35');
 INSERT INTO `sys_log` VALUES (34, 'admin', '修改绩效设置', 'com.person.modules.person.controller.MeritController.update()', '{\"id\":1,\"setDate\":\"2020-06-02\",\"monthQuota\":\"113\",\"weekQuota\":\"224\"}', 13, '0:0:0:0:0:0:0:1', '2020-06-02 21:17:08');
+INSERT INTO `sys_log` VALUES (35, 'admin', '删除绩效设置', 'com.person.modules.person.controller.MeritController.delete()', '[1]', 9, '0:0:0:0:0:0:0:1', '2020-06-02 21:19:06');
+INSERT INTO `sys_log` VALUES (36, 'admin', '保存员工档案', 'com.person.modules.person.controller.UserDocController.save()', '{\"id\":12,\"userId\":1,\"age\":0,\"deptName\":\"江苏富梓民轮胎厂\",\"deptId\":1,\"education\":\"博士\",\"userNo\":\"0001\",\"birth\":\"1976-06-15\",\"entryDate\":\"2013-06-04\",\"userType\":\"1\",\"createTime\":\"2020-06-04 22:27:49\"}', 178, '0:0:0:0:0:0:0:1', '2020-06-04 22:27:49');
 
 -- ----------------------------
 -- Table structure for sys_menu

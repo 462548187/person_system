@@ -77,7 +77,6 @@ public class SysLoginController {
 		}catch (AuthenticationException e) {
 			return R.error("账户验证失败");
 		}
-	    
 		return R.ok();
 	}
 	
