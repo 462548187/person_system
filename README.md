@@ -85,7 +85,7 @@
 
 
 ## 三、安装教程
-1. 导入mysql脚本
+1. 导入mysql脚本,数据库名称：person_system
 2. 修改数据库配置：
 ![修改数据](https://gitee.com/doudoutang/person_system/raw/master/%E4%BA%BA%E4%BA%8B%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C%E5%9B%BE/0-99-%E6%95%B0%E6%8D%AE%E5%BA%93%E9%85%8D%E7%BD%AE.png)
 3. 启动java工程（执行person-admin工程com.person.AdminApplication.class中main方法）
