@@ -59,12 +59,30 @@
 ## 二、软件架构
 本系统由person-common和person-admin两个模块组成。其中person-common模块主要用于权限验证，person-admin模块主要有业务逻辑
 
-系统环境介绍：
-1. jdk:1.8
-2. mysql:5.7
-3. springboot:2.1.8.RELEASE
-4. MyBatisPlus:3.1.2
-5. swagger:2.7.0
+基础环境：
+1. JDK:1.8
+
+2. MySQL:5.7
+
+3. Maven3.0
+
+使用框架：
+
+1. 核心框架：Spring Boot 2.1.8.RELEASE
+
+2. 视图框架：Spring MVC 5.0
+
+3. ORM框架：MyBatisPlus 3.1.2
+
+4. 数据库连接池：Druid 1.1
+
+5. 安全框架：Apache Shiro 1.4
+
+6. 日志：SLF4J 1.7、Log4j
+
+7. 前端框架：Vue,Layui,ztree
+
+
 
 ## 三、安装教程
 1. 导入mysql脚本
