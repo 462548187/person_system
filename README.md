@@ -156,3 +156,5 @@
 
 ## 五、特别说明
 本项目可做练习亦可作毕业设计，如需交流请加QQ:553039957
+
+![QQ-553039957](https://gitee.com/doudoutang/bankOA/raw/master/%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C%E5%9B%BE/553039957.png)
