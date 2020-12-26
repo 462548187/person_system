@@ -32,7 +32,7 @@ public class SysDictServiceImpl extends ServiceImpl<SysDictDao, SysDictEntity> i
         IPage<SysDictEntity> page = this.page(
             new Query<SysDictEntity>().getPage(params),
             new QueryWrapper<SysDictEntity>()
-                .like(StringUtils.isNotBlank(name),"name", name)
+                .like(StringUtils.isNotBlank(name),"name", name).orderByAsc("order_num")
         );
 
         return new PageUtils(page);

@@ -8,6 +8,7 @@
 
 package com.person.modules.sys.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.person.common.annotation.SysLog;
 import com.person.common.exception.RRException;
 import com.person.common.utils.Constant;
@@ -50,7 +51,9 @@ public class SysMenuController extends AbstractController {
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:menu:list")
 	public List<SysMenuEntity> list(){
-		List<SysMenuEntity> menuList = sysMenuService.list();
+		QueryWrapper<SysMenuEntity> q = new QueryWrapper<SysMenuEntity> ();
+		q.orderByAsc("order_num");
+		List<SysMenuEntity> menuList = sysMenuService.list(q);
 		for(SysMenuEntity sysMenuEntity : menuList){
 			SysMenuEntity parentMenuEntity = sysMenuService.getById(sysMenuEntity.getParentId());
 			if(parentMenuEntity != null){
