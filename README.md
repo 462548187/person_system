@@ -155,6 +155,7 @@
 ![系统管理-字典管理-增加](https://gitee.com/doudoutang/person_system/raw/master/%E4%BA%BA%E4%BA%8B%E7%AE%A1%E7%90%86%E7%B3%BB%E7%BB%9F%E6%95%88%E6%9E%9C%E5%9B%BE/7-%E7%B3%BB%E7%BB%9F%E7%AE%A1%E7%90%86-%E5%AD%97%E5%85%B8%E7%AE%A1%E7%90%86-%E5%A2%9E%E5%8A%A0.png)
 
 ## 五、特别说明
-本项目可做练习亦可作毕业设计，如需交流请加QQ:553039957
+本项目可做练习亦可作毕业设计，SQL及指导有偿提供，如不愿意付费的勿扰，如需交流请加QQ:553039957
+
 
 ![QQ-553039957](https://gitee.com/doudoutang/bankOA/raw/master/%E8%BF%90%E8%A1%8C%E6%95%88%E6%9E%9C%E5%9B%BE/553039957.png)
