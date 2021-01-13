@@ -36,7 +36,6 @@ public class SwaggerConfig{
             //加了ApiOperation注解的类，生成接口文档
             .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
             //包下的类，生成接口文档
-            //.apis(RequestHandlerSelectors.basePackage("io.renren.modules.job.controller"))
             .paths(PathSelectors.any())
             .build();
     }
@@ -44,7 +43,7 @@ public class SwaggerConfig{
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
             .title("")
-            .description("renren-admin文档")
+            .description("renshi-admin文档")
             .termsOfServiceUrl("")
             .version("4.0.0")
             .build();
