@@ -1,9 +1,9 @@
 /**
- * 
  *
- * 
  *
- * 
+ *
+ *
+ *
  */
 
 package com.person.modules.sys.service;
@@ -19,7 +19,7 @@ import java.util.Map;
 /**
  * 系统日志
  *
- * @author 
+ * @author
  */
 public interface SysLogService extends IService<SysLogEntity> {
 

@@ -15,7 +15,6 @@
 	</parent>
 
     <modules>
-        <module>person-common</module>
         <module>person-admin</module>
     </modules>
 

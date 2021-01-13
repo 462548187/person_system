@@ -20,7 +20,7 @@ import java.util.Date;
 /**
  * 系统日志
  *
- * @author 
+ * @author
  */
 @TableName("sys_log")
 public class SysLogEntity implements Serializable {

@@ -9,9 +9,9 @@
 package com.person.common.validator.group;
 
 /**
- * 七牛
+ * 新增数据 Group
  *
  * @author 
  */
-public interface QiniuGroup {
+public interface AddGroup {
 }

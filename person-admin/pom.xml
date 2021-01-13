@@ -10,7 +10,6 @@
 	<description>person-admin</description>
 
 	<properties>
-<!--		<quartz.version>2.3.0</quartz.version>-->
 		<shiro.version>1.4.0</shiro.version>
 		<kaptcha.version>0.0.9</kaptcha.version>
 		<qiniu.version>7.2.23</qiniu.version>
@@ -20,16 +19,6 @@
 	</properties>
 
 	<dependencies>
-		<dependency>
-			<groupId>com.person</groupId>
-			<artifactId>person-common</artifactId>
-			<version>4.0.0</version>
-		</dependency>
-		<!-- 集群环境，需要打开注释 -->
-		<!--<dependency>-->
-			<!--<groupId>org.springframework.session</groupId>-->
-			<!--<artifactId>spring-session-data-redis</artifactId>-->
-		<!--</dependency>-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
@@ -59,27 +48,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
 		</dependency>
-<!--		<dependency>-->
-<!--			<groupId>com.qiniu</groupId>-->
-<!--			<artifactId>qiniu-java-sdk</artifactId>-->
-<!--			<version>${qiniu.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.aliyun.oss</groupId>-->
-<!--			<artifactId>aliyun-sdk-oss</artifactId>-->
-<!--			<version>${aliyun.oss.version}</version>-->
-<!--		</dependency>-->
-<!--		<dependency>-->
-<!--			<groupId>com.qcloud</groupId>-->
-<!--			<artifactId>cos_api</artifactId>-->
-<!--			<version>${qcloud.cos.version}</version>-->
-<!--			<exclusions>-->
-<!--				<exclusion>-->
-<!--					<groupId>org.slf4j</groupId>-->
-<!--					<artifactId>slf4j-log4j12</artifactId>-->
-<!--				</exclusion>-->
-<!--			</exclusions>-->
-<!--		</dependency>-->
     </dependencies>
 
 	<build>

@@ -9,9 +9,10 @@
 package com.person.common.validator.group;
 
 /**
- * 阿里云
+ * 更新数据 Group
  *
  * @author 
  */
-public interface AliyunGroup {
+public interface UpdateGroup {
+
 }
