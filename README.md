@@ -57,7 +57,6 @@
 管理系统常用字典值，只有管理员可用
 
 ## 二、软件架构
-本系统由person-common和person-admin两个模块组成。其中person-common模块主要用于权限验证，person-admin模块主要有业务逻辑
 
 基础环境：
 1. JDK:1.8
@@ -80,7 +79,7 @@
 
 6. 日志：SLF4J 1.7、Log4j
 
-7. 前端框架：Vue,Layui,ztree
+7. 前端框架：Layui,ztree
 
 
 
