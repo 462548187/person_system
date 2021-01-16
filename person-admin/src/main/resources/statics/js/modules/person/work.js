@@ -73,6 +73,7 @@ var vm = new Vue({
             vm.reload();
         },
         add: function () {
+            vm.upTime = new Date();
             vm.showList = false;
             vm.title = "上班打卡";
             vm.work = {};

@@ -15,6 +15,7 @@ import com.person.modules.person.entity.WorkDailyEntity;
 import com.person.modules.person.entity.WorkRecordEntity;
 import com.person.modules.person.service.WorkRecordService;
 import com.person.modules.sys.controller.AbstractController;
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -79,8 +80,14 @@ public class WorkRecordController extends AbstractController {
         Long userId = getUserId();
 
         //查询当日记录是否已存在
-        WorkRecordEntity d = new WorkRecordEntity();
         String workDate = work.getWorkDate();
+        if(StringUtils.isBlank(workDate)){
+            return R.error( "工作日期不能为空");
+        }
+        if(StringUtils.isBlank(work.getUpTime())&&StringUtils.isBlank(work.getDownTime())){
+            return R.error( "时间不能为空");
+        }
+        WorkRecordEntity d = new WorkRecordEntity();
         d.setUserId(userId);
         d.setWorkDate(workDate);
         QueryWrapper q = new QueryWrapper();
