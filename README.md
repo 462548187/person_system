@@ -170,7 +170,7 @@
 最近有同学反映有人在淘宝，B站等渠道贩卖我的源代码，本人在此郑重声明，目前只有唯一的购买咨询方式就是加我QQ:553039957.
 其他渠道都是非法的，您可能花了钱买到的不是完整系统，请各位真心喜欢本项目的朋友不要上当受骗，请走唯一正规渠道，我只对这唯一渠道的服务负责。
 ## 九、其他项目
-1. [OA系统](https://gitee.com/doudoutang/bankOA)
-2. [人事管理系统](https://gitee.com/doudoutang/person_system)
-3. [薪资管理系统](https://gitee.com/doudoutang/bid-system)
-3. [招投标管理系统](https://gitee.com/doudoutang/bid-system)
+1. [人事管理系统](https://gitee.com/doudoutang/person_system)
+2. [薪资管理系统](https://gitee.com/doudoutang/salary_system)
+3. [OA系统](https://gitee.com/doudoutang/bankOA)
+4. [招投标管理系统](https://gitee.com/doudoutang/bid-system)
