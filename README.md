@@ -164,7 +164,7 @@
 
 ## 七、特别说明
 本项目可做公司内网使用，也可做自学练习亦可作毕业设计。SQL，前端代码以及指导有偿提供，也可付费咨询其他项目，如不愿意付费的勿扰。
-如有付费意愿可加QQ详谈，或约QQ语音电话了解详情及靠谱程度后再做决定，QQ:553039957
+如意愿付费请加QQ详谈，QQ:553039957
 
 ## 八、提醒
 最近有同学反映有人在淘宝，B站等渠道贩卖我的源代码，本人在此郑重声明，目前只有唯一的购买咨询方式就是加我QQ:553039957.
@@ -172,4 +172,5 @@
 ## 九、其他项目
 1. [OA系统](https://gitee.com/doudoutang/bankOA)
 2. [人事管理系统](https://gitee.com/doudoutang/person_system)
-3. [薪资管理系统](https://gitee.com/doudoutang/person_system)
+3. [薪资管理系统](https://gitee.com/doudoutang/bid-system)
+3. [招投标管理系统](https://gitee.com/doudoutang/bid-system)
