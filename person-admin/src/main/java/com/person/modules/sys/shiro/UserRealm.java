@@ -12,6 +12,7 @@ import com.person.common.utils.Constant;
 import com.person.modules.sys.dao.SysMenuDao;
 import com.person.modules.sys.dao.SysUserDao;
 import com.person.modules.sys.entity.SysUserEntity;
+import com.person.modules.sys.service.SysUserRoleService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authc.*;
 import org.apache.shiro.authc.credential.CredentialsMatcher;
@@ -39,7 +40,8 @@ public class UserRealm extends AuthorizingRealm {
     private SysMenuDao sysMenuDao;
     @Autowired
     UserDocService userDocService;
-
+    @Autowired
+    private SysUserRoleService sysUserRoleService;
     /**
      * 授权(验证权限时调用)
      */
@@ -87,6 +89,8 @@ public class UserRealm extends AuthorizingRealm {
         if (null != userDoc) {
             Long userId = userDoc.getUserId();
             user = sysUserDao.selectById(userId);
+            List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
+            user.setRoleIdList(roleIdList);
         } else {
             //查询用户信息
             user = sysUserDao.selectOne(new QueryWrapper<SysUserEntity>().eq("username", token.getUsername()));
@@ -100,7 +104,8 @@ public class UserRealm extends AuthorizingRealm {
         if (user.getStatus() == 0) {
             throw new LockedAccountException("账号已被锁定,请联系管理员");
         }
-
+        List<Long> roleIdList = sysUserRoleService.queryRoleIdList(user.getUserId());
+        user.setRoleIdList(roleIdList);
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(user, user.getPassword(), ByteSource.Util.bytes(user.getSalt()), getName());
         return info;
     }
