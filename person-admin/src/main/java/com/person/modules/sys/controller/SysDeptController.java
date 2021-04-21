@@ -38,7 +38,7 @@ public class SysDeptController extends AbstractController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("sys:dept:list")
+//	@RequiresPermissions("sys:dept:list")
 	public List<SysDeptEntity> list(){
 		List<SysDeptEntity> deptList = sysDeptService.queryList(new HashMap<String, Object>());
 

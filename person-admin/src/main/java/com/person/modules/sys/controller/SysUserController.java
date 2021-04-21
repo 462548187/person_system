@@ -42,7 +42,7 @@ public class SysUserController extends AbstractController {
      * 所有用户列表
      */
     @RequestMapping("/list")
-    @RequiresPermissions("sys:user:list")
+//    @RequiresPermissions("sys:user:list")
     public R list(@RequestParam Map<String, Object> params) {
         PageUtils page = sysUserService.queryPage(params);
 
