@@ -52,7 +52,7 @@
 ### 3.档案管理
 档案管理子模块:员工档案和合同管理。
 #### （1）员工档案
-员工入职资料管理
+员工档案是“系统管理-员工管理”的延伸，即“系统管理-员工管理”是系统的登录账号信息，而员工档案是对账号信息的补充。必须由管理员先创建好账户，才能添加员工档案
 ![员工档案-列表](https://gitee.com/doudoutang/system-diagram/raw/master/%E4%BA%BA%E4%BA%8B%E7%AE%A1%E7%90%86/3-%E6%A1%A3%E6%A1%88%E7%AE%A1%E7%90%86-%E5%91%98%E5%B7%A5%E6%A1%A3%E6%A1%88-%E5%88%97%E8%A1%A8.png)
 ![员工档案-增加](https://gitee.com/doudoutang/system-diagram/raw/master/%E4%BA%BA%E4%BA%8B%E7%AE%A1%E7%90%86/3-%E6%A1%A3%E6%A1%88%E7%AE%A1%E7%90%86-%E5%91%98%E5%B7%A5%E6%A1%A3%E6%A1%88-%E5%A2%9E%E5%8A%A0.png)
 
