@@ -15,6 +15,7 @@ public class UserDocEntity {
     private Long id;
 
     private Long userId;
+
     @TableField(exist = false)
     private String userName;
     @TableField(exist = false)
@@ -30,7 +31,7 @@ public class UserDocEntity {
 
     @NotNull(message = "生日不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String birth;
-
+    @NotNull(message = "入职日期不能为空", groups = {AddGroup.class, UpdateGroup.class})
     private String entryDate;
 
     private String userType;
